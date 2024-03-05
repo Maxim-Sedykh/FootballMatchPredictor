@@ -7,13 +7,22 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Entities
 {
-    public class Country: IAuditable
+    public class Country: IAuditable, IEntityId<byte>
     {
-        public Guid Id { get; set; }
+        /// <summary>
+        /// Идентификатор сущности
+        /// </summary>
+        public byte Id { get; set; }
 
+        /// <summary>
+        /// Название страны
+        /// </summary>
         public string CountryName { get; set; }
 
-        public List<Team> countryTeams { get; set; }
+        /// <summary>
+        /// Команды
+        /// </summary>
+        public List<Team> Teams { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

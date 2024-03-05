@@ -4,10 +4,18 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>d8c5d94a-b96d-4611-abfc-33b4b4001170</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Middlewares\" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FootballMatchPredictor.Application\FootballMatchPredictor.Application.csproj" />
+    <ProjectReference Include="..\FootballMatchPredictor.Domain\FootballMatchPredictor.Domain.csproj" />
+    <ProjectReference Include="..\FootballMatchPredictor.Persistence\FootballMatchPredictor.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

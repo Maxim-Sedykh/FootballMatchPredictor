@@ -10,6 +10,8 @@ namespace FootballMatchPredictor.Domain.Enums
     {
 
 
+        Unauthorized = 401,
+
         InternalServerError = 500,
     }
 }

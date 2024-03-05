@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Entities
 {
-    public class Bet: IAuditable
+    public class Bet: IAuditable, IEntityId<long>
     {
         /// <summary>
         /// Идентификатор ставки
         /// </summary>
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Внешний ключ для связи с пользователем
         /// </summary>
-        public Guid UserId { get; set; }
+        public long UserId { get; set; }
 
         /// <summary>
         /// Пользователь
@@ -25,29 +25,34 @@ namespace FootballMatchPredictor.Domain.Entities
         public User User { get; set; }
 
         /// <summary>
-        /// Внешний ключ для связи с матчем
+        /// Внешний ключ для связи с коэффициентами
         /// </summary>
-        public Guid MatchId { get; set; }
+        public float CoefficientId { get; set; }
 
         /// <summary>
-        /// Матч
+        /// Коэффициент
         /// </summary>
-        public Match Match { get; set; }
+        public Coefficient Coefficient { get; set; }
 
         /// <summary>
-        /// Внешний ключ для связи с типом ставки
+        /// Количество поставленных денег
         /// </summary>
-        public Guid BetTypeId { get; set; }
-        
+        public decimal BetAmountMoney { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для типа связи
+        /// </summary>
+        public long BetTypeId { get; set; } 
+
         /// <summary>
         /// Тип ставки
         /// </summary>
         public BetType BetType { get; set; }
 
         /// <summary>
-        /// Количество поставленных денег
+        /// Значения ставки
         /// </summary>
-        public decimal BetAmountMoney { get; set; }
+        public List<BetValue> BetValues { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

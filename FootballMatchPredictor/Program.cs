@@ -1,7 +1,17 @@
+using FootballMatchPredictor;
+using FootballMatchPredictor.Persistence.DependencyInjection;
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthenticationAndAuthorization(builder);
+
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+
+builder.Services.AddPersistence(builder.Configuration);
 
 var app = builder.Build();
 

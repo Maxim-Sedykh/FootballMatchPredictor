@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Entities
 {
-    public class BetType: IAuditable
+    public class BetType: IAuditable, IEntityId<byte>
     {
         /// <summary>
         /// Идентификатор типа ставки
         /// </summary>
-        public Guid Id { get; set; }
+        public byte Id { get; set; }
 
         /// <summary>
         /// Название типа ставки
@@ -28,6 +28,21 @@ namespace FootballMatchPredictor.Domain.Entities
         /// Количество коэффициентов для этой ставки
         /// </summary>
         public float CoefficientCount { get; set; }
+
+        /// <summary>
+        /// Информация по возможным коэффициентам
+        /// </summary>
+        public List<CoefficientRefer> CoefficientRefers { get; set; }
+
+        /// <summary>
+        /// Информация по значениям ставки
+        /// </summary>
+        public List<BetValueInfo> BetValueInfos { get; set; }
+
+        /// <summary>
+        /// Информация по ставкам
+        /// </summary>
+        public List<Bet> Bets { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

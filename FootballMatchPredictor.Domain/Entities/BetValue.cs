@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Entities
 {
-    public class BetValue: IAuditable
+    public class BetValue: IAuditable, IEntityId<long>
     {
         /// <summary>
         /// Идентификатор значения ставки
         /// </summary>
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Номер значения ставки
@@ -22,7 +22,7 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Внешний ключ для связи со ставкой
         /// </summary>
-        public Guid BetId { get; set; }
+        public long BetId { get; set; }
 
         /// <summary>
         /// Ставка
@@ -32,7 +32,7 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Внешний ключ для связи с информацией об значении ставки
         /// </summary>
-        public Guid BetValueInfoId { get; set; }
+        public long BetValueInfoId { get; set; }
 
         /// <summary>
         /// Информация о значении ставки

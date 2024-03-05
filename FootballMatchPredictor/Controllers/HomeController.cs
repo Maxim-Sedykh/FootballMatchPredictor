@@ -1,4 +1,4 @@
-using FootballMatchPredictor.Models;
+using FootballMatchPredictor.Domain.ViewModels.Error;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

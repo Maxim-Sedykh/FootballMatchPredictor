@@ -2,14 +2,9 @@
 using FootballMatchPredictor.Domain.Interfaces.Repository;
 using FootballMatchPredictor.Persistence.Interceptor;
 using FootballMatchPredictor.Persistence.Repository;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Persistence.DependencyInjection
 {
@@ -18,14 +13,14 @@ namespace FootballMatchPredictor.Persistence.DependencyInjection
     /// </summary>
     public static class DependencyInjection
     {
-        public static void AddDataAccessLayer(this IServiceCollection services, IConfiguration configuration)
+        public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("DbConnectionString");
+            var connectionString = configuration.GetConnectionString("ApplicationDbConnectionString");
 
             services.AddSingleton<AuditInterceptor>();
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseMySql(connectionString);
+                options.UseNpgsql(connectionString);
             });
             services.InitRepositories();
         }

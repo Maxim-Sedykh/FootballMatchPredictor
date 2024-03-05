@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Entities
 {
-    public class User: IAuditable
+    public class User: IAuditable, IEntityId<long>
     {
         /// <summary>
         /// Идентификатор пользователя
         /// </summary>
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Логин пользователя
@@ -35,6 +35,11 @@ namespace FootballMatchPredictor.Domain.Entities
         /// Пароль пользователя (обычный пользователь, модератор, админ)
         /// </summary>
         public Role Role { get; set; }
+
+        /// <summary>
+        /// Ставки пользователя
+        /// </summary>
+        public List<Bet> Bets { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

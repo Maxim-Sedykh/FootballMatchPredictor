@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Entities
 {
-    public class Team: IAuditable
+    public class Team: IAuditable, IEntityId<short>
     {
         /// <summary>
         /// Идентификатор команды
         /// </summary>
-        public Guid Id { get; set; }
+        public short Id { get; set; }
 
         /// <summary>
         /// Название команды
@@ -22,7 +22,7 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Внешний ключ для связи с пользователем
         /// </summary>
-        public Guid CountryId { get; set; }
+        public byte CountryId { get; set; }
 
         /// <summary>
         /// Страна команды

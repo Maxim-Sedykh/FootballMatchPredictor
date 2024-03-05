@@ -7,22 +7,17 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Entities
 {
-    public class BetValueInfo: IAuditable, IEntityId<long>
+    public class CoefficientRefer : IAuditable, IEntityId<int>
     {
         /// <summary>
-        /// Идентификатор информации о значении ставки
+        /// Идентификатор сущности
         /// </summary>
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
-        /// Номер значения для типа ставки
+        /// Описание значения коэффициента
         /// </summary>
-        public byte ValueNumber { get; set; }
-
-        /// <summary>
-        /// Описание значения ставки
-        /// </summary>
-        public string ValueDescription { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// Внешний ключ для связи с типом ставки
@@ -35,9 +30,9 @@ namespace FootballMatchPredictor.Domain.Entities
         public BetType BetType { get; set; }
 
         /// <summary>
-        /// Ставки
+        /// Коэффициенты
         /// </summary>
-        public List<BetValue> BetValues { get; set; }
+        public List<Coefficient> Coefficients { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

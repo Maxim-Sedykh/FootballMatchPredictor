@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Entities
 {
-    public class Match: IAuditable
+    public class Match: IAuditable, IEntityId<long>
     {
         /// <summary>
         /// Идентификатор матча
         /// </summary>
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Внешний ключ для связи с первой командой
         /// </summary>
-        public Guid Team1Id { get; set; }
+        public short Team1Id { get; set; }
 
         /// <summary>
         /// Первая команда
@@ -28,7 +28,7 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Внешний ключ для связи со второй командой
         /// </summary>
-        public Guid Team2Id { get; set; }
+        public short Team2Id { get; set; }
 
         /// <summary>
         /// Вторая команда
@@ -54,6 +54,11 @@ namespace FootballMatchPredictor.Domain.Entities
         /// Время проведения матча
         /// </summary>
         public DateTime MatchDate { get; set; }
+
+        /// <summary>
+        /// Коэффициенты
+        /// </summary>
+        public List<Coefficient> Coefficients { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

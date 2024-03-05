@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Entities
 {
-    public class Coefficient: IAuditable
+    public class Coefficient: IAuditable, IEntityId<long>
     {
         /// <summary>
         /// Идентификатор коэффициента
         /// </summary>
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Внешний ключ для связи с матчем
         /// </summary>
-        public Guid MatchId { get; set; }
+        public long MatchId { get; set; }
 
         /// <summary>
         /// Матч данного коэффициента
@@ -31,19 +31,19 @@ namespace FootballMatchPredictor.Domain.Entities
         public float CoefficientValue { get; set; }
 
         /// <summary>
+        /// Внешний ключ для коэффициента
+        /// </summary>
+        public int CoefficientReferId { get; set; }
+
+        /// <summary>
         /// К чему относится данный коэффициент
         /// </summary>
         public CoefficientRefer CoefficientRefer { get; set; }
 
         /// <summary>
-        /// Внешний ключ для связи с типом ставки
+        /// Ставки
         /// </summary>
-        public Guid BetTypeId { get; set; }
-
-        /// <summary>
-        /// Тип ставки
-        /// </summary>
-        public BetType BetType { get; set; }
+        public List<Bet> Bets { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
