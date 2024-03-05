@@ -3,7 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballMatchPredictor", "FootballMatchPredictor\FootballMatchPredictor.csproj", "{56917B8E-19CE-4E3D-BEA8-0DCF3A8E97E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballMatchPredictor", "FootballMatchPredictor\FootballMatchPredictor.csproj", "{56917B8E-19CE-4E3D-BEA8-0DCF3A8E97E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{7F35F642-0DCC-413A-BE17-179AE3B32328}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{1DDED8DE-378E-4E3A-BAAD-FAB8517F0C5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{2A580D53-EB2F-4932-9863-742415BD7E27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{DAC91406-3A0C-4A6A-83E8-CCFA05317E0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballMatchPredictor.Persistence", "FootballMatchPredictor.Persistence\FootballMatchPredictor.Persistence.csproj", "{F7A04E23-76FC-48BF-B039-A71DBE029FEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballMatchPredictor.Domain", "FootballMatchPredictor.Domain\FootballMatchPredictor.Domain.csproj", "{78BB4B87-7FC4-4AB4-BEDD-0AAD36A58CA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballMatchPredictor.Application", "FootballMatchPredictor.Application\FootballMatchPredictor.Application.csproj", "{5A78D2D8-780F-409F-AC67-E0CE13DADF7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +29,27 @@ Global
 		{56917B8E-19CE-4E3D-BEA8-0DCF3A8E97E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56917B8E-19CE-4E3D-BEA8-0DCF3A8E97E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56917B8E-19CE-4E3D-BEA8-0DCF3A8E97E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A04E23-76FC-48BF-B039-A71DBE029FEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A04E23-76FC-48BF-B039-A71DBE029FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A04E23-76FC-48BF-B039-A71DBE029FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A04E23-76FC-48BF-B039-A71DBE029FEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78BB4B87-7FC4-4AB4-BEDD-0AAD36A58CA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BB4B87-7FC4-4AB4-BEDD-0AAD36A58CA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78BB4B87-7FC4-4AB4-BEDD-0AAD36A58CA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78BB4B87-7FC4-4AB4-BEDD-0AAD36A58CA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A78D2D8-780F-409F-AC67-E0CE13DADF7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A78D2D8-780F-409F-AC67-E0CE13DADF7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A78D2D8-780F-409F-AC67-E0CE13DADF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A78D2D8-780F-409F-AC67-E0CE13DADF7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{56917B8E-19CE-4E3D-BEA8-0DCF3A8E97E6} = {DAC91406-3A0C-4A6A-83E8-CCFA05317E0F}
+		{F7A04E23-76FC-48BF-B039-A71DBE029FEA} = {7F35F642-0DCC-413A-BE17-179AE3B32328}
+		{78BB4B87-7FC4-4AB4-BEDD-0AAD36A58CA7} = {1DDED8DE-378E-4E3A-BAAD-FAB8517F0C5B}
+		{5A78D2D8-780F-409F-AC67-E0CE13DADF7F} = {2A580D53-EB2F-4932-9863-742415BD7E27}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {89ABED75-F531-4CAE-A8E0-4D561A204ECA}

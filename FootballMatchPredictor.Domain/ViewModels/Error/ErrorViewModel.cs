@@ -1,4 +1,4 @@
-namespace FootballMatchPredictor.Models
+namespace FootballMatchPredictor.Domain.ViewModels.Error
 {
     public class ErrorViewModel
     {
