@@ -27,7 +27,7 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Внешний ключ для связи с коэффициентами
         /// </summary>
-        public float CoefficientId { get; set; }
+        public long CoefficientId { get; set; }
 
         /// <summary>
         /// Коэффициент
@@ -42,7 +42,7 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Внешний ключ для типа связи
         /// </summary>
-        public long BetTypeId { get; set; } 
+        public byte BetTypeId { get; set; } 
 
         /// <summary>
         /// Тип ставки

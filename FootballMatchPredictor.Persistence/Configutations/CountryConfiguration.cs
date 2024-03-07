@@ -15,8 +15,6 @@ namespace FootballMatchPredictor.Persistence.Configutations
     {
         public void Configure(EntityTypeBuilder<Country> builder)
         {
-            builder.HasKey(x => x.Id);
-
             builder.HasData(new List<Country>()
             {
                 new()

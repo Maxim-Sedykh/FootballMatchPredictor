@@ -15,8 +15,6 @@ namespace FootballMatchPredictor.Persistence.Configutations
     {
         public void Configure(EntityTypeBuilder<Team> builder)
         {
-            builder.HasKey(x => x.Id);
-
             builder.HasData(new List<Team>()
             {
                 new()
@@ -28,23 +26,23 @@ namespace FootballMatchPredictor.Persistence.Configutations
                 },
                 new()
                 {
-                    Id = 1,
+                    Id = 2,
                     Name = "ЦСКА",
-                    CountryId = 2,
+                    CountryId = 1,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
                 {
-                    Id = 1,
+                    Id = 3,
                     Name = "Зенит",
-                    CountryId = 3,
+                    CountryId = 1,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
                 {
-                    Id = 1,
+                    Id = 4,
                     Name = "Манчестер Юнайтед",
-                    CountryId = 4,
+                    CountryId = 2,
                     CreatedAt = DateTime.UtcNow,
                 }
             });

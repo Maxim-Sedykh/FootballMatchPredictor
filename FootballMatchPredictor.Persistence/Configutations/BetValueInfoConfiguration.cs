@@ -13,8 +13,6 @@ namespace FootballMatchPredictor.Persistence.Configutations
     {
         public void Configure(EntityTypeBuilder<BetValueInfo> builder)
         {
-            builder.HasKey(x => x.Id);
-
             builder.HasData(new List<BetValueInfo>()
             {
                 new()
@@ -45,7 +43,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
 
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-            builder.Property(x => x.ValueDescription).IsRequired().HasMaxLength(30);
+            builder.Property(x => x.ValueDescription).IsRequired().HasMaxLength(200);
 
             builder.HasMany(x => x.BetValues)
                 .WithOne(x => x.BetValueInfo)

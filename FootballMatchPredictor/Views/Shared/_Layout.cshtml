@@ -54,20 +54,40 @@
                             </div>
                         </li>
                     </ul>
-                    <button type="button" class="btn bg-indigo br-40 rounded-pill me-2 text-white btn-layout">Логин</button>
-                    <button type="button" class="btn btn-dark br-40 rounded-pill  btn-layout">Регистрация</button>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="dropdown">
+                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="far fa-user-circle fa-3x text-dark mx-2" aria-hidden="true"></i></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Аккаунт</a></li>
+                            <li><a class="dropdown-item" href="#">Мои ставки</a></li>
+                            <li><a class="dropdown-item" href="#">Выйти</a></li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn bg-indigo br-40 rounded-pill me-2 text-white btn-layout"
+                                data-bs-toggle="modal" data-bs-target="#modalWindow" onclick="openModal({ url: '/Auth/Login', modalId: 'modalWindow', modalTitle:'Логин' })">
+                            Логин
+                        </button>
+                        <button type="button" class="btn btn-dark br-40 rounded-pill  btn-layout"
+                                data-bs-toggle="modal" data-bs-target="#modalWindow" onclick="openModal({ url: '/Auth/Register', modalId: 'modalWindow', modalTitle:'Регистрация' })">
+                            Регистрация
+                        </button>
+                    }
                 </div>
             </div>
         </nav>
     </header>
 
-    <div class="modal fade br-40" id="modalWindow" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="modalWindow" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border">
+            <div class="modal-content br-40">
                 <div class="modal-header d-flex">
-                    <div class="mx-auto"><p class="modal-title fs-3"></p></div>
+                    <div class="mx-auto"><p class="modal-title fs-4 text-black ms-3"></p></div>
                     <div class="float-end">
-                        <button type="button" class="btn-close"
+                        <button type="button" class="btn-close me-2 mt-2"
                                 data-bs-dismiss="modal" aria-label="Закрыть"></button>
                     </div>
                 </div>
@@ -88,9 +108,11 @@
             &copy; 2024 - FootballMatchPredictor - <a asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/modal.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

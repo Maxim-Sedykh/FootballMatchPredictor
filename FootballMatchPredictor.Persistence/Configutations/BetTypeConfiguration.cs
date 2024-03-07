@@ -14,8 +14,6 @@ namespace FootballMatchPredictor.Persistence.Configutations
     {
         public void Configure(EntityTypeBuilder<BetType> builder)
         {
-            builder.HasKey(x => x.Id);
-
             builder.HasData(new List<BetType>()
             {
                 new()
@@ -28,7 +26,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                 },
                 new()
                 {
-                    Id = 1,
+                    Id = 2,
                     TypeName = "Ставка на первый гол",
                     ValuesCount = 1,
                     CoefficientCount = 2,

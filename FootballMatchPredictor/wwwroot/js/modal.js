@@ -15,6 +15,9 @@
             modal.find(".modal-title").html(modalTitle);
             modal.modal('show');
         },
+        failure: function () {
+            modal.modal('hide')
+        },
         error: function (response) {
             alert(response.responseText);
         }

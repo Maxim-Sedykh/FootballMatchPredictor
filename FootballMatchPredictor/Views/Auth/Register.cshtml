@@ -1,0 +1,29 @@
+﻿@using FootballMatchPredictor.Domain.ViewModels.Auth
+@model RegisterUserViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-controller="Auth" asp-action="Register">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Имя пользователя</label>
+                    <input type="text" class="form-control" asp-for="Username" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">Мы никогда не делимся вашей почтой с кем то ещё.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Почта</label>
+                    <input type="email" asp-for="Email" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Пароль</label>
+                    <input type="password" asp-for="Password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Подтвердите пароль</label>
+                    <input type="password" asp-for="PasswordConfirm" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn  bg-indigo text-white">Регистрация</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -42,7 +42,7 @@ namespace FootballMatchPredictor.Middlewares
 
             HomeController homeController = new HomeController();
 
-            homeController.Error(new ErrorViewModel { ErrorMessage = response.ErrorMessage, StatusCode = response.ErrorCode });
+            homeController.Error(new ErrorViewModel(response.ErrorMessage, response.ErrorCode));
 
             return Task.CompletedTask;
         }

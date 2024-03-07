@@ -15,7 +15,7 @@ namespace FootballMatchPredictor.Persistence.DependencyInjection
     {
         public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("ApplicationDbConnectionString");
+            var connectionString = configuration.GetConnectionString("DbConnectionString");
 
             services.AddSingleton<AuditInterceptor>();
             services.AddDbContext<ApplicationDbContext>(options =>

@@ -13,8 +13,6 @@ namespace FootballMatchPredictor.Persistence.Configutations
     {
         public void Configure(EntityTypeBuilder<Bet> builder)
         {
-            builder.HasKey(x => x.Id);
-
             builder.HasData(new List<Bet>()
             {
                 new()
