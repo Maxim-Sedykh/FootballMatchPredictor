@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -20,3 +20,55 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.br-40 {
+    border-radius: 40px;
+}
+
+.bg-indigo {
+    background-color: #6610f2;
+}
+
+.main-page-pic {
+    background-image: url(/images/default-main-page-pic.jpg);
+    background-size:cover;
+}
+
+.btn-layout{
+    min-width:180px;
+}
+
+.main-ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.mail-ul li {
+    position: relative;
+    padding-left: 30px; /* Отступ слева для галочки */
+    margin-bottom: 10px; /* Расстояние между элементами списка */
+}
+
+@counter-style marker-font {
+    system: cyclic;
+    symbols: "arrow_forward";
+    suffix: " ";
+}
+
+.list-marked {
+    margin: 0 0 20px 24px;
+    padding: 0;
+    list-style-type: marker-font;
+}
+
+    .list-marked li::marker {
+        font-family: 'Material Icons';
+        color: purple;
+        line-height: 1;
+        font-size: 20px;
+        margin-top:10px;
+    }
+
+    .list-marked li {
+        margin: 7px 0;
+    }

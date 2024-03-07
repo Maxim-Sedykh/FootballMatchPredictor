@@ -1,5 +1,7 @@
-﻿using FootballMatchPredictor.Domain.Enums;
+﻿using FootballMatchPredictor.Controllers;
+using FootballMatchPredictor.Domain.Enums;
 using FootballMatchPredictor.Domain.Result;
+using FootballMatchPredictor.Domain.ViewModels.Error;
 using System.Net;
 
 namespace FootballMatchPredictor.Middlewares
@@ -35,11 +37,12 @@ namespace FootballMatchPredictor.Middlewares
             var response = exception switch
             {
                 UnauthorizedAccessException => new BaseResult() { ErrorMessage = errorMessage, ErrorCode = (int)StatusCode.Unauthorized },
-                _ => new BaseResult() { ErrorMessage = errorMessage, ErrorCode = (int)HttpStatusCode.InternalServerError },
+                _ => new BaseResult() { ErrorMessage = errorMessage, ErrorCode = (int)StatusCode.InternalServerError },
             };
 
-            httpContext.Response.StatusCode = (int)response.ErrorCode;
-            httpContext.Response.Redirect($"/home/error/{response.ErrorMessage}");
+            HomeController homeController = new HomeController();
+
+            homeController.Error(new ErrorViewModel { ErrorMessage = response.ErrorMessage, StatusCode = response.ErrorCode });
 
             return Task.CompletedTask;
         }
