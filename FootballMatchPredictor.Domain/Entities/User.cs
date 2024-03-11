@@ -22,6 +22,21 @@ namespace FootballMatchPredictor.Domain.Entities
         public string Username { get; set; }
 
         /// <summary>
+        /// Имя пользователя
+        /// </summary>
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// Фамилия пользователя
+        /// </summary>
+        public string SurName { get; set; }
+
+        /// <summary>
+        /// Пол пользователя
+        /// </summary>
+        public Sex Sex { get; set; }
+
+        /// <summary>
         /// Почта пользователя
         /// </summary>
         public string Email { get; set; }

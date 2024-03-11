@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FootballMatchPredictor.Application.Resources.Error {
+namespace FootballMatchPredictor.Application.Resources.Success {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace FootballMatchPredictor.Application.Resources.Error {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ErrorMessage {
+    internal class SuccessMessage {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ErrorMessage() {
+        internal SuccessMessage() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FootballMatchPredictor.Application.Resources.Error.ErrorMessage", typeof(ErrorMessage).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FootballMatchPredictor.Application.Resources.Success.SuccessMessage", typeof(SuccessMessage).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,29 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Матчи не найдены.
+        ///   Ищет локализованную строку, похожую на Матч успешно создан.
         /// </summary>
-        internal static string MatchesNotFound {
+        internal static string MatchCreated {
             get {
-                return ResourceManager.GetString("MatchesNotFound", resourceCulture);
+                return ResourceManager.GetString("MatchCreated", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Матч не найден.
+        ///   Ищет локализованную строку, похожую на Матч успешно удалён.
         /// </summary>
-        internal static string MatchNotFound {
+        internal static string MatchDeleted {
             get {
-                return ResourceManager.GetString("MatchNotFound", resourceCulture);
+                return ResourceManager.GetString("MatchDeleted", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Неправильный пароль.
+        ///   Ищет локализованную строку, похожую на Данные пользователя успешно обновлены!.
         /// </summary>
-        internal static string PasswordIsWrong {
+        internal static string UserDataUpdated {
             get {
-                return ResourceManager.GetString("PasswordIsWrong", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Пароли не совпадают.
-        /// </summary>
-        internal static string PasswordNotEqualsPasswordConfirm {
-            get {
-                return ResourceManager.GetString("PasswordNotEqualsPasswordConfirm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Команды не могут играть против друг друга.
-        /// </summary>
-        internal static string TeamsAreEqual {
-            get {
-                return ResourceManager.GetString("TeamsAreEqual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Пользователь с такими данными уже существует.
-        /// </summary>
-        internal static string UserAlreadyExist {
-            get {
-                return ResourceManager.GetString("UserAlreadyExist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Пользователь не найден.
-        /// </summary>
-        internal static string UserNotFound {
-            get {
-                return ResourceManager.GetString("UserNotFound", resourceCulture);
+                return ResourceManager.GetString("UserDataUpdated", resourceCulture);
             }
         }
     }

@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Success\" />
     <Folder Include="Validations\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
   </ItemGroup>
 
@@ -25,12 +25,21 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>ErrorMessage.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="Resources\Success\SuccessMessage.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>SuccessMessage.resx</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <EmbeddedResource Update="Resources\Error\ErrorMessage.resx">
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>ErrorMessage.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\Success\SuccessMessage.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>SuccessMessage.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
 	</ItemGroup>
 

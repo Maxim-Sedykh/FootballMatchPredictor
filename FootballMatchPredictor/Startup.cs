@@ -15,10 +15,10 @@ namespace FootballMatchPredictor
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = new PathString("/Account/Login");
-                    options.AccessDeniedPath = new PathString("/Account/Login");
+                    options.LoginPath = new PathString("/Auth/Login");
+                    options.AccessDeniedPath = new PathString("/Auth/Login");
                     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                    options.Cookie.Name = "OnlineBankingCookie";
+                    options.Cookie.Name = "FootballMatchPredictorCookie";
                     options.ExpireTimeSpan = TimeSpan.FromDays(1);
                     options.SlidingExpiration = true;
                 });

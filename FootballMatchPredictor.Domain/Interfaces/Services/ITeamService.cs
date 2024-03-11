@@ -1,4 +1,5 @@
 ﻿using FootballMatchPredictor.Domain.Result;
+using FootballMatchPredictor.Domain.ViewModels.Team;
 using FootballMatchPredictor.Domain.ViewModels.UserProfile;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Interfaces.Services
 {
-    public interface IUserProfileService
+    public interface ITeamService
     {
-        Task<BaseResult<UserProfileViewModel>> GetUserProfile(string userName);
+        Task<BaseResult> CreateTeam(CreateTeamViewModel viewModel);
 
-        Task<BaseResult> UpdateUserInfo(UserProfileViewModel viewModel);
+        Task<CollectionResult<TeamViewModel>> GetAllTeams();
+
+        Task<BaseResult> UpdateTeam(UpdateTeamViewModel viewModel);
     }
 }

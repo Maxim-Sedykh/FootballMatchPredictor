@@ -15,6 +15,8 @@ namespace FootballMatchPredictor.Domain.ViewModels.Auth
     public record RegisterUserViewModel(
         string Username,
         string Email,
+        string FirstName,
+        string SurName,
         string Password,
         string PasswordConfirm
     );

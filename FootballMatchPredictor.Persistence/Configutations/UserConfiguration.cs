@@ -21,8 +21,11 @@ namespace FootballMatchPredictor.Persistence.Configutations
                 {
                     Id = 1,
                     Username = "SuperAdmin",
+                    FirstName = "Admin",
+                    SurName = "Admin",
                     Email = "Admin_m@mail.ru",
                     Password = HashPasswordHelper.HashPassword("admin123"),
+                    Sex = Sex.Woman,
                     Role = Role.Admin,
                     CreatedAt = DateTime.UtcNow,
                 },
@@ -30,8 +33,11 @@ namespace FootballMatchPredictor.Persistence.Configutations
                 {
                     Id = 2,
                     Username = "StavoChnik",
+                    FirstName = "Ivan",
+                    SurName = "Ivanov",
                     Email = "min_mexd@mail.ru",
                     Password = HashPasswordHelper.HashPassword("12341234"),
+                    Sex = Sex.Man,
                     Role = Role.User,
                     CreatedAt = DateTime.UtcNow,
                 },
@@ -42,6 +48,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
             builder.Property(x => x.Password).IsRequired();
             builder.Property(x => x.Email).IsRequired().HasMaxLength(20);
             builder.Property(x => x.Username).IsRequired().HasMaxLength(20);
+            builder.Property(x => x.FirstName).IsRequired().HasMaxLength(30);
+            builder.Property(x => x.SurName).IsRequired().HasMaxLength(30);
 
             builder.HasMany(x => x.Bets)
                 .WithOne(x => x.User)

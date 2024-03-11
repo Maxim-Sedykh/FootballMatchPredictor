@@ -1,0 +1,112 @@
+﻿@using FootballMatchPredictor.Domain.Enums
+@using FootballMatchPredictor.Domain.ViewModels.UserProfile
+@model UserProfileViewModel
+
+@{
+    ViewBag.Title = "Ваш профиль";
+}
+
+<section>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-dark rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item text-white"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                        <li class="breadcrumb-item text-white"><a @(User.IsInRole("Admin") ? "" : "text-muted")> Страница админа</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Профиль пользователя</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 bg-dark">
+                    <div class="card-body text-center pt-5">
+                        @if (Model.Sex == Sex.Man)
+                        {
+                            <img class="img-fluid rounded-circle" style="height:200px;" src="https://pushinka.top/uploads/posts/2023-04/1680944641_pushinka-top-p-avatarki-dlya-shkolnogo-chata-avatarka-ins-16.jpg" />
+                        }
+                        else
+                        {
+                            <img class="img-fluid rounded-circle" style="height:200px;" src="/images/beautiful-woman-avatar.jpg" />
+                        }
+                        <h5 class="my-3">John Smith</h5>
+                        <p class="mb-1 text-white">Сделайте ставку!</p>
+                        <p class="mb-4 text-white">Ставки на фатбольные матчи – это захватывающий способ испытать свою удачу</p>
+                        <div class="d-flex justify-content-center mb-2">
+                            <button type="button" class="btn btn-primary"
+                                    onclick="doActionWithPopupWindow(event, { url: '/UserProfile/UpdateUserInfo', formId: 'updateUserData' })">
+                                Обновить данные
+                            </button>
+                            <button type="button" class="btn btn-outline-primary ms-1">Ваша статистика</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-4 bg-dark px-4">
+                    <form id="updateUserData">
+                        <input type="hidden" asp-for="Id" value="@Model.Id"/>
+                        <div class="form-group row my-3">
+                            <div class="col-sm-1 pt-2">
+                                <label class="text-white" asp-for="Username">Логин</label>
+                            </div>
+                            <div class="col-sm-11 ps-4">
+                                <input type="text" class="form-control" asp-for="Username" value="@Model.Username">
+                            </div>
+                        </div>
+                        <div class="form-group row my-3">
+                            <div class="col-sm-1 pt-2 ">
+                                <label class="text-white" asp-for="FirstName">Имя</label>
+                            </div>
+                            <div class="col-sm-11 ps-4">
+                                <input type="text" class="form-control" asp-for="FirstName" value="@Model.FirstName">
+                            </div>
+                        </div>
+                        <div class="form-group row my-3">
+                            <div class="col-sm-1 pt-2">
+                                <label class="text-white" asp-for="SurName">Фамилия</label>
+                            </div>
+                            <div class="col-sm-11 ps-4">
+                                <input type="text" class="form-control" asp-for="SurName" value="@Model.SurName">
+                            </div>
+                        </div>
+                        <div class="form-group row my-3">
+                            <div class="col-sm-1 pt-2">
+                                <label class="text-white" asp-for="Email">Почта</label>
+                            </div>
+                            <div class="col-sm-11 ps-4">
+                                <input type="email" class="form-control" asp-for="Email" value="@Model.Email">
+                            </div>
+                        </div>
+                        <div class="form-group row my-3">
+                            <div class="col-sm-1 pt-2">
+                                <label class="text-white" asp-for="Sex">Пол</label>
+                            </div>
+                            <div class="col-sm-11 ps-4">
+                                <select class="form-select" asp-for="Sex">
+                                    @foreach(Sex sex in Enum.GetValues(typeof(Sex)))
+                                    {
+                                        <option value="@sex">
+                                            @sex
+                                        </option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </form> 
+                </div>
+                <div class="card mb-4 bg-dark px-4 text-white text-center pt-3"> 
+                    <p class="text-white fs-4">
+                        Ваши ставки
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

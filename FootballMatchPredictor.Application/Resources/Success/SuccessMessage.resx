@@ -117,25 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MatchesNotFound" xml:space="preserve">
-    <value>Matches if not found</value>
+  <data name="MatchCreated" xml:space="preserve">
+    <value>Матч успешно создан</value>
   </data>
-  <data name="MatchNotFound" xml:space="preserve">
-    <value>Match is not found</value>
+  <data name="MatchDeleted" xml:space="preserve">
+    <value>Матч успешно удалён</value>
   </data>
-  <data name="PasswordIsWrong" xml:space="preserve">
-    <value>Password is wrong</value>
-  </data>
-  <data name="PasswordNotEqualsPasswordConfirm" xml:space="preserve">
-    <value>Password mismatch</value>
-  </data>
-  <data name="TeamsAreEqual" xml:space="preserve">
-    <value>Teams cannot play against each other</value>
-  </data>
-  <data name="UserAlreadyExist" xml:space="preserve">
-    <value>User is already exist</value>
-  </data>
-  <data name="UserNotFound" xml:space="preserve">
-    <value>User is not found</value>
+  <data name="UserDataUpdated" xml:space="preserve">
+    <value>Данные пользователя успешно обновлены!</value>
   </data>
 </root>
