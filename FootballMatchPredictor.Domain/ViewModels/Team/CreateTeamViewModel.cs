@@ -8,11 +8,7 @@ using System.Threading.Tasks;
 namespace FootballMatchPredictor.Domain.ViewModels.Team
 {
     public record CreateTeamViewModel(
-        long Id,
-        string Username,
-        string FirstName,
-        string SurName,
-        string Email,
-        Sex Sex
+        string Name,
+        string CountryId
     );
 }

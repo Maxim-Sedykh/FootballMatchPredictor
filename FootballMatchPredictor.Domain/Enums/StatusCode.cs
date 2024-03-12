@@ -19,6 +19,9 @@ namespace FootballMatchPredictor.Domain.Enums
         MatchNotFound = 41,
         MatchesNotFound = 42,
 
+        TeamNotFound = 51,
+        TeamsNotFound = 52,
+
         Unauthorized = 401,
 
         InternalServerError = 500,

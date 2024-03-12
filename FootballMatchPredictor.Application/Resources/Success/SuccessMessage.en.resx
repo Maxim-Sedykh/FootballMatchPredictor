@@ -123,6 +123,18 @@
   <data name="MatchDeleted" xml:space="preserve">
     <value>Match is successfully deleted!</value>
   </data>
+  <data name="MatchUpdated" xml:space="preserve">
+    <value>Match is successfully updated!</value>
+  </data>
+  <data name="TeamCreated" xml:space="preserve">
+    <value>Team is successfully created!</value>
+  </data>
+  <data name="TeamDeleted" xml:space="preserve">
+    <value>Team is successfully deleted!</value>
+  </data>
+  <data name="TeamUpdated" xml:space="preserve">
+    <value>Team is successfully updated!</value>
+  </data>
   <data name="UserDataUpdated" xml:space="preserve">
     <value>User data is successfully updated!</value>
   </data>

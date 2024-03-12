@@ -97,11 +97,29 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Команда не найдена.
+        /// </summary>
+        internal static string TeamNotFound {
+            get {
+                return ResourceManager.GetString("TeamNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Команды не могут играть против друг друга.
         /// </summary>
         internal static string TeamsAreEqual {
             get {
                 return ResourceManager.GetString("TeamsAreEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Команды не найдены.
+        /// </summary>
+        internal static string TeamsNotFound {
+            get {
+                return ResourceManager.GetString("TeamsNotFound", resourceCulture);
             }
         }
         

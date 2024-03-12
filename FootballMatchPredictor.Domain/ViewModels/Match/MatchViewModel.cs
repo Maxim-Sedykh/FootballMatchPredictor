@@ -1,4 +1,5 @@
 ﻿using FootballMatchPredictor.Domain.Enums;
+using FootballMatchPredictor.Domain.ViewModels.Coefficient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace FootballMatchPredictor.Domain.ViewModels.Match
             string Team2Name,
             byte Team1GoalsCount,
             byte Team2GoalsCount,
-            MatchState MatchState,
-            DateTime MatchDate
+            string MatchState,
+            DateTime MatchDate,
+            List<MatchCoefficientViewModel> Coefficients
         );
 }

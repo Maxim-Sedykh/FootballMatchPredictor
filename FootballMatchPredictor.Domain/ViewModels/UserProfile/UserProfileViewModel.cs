@@ -1,4 +1,5 @@
 ﻿using FootballMatchPredictor.Domain.Enums;
+using FootballMatchPredictor.Domain.ViewModels.Bet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace FootballMatchPredictor.Domain.ViewModels.UserProfile
         string FirstName,
         string SurName,
         string Email,
-        Sex Sex
+        Sex Sex,
+        List<BetViewModel>? userBets
     );
 }

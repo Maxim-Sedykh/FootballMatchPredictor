@@ -13,7 +13,7 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
     {
         Task<BaseResult> CreateMatch(CreateMatchViewModel viewModel);
 
-        Task<CollectionResult<MatchViewModel>> GetAllMatches();
+        Task<BaseResult<MatchPageViewModel>> GetAllMatches();
 
         Task<BaseResult> UpdateMatch(UpdateMatchViewModel viewModel);
 

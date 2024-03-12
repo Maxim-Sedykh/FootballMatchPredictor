@@ -16,5 +16,7 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         Task<CollectionResult<TeamViewModel>> GetAllTeams();
 
         Task<BaseResult> UpdateTeam(UpdateTeamViewModel viewModel);
+
+        Task<BaseResult> DeleteTeam(short id);
     }
 }

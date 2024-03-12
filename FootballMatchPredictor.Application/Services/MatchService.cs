@@ -2,14 +2,14 @@
 using FootballMatchPredictor.Application.Resources.Success;
 using FootballMatchPredictor.Domain.Entities;
 using FootballMatchPredictor.Domain.Enums;
+using FootballMatchPredictor.Domain.Extensions;
 using FootballMatchPredictor.Domain.Interfaces.Repository;
 using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.Result;
+using FootballMatchPredictor.Domain.ViewModels.Coefficient;
 using FootballMatchPredictor.Domain.ViewModels.Match;
-using FootballMatchPredictor.Domain.ViewModels.UserProfile;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 
 namespace FootballMatchPredictor.Application.Services
 {
@@ -66,63 +66,53 @@ namespace FootballMatchPredictor.Application.Services
             };
         }
 
-        public async Task<CollectionResult<MatchViewModel>> GetAllMatches()
+        public async Task<BaseResult<MatchPageViewModel>> GetAllMatches()
         {
             var matches = await _matchRepository.GetAll()
                 .Include(x => x.Team1)
                 .Include(x => x.Team2)
-                .Select(x => new MatchViewModel(x.Id, x.Team1.Name, x.Team2.Name, x.Team1GoalsCount, x.Team2GoalsCount, x.MatchState, x.MatchDate))
-                .OrderBy(x => x.MatchDate)
+                .Include(x => x.Coefficients)
+                .ThenInclude(x => x.CoefficientRefer)
+                .Select(x => new MatchViewModel(x.Id, x.Team1.Name, x.Team2.Name, x.Team1GoalsCount, x.Team2GoalsCount, x.MatchState.GetDisplayName(), x.MatchDate, 
+                x.Coefficients.Select(x => new MatchCoefficientViewModel(x.Id, x.CoefficientValue, x.CoefficientRefer.Description, x.CreatedAt)).ToList()))
                 .ToListAsync();
 
-            if (matches.Count == 0)
-            {
-                return new CollectionResult<MatchViewModel>()
-                {
-                    ErrorMessage = ErrorMessage.MatchesNotFound,
-                    ErrorCode = (int)StatusCode.MatchesNotFound
-                };
-            }
+            var liveMatches = matches.Where(x => x.MatchState == MatchState.InProgress.GetDisplayName()).ToList();
+            var notPlayedMatches = matches.Where(x => x.MatchState == MatchState.NotPlayedYet.GetDisplayName()).ToList();
+            var playedMatches = matches.Except(notPlayedMatches).Except(liveMatches).ToList();
 
-            return new CollectionResult<MatchViewModel>()
+            return new BaseResult<MatchPageViewModel>()
             {
-                Data = matches,
-                Count = matches.Count()
+                Data = new MatchPageViewModel(liveMatches, notPlayedMatches, playedMatches),
             };
         }
 
-        public Task<BaseResult> UpdateMatch(UpdateMatchViewModel viewModel)
+        public async Task<BaseResult> UpdateMatch(UpdateMatchViewModel viewModel)
         {
-            throw new NotImplementedException();
-        }
+            var match = await _matchRepository.GetAll().FirstOrDefaultAsync(x => x.Id == viewModel.Id);
 
-        public async Task<BaseResult<MatchViewModel>> GetMatchById(long id)
-        {
-            var matches = await _matchRepository.GetAll()
-                .Include(x => x.Team1)
-                .Include(x => x.Team2)
-                .Select(x => new MatchViewModel(x.Id, x.Team1.Name, x.Team2.Name, x.Team1GoalsCount, x.Team2GoalsCount, x.MatchState, x.MatchDate))
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (matches == null)
+            if (match == null)
             {
-                return new BaseResult<MatchViewModel>()
+                return new BaseResult()
                 {
                     ErrorMessage = ErrorMessage.MatchNotFound,
                     ErrorCode = (int)StatusCode.MatchNotFound
                 };
             }
 
-            return new CollectionResult<MatchViewModel>()
-            {
-                Data = matches,
-                Count = matches.Count()
-            };
-        }
+            match.Team1Id = viewModel.Team1Id;
+            match.Team2Id = viewModel.Team2Id;
+            match.Team1GoalsCount = viewModel.Team1GoalsCount;
+            match.Team2GoalsCount = viewModel.Team2GoalsCount;
+            match.MatchState = viewModel.MatchState;
+            match.MatchDate = viewModel.MatchDate;
 
-        public Task<BaseResult> UpdateMatch(UpdateMatchViewModel viewModel)
-        {
-            throw new NotImplementedException();
+            await _matchRepository.UpdateAsync(match);
+
+            return new BaseResult()
+            {
+                SuccessMessage = SuccessMessage.MatchUpdated,
+            };
         }
     }
 }

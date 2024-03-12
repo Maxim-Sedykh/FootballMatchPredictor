@@ -36,6 +36,11 @@ namespace FootballMatchPredictor.Domain.Entities
         public int CoefficientReferId { get; set; }
 
         /// <summary>
+        /// Активный ли коэффициент, если коэффициент активный, значит на него ещё можно поставить
+        /// </summary>
+        public bool IsActive { get; set; }
+
+        /// <summary>
         /// К чему относится данный коэффициент
         /// </summary>
         public CoefficientRefer CoefficientRefer { get; set; }

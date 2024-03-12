@@ -129,8 +129,14 @@
   <data name="PasswordNotEqualsPasswordConfirm" xml:space="preserve">
     <value>Пароли не совпадают</value>
   </data>
+  <data name="TeamNotFound" xml:space="preserve">
+    <value>Команда не найдена</value>
+  </data>
   <data name="TeamsAreEqual" xml:space="preserve">
     <value>Команды не могут играть против друг друга</value>
+  </data>
+  <data name="TeamsNotFound" xml:space="preserve">
+    <value>Команды не найдены</value>
   </data>
   <data name="UserAlreadyExist" xml:space="preserve">
     <value>Пользователь с такими данными уже существует</value>

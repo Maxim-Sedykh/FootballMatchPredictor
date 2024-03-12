@@ -79,6 +79,42 @@ namespace FootballMatchPredictor.Application.Resources.Success {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Матч успешно обновлён.
+        /// </summary>
+        internal static string MatchUpdated {
+            get {
+                return ResourceManager.GetString("MatchUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Команда успешно создана.
+        /// </summary>
+        internal static string TeamCreated {
+            get {
+                return ResourceManager.GetString("TeamCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Команда успешно удалена.
+        /// </summary>
+        internal static string TeamDeleted {
+            get {
+                return ResourceManager.GetString("TeamDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Команда успешно обновлена.
+        /// </summary>
+        internal static string TeamUpdated {
+            get {
+                return ResourceManager.GetString("TeamUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Данные пользователя успешно обновлены!.
         /// </summary>
         internal static string UserDataUpdated {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Interfaces.Services
 {
-    internal interface IBetService
+    public interface IBetService
     {
     }
 }

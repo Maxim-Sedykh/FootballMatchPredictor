@@ -39,6 +39,42 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     MatchDate = DateTime.SpecifyKind(new DateTime(2024, 2, 25), DateTimeKind.Utc),
                     CreatedAt = DateTime.UtcNow,
                 },
+                new()
+                {
+                    Id = 3,
+                    Team1Id = 1,
+                    Team2Id = 3,
+                    MatchState = MatchState.NotPlayedYet,
+                    MatchDate = DateTime.SpecifyKind(new DateTime(2025, 5, 5), DateTimeKind.Utc),
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 4,
+                    Team1Id = 2,
+                    Team2Id = 4,
+                    MatchState = MatchState.NotPlayedYet,
+                    MatchDate = DateTime.SpecifyKind(new DateTime(2025, 2, 25), DateTimeKind.Utc),
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 5,
+                    Team1Id = 1,
+                    Team2Id = 2,
+                    MatchState = MatchState.InProgress,
+                    MatchDate = DateTime.UtcNow,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 6,
+                    Team1Id = 2,
+                    Team2Id = 3,
+                    MatchState = MatchState.InProgress,
+                    MatchDate = DateTime.UtcNow,
+                    CreatedAt = DateTime.UtcNow,
+                },
             });
 
             builder.Property(x => x.Id).ValueGeneratedOnAdd();

@@ -40,6 +40,70 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     CoefficientReferId = 3,
                     CreatedAt = DateTime.UtcNow,
                 },
+                new()
+                {
+                    Id = 4,
+                    MatchId = 3,
+                    CoefficientValue = 2.5f,
+                    CoefficientReferId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 5,
+                    MatchId = 3,
+                    CoefficientValue = 1.3f,
+                    CoefficientReferId = 3,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 6,
+                    MatchId = 4,
+                    CoefficientValue = 1.4f,
+                    CoefficientReferId = 2,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 7,
+                    MatchId = 4,
+                    CoefficientValue = 2.4f,
+                    CoefficientReferId = 2,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 8,
+                    MatchId = 4,
+                    CoefficientValue = 3.4f,
+                    CoefficientReferId = 3,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 9,
+                    MatchId = 5,
+                    CoefficientValue = 4.4f,
+                    CoefficientReferId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 10,
+                    MatchId = 6,
+                    CoefficientValue = 1.3f,
+                    CoefficientReferId = 2,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 11,
+                    MatchId = 6,
+                    CoefficientValue = 1.1f,
+                    CoefficientReferId = 3,
+                    CreatedAt = DateTime.UtcNow,
+                },
             });
 
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
