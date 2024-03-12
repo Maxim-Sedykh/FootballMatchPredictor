@@ -103,7 +103,43 @@
                     <p class="text-white fs-4">
                         Ваши ставки
                     </p>
-                    
+                    @foreach (var bet in Model.UserBets)
+                    {
+                        <div class="d-flex bg-dark rounded w-100 border border-white px-4 mb-3" style="min-height:100px;">
+                            <div class="p-2 flex-fill">
+                                <p>
+                                    @bet.Team1Name
+                                </p>
+                                <p>
+                                    @bet.Team2Name
+                                </p>
+                            </div>
+                            <div class="p-2 flex-fill ms-3">
+                                <p class="text-start mb-0">
+                                    @bet.CoefficientReferDescription: @bet.CoefficientValue
+                                </p>
+                                <p>
+                                    @bet.BetTypeName
+                                </p>
+                            </div>
+                            <div class="p-2 flex-fill">
+                                <p class="">
+                                    Вы поставили: @bet.BetAmountMoney
+                                </p>
+                                <p>
+                                    Выигрыш: @bet.WinningAmount
+                                </p>
+                            </div>
+                            <div class="p-2 flex-fill">
+                                <p>
+                                    @bet.CreatedAt
+                                </p>
+                                <p>
+                                    @bet.BetState
+                                </p>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

@@ -74,7 +74,7 @@ namespace FootballMatchPredictor.Application.Services
                 .Include(x => x.Coefficients)
                 .ThenInclude(x => x.CoefficientRefer)
                 .Select(x => new MatchViewModel(x.Id, x.Team1.Name, x.Team2.Name, x.Team1GoalsCount, x.Team2GoalsCount, x.MatchState.GetDisplayName(), x.MatchDate, 
-                x.Coefficients.Select(x => new MatchCoefficientViewModel(x.Id, x.CoefficientValue, x.CoefficientRefer.Description, x.CreatedAt)).ToList()))
+                x.Coefficients.Select(x => new MatchCoefficientViewModel(x.Id, x.CoefficientValue, x.IsActive, x.CoefficientRefer.Description, x.CreatedAt)).ToList()))
                 .ToListAsync();
 
             var liveMatches = matches.Where(x => x.MatchState == MatchState.InProgress.GetDisplayName()).ToList();

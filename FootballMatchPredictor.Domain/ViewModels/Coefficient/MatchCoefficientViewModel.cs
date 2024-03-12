@@ -9,6 +9,7 @@ namespace FootballMatchPredictor.Domain.ViewModels.Coefficient
     public record MatchCoefficientViewModel(
         long Id,
         float CoefficientValue,
+        bool IsActive,
         string CoefficientReferDescription,
         DateTime CreatedAt
     );

@@ -92,8 +92,10 @@ namespace FootballMatchPredictor.Application.Services
                 UserId = user.Id,
                 CoefficientId = coefficient.Id,
                 BetAmountMoney = viewModel.MoneyAmount,
+                WinningAmount = viewModel.MoneyAmount * (decimal)coefficient.CoefficientValue,
                 BetTypeId = coefficient.CoefficientRefer.BetType.Id,
                 CreatedAt = DateTime.UtcNow,
+                BetState = BetState.Unknown
             };
 
             await _betRepository.CreateAsync(bet);

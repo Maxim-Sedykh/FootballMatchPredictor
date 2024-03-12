@@ -15,6 +15,6 @@ namespace FootballMatchPredictor.Domain.ViewModels.UserProfile
         string SurName,
         string Email,
         Sex Sex,
-        List<BetViewModel>? userBets
+        List<BetViewModel>? UserBets
     );
 }

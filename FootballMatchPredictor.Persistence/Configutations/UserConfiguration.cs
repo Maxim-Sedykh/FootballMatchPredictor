@@ -27,6 +27,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Password = HashPasswordHelper.HashPassword("admin123"),
                     Sex = Sex.Woman,
                     Role = Role.Admin,
+                    WinningSum = 45000,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -39,6 +40,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Password = HashPasswordHelper.HashPassword("12341234"),
                     Sex = Sex.Man,
                     Role = Role.User,
+                    WinningSum = 0,
                     CreatedAt = DateTime.UtcNow,
                 },
             });

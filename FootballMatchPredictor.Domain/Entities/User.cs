@@ -56,6 +56,11 @@ namespace FootballMatchPredictor.Domain.Entities
         /// </summary>
         public List<Bet> Bets { get; set; }
 
+        /// <summary>
+        /// Захэшированный пароль пользователя
+        /// </summary>
+        public decimal WinningSum { get; set; }
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

@@ -1,4 +1,5 @@
-﻿using FootballMatchPredictor.Domain.Interfaces;
+﻿using FootballMatchPredictor.Domain.Enums;
+using FootballMatchPredictor.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,11 @@ namespace FootballMatchPredictor.Domain.Entities
         public decimal BetAmountMoney { get; set; }
 
         /// <summary>
+        /// Количество поставленных денег
+        /// </summary>
+        public decimal WinningAmount { get; set; }
+
+        /// <summary>
         /// Внешний ключ для типа связи
         /// </summary>
         public byte BetTypeId { get; set; } 
@@ -48,6 +54,11 @@ namespace FootballMatchPredictor.Domain.Entities
         /// Тип ставки
         /// </summary>
         public BetType BetType { get; set; }
+
+        /// <summary>
+        /// Состояние ставки
+        /// </summary>
+        public BetState BetState { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

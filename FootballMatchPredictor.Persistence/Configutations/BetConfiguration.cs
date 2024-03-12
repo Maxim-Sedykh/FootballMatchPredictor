@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FootballMatchPredictor.Domain.Enums;
 
 namespace FootballMatchPredictor.Persistence.Configutations
 {
@@ -21,16 +22,31 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     UserId = 1,
                     CoefficientId  = 2,
                     BetAmountMoney = 10000,
+                    WinningAmount = 17000,
                     BetTypeId = 1,
+                    BetState = BetState.Winning,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
                 {
                     Id = 2,
+                    UserId = 1,
+                    CoefficientId  = 3,
+                    BetAmountMoney = 20000,
+                    WinningAmount = 28000,
+                    BetTypeId = 1,
+                    BetState = BetState.Winning,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 3,
                     UserId = 2,
                     CoefficientId  = 1,
                     BetAmountMoney = 10000,
+                    WinningAmount = 24000,
                     BetTypeId = 2,
+                    BetState = BetState.Losing,
                     CreatedAt = DateTime.UtcNow,
                 }
             });

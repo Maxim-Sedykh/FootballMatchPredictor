@@ -2,9 +2,11 @@
 using FootballMatchPredictor.Application.Resources.Success;
 using FootballMatchPredictor.Domain.Entities;
 using FootballMatchPredictor.Domain.Enums;
+using FootballMatchPredictor.Domain.Extensions;
 using FootballMatchPredictor.Domain.Interfaces.Repository;
 using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.Result;
+using FootballMatchPredictor.Domain.ViewModels.Bet;
 using FootballMatchPredictor.Domain.ViewModels.UserProfile;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
@@ -20,10 +22,12 @@ namespace FootballMatchPredictor.Application.Services
     public class UserProfileService : IUserProfileService
     {
         private readonly IBaseRepository<User> _userRepository;
+        private readonly IBaseRepository<Bet> _betRepository;
 
-        public UserProfileService(IBaseRepository<User> userRepository)
+        public UserProfileService(IBaseRepository<User> userRepository, IBaseRepository<Bet> betRepository)
         {
             _userRepository = userRepository;
+            _betRepository = betRepository;
         }
 
         public async Task<BaseResult<UserProfileViewModel>> GetUserProfile(string userName)
@@ -39,9 +43,27 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
+            var userBets = await _betRepository.GetAll()
+                .Include(x => x.Coefficient)
+                .ThenInclude(x => x.Match)
+                .ThenInclude(x => x.Team1)
+                .Include(x => x.Coefficient)
+                .ThenInclude(x => x.Match)
+                .ThenInclude(x => x.Team2)
+                .Include(x => x.Coefficient)
+                .ThenInclude(x => x.CoefficientRefer)
+                .Include(x => x.BetType)
+                .Where(x => x.UserId == user.Id)
+                .Select(x => new BetViewModel(x.Id, x.Coefficient.Match.Team1.Name,
+                x.Coefficient.Match.Team1.Name, x.Coefficient.CoefficientValue,
+                x.Coefficient.CoefficientRefer.Description, x.BetAmountMoney, x.WinningAmount, x.BetType.TypeName, x.BetState.GetDisplayName(), x.CreatedAt))
+                .ToListAsync();
+
+            var userProfile = user.Adapt<UserProfileViewModel>() with { UserBets = userBets };
+
             return new BaseResult<UserProfileViewModel>()
             {
-                Data = user.Adapt<UserProfileViewModel>(),
+                Data = userProfile,
             };
         }
 

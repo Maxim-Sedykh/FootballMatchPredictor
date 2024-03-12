@@ -44,7 +44,7 @@
                                     <p>
                                         @coefficient.CoefficientReferDescription - @coefficient.CoefficientValue
                                     </p>
-                                    <button class="btn bg-indigo text-white br-40 mb-4" type="button" disabled onclick="openModal({ url: '/Bet/MakeBet/@coefficient.Id', modalId: 'modalWindow', modalTitle:'Сделать ставку'})"
+                                    <button class="btn bg-indigo text-white br-40 mb-4" type="button" @(coefficient.IsActive ? string.Empty : "disabled") onclick="openModal({ url: '/Bet/MakeBet/@coefficient.Id', modalId: 'modalWindow', modalTitle:'Сделать ставку'})"
                                             data-toggle="ajax-modal" data-target="Modal">
                                         Поставить на коэффициент
                                     </button>
@@ -99,7 +99,9 @@
                                     <p>
                                         @coefficient.CoefficientReferDescription - @coefficient.CoefficientValue
                                     </p>
-                                    <button class="btn bg-indigo text-white br-40 mb-4" type="button" onclick="openModal({ url: '/Bet/MakeBet/@coefficient.Id', modalId: 'modalWindow', modalTitle:'Сделать ставку'})"
+                                    <button class="btn bg-indigo text-white br-40 mb-4" type="button"  
+                                            @(coefficient.IsActive ? string.Empty : "disabled")
+                                            onclick="openModal({ url: '/Bet/MakeBet/@coefficient.Id', modalId: 'modalWindow', modalTitle:'Сделать ставку'})"
                                             data-toggle="ajax-modal" data-target="Modal">
                                         Поставить на коэффициент
                                     </button>
