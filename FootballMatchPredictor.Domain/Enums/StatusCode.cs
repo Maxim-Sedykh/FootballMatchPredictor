@@ -22,6 +22,12 @@ namespace FootballMatchPredictor.Domain.Enums
         TeamNotFound = 51,
         TeamsNotFound = 52,
 
+        BetValuesNotFound = 61,
+
+        CoefficientNotFound = 71,
+
+        IncorrectAmount = 81,
+
         Unauthorized = 401,
 
         InternalServerError = 500,

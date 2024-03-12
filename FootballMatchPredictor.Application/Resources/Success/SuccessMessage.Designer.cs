@@ -61,6 +61,15 @@ namespace FootballMatchPredictor.Application.Resources.Success {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ставка успешно поставлена.
+        /// </summary>
+        internal static string BetCreated {
+            get {
+                return ResourceManager.GetString("BetCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Матч успешно создан.
         /// </summary>
         internal static string MatchCreated {

@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BetValuesNotFound" xml:space="preserve">
+    <value>Bet values is not found</value>
+  </data>
+  <data name="CoefficientNotFound" xml:space="preserve">
+    <value>Coefficient is not found</value>
+  </data>
+  <data name="IncorrectAmount" xml:space="preserve">
+    <value>The amount must be more than 1000 rubles!</value>
+  </data>
   <data name="MatchesNotFound" xml:space="preserve">
     <value>Matches if not found</value>
   </data>

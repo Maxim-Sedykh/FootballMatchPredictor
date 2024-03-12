@@ -38,10 +38,6 @@ namespace FootballMatchPredictor.Persistence.Configutations
 
             builder.Property(x => x.TypeName).IsRequired().HasMaxLength(30);
 
-            builder.HasMany(x => x.BetValueInfos)
-                .WithOne(x => x.BetType)
-                .HasForeignKey(x => x.BetTypeId);
-
             builder.HasMany(x => x.CoefficientRefers)
                 .WithOne(x => x.BetType)
                 .HasForeignKey(x => x.BetTypeId);

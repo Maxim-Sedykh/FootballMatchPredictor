@@ -31,8 +31,6 @@ namespace FootballMatchPredictor.Persistence.DependencyInjection
             {
                 typeof(Bet),
                 typeof(BetType),
-                typeof(BetValue),
-                typeof(BetValueInfo),
                 typeof(Coefficient),
                 typeof(User),
                 typeof(Country),

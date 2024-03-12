@@ -49,11 +49,6 @@ namespace FootballMatchPredictor.Domain.Entities
         /// </summary>
         public BetType BetType { get; set; }
 
-        /// <summary>
-        /// Значения ставки
-        /// </summary>
-        public List<BetValue> BetValues { get; set; }
-
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

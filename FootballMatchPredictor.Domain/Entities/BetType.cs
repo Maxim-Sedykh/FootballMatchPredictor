@@ -35,9 +35,9 @@ namespace FootballMatchPredictor.Domain.Entities
         public List<CoefficientRefer> CoefficientRefers { get; set; }
 
         /// <summary>
-        /// Информация по значениям ставки
+        /// Коэффициенты по этому типу ставки
         /// </summary>
-        public List<BetValueInfo> BetValueInfos { get; set; }
+        public List<Coefficient> Coefficients { get; set; }
 
         /// <summary>
         /// Информация по ставкам

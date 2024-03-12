@@ -29,7 +29,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 2,
                     MatchId = 1,
                     CoefficientValue = 1.7f,
-                    CoefficientReferId = 2,
+                    CoefficientReferId = 5,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -37,7 +37,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 3,
                     MatchId = 2,
                     CoefficientValue = 1.4f,
-                    CoefficientReferId = 3,
+                    CoefficientReferId = 6,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -45,7 +45,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 4,
                     MatchId = 3,
                     CoefficientValue = 2.5f,
-                    CoefficientReferId = 1,
+                    CoefficientReferId = 2,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -53,7 +53,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 5,
                     MatchId = 3,
                     CoefficientValue = 1.3f,
-                    CoefficientReferId = 3,
+                    CoefficientReferId = 5,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -61,7 +61,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 6,
                     MatchId = 4,
                     CoefficientValue = 1.4f,
-                    CoefficientReferId = 2,
+                    CoefficientReferId = 6,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -69,7 +69,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 7,
                     MatchId = 4,
                     CoefficientValue = 2.4f,
-                    CoefficientReferId = 2,
+                    CoefficientReferId = 3,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -77,7 +77,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 8,
                     MatchId = 4,
                     CoefficientValue = 3.4f,
-                    CoefficientReferId = 3,
+                    CoefficientReferId = 4,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -93,7 +93,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 10,
                     MatchId = 6,
                     CoefficientValue = 1.3f,
-                    CoefficientReferId = 2,
+                    CoefficientReferId = 5,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -101,7 +101,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 11,
                     MatchId = 6,
                     CoefficientValue = 1.1f,
-                    CoefficientReferId = 3,
+                    CoefficientReferId = 6,
                     CreatedAt = DateTime.UtcNow,
                 },
             });

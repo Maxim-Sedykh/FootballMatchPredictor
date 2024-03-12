@@ -25,13 +25,34 @@ namespace FootballMatchPredictor.Persistence.Configutations
                 new()
                 {
                     Id = 2,
+                    Description = "Коэффициент на определённый счёт 2:2",
+                    BetTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 3,
+                    Description = "Коэффициент на определённый счёт 3:3",
+                    BetTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 4,
+                    Description = "Коэффициент на определённый счёт 1:2",
+                    BetTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new()
+                {
+                    Id = 5,
                     Description = "Коэффициент на то, что первая команда забьёт первый гол",
                     BetTypeId = 2,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
                 {
-                    Id = 3,
+                    Id = 6,
                     Description = "Коэффициент на то, что вторая команда забьёт первый гол",
                     BetTypeId = 2,
                     CreatedAt = DateTime.UtcNow,

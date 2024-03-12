@@ -36,10 +36,6 @@ namespace FootballMatchPredictor.Persistence.Configutations
             });
 
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-
-            builder.HasMany(x => x.BetValues)
-                .WithOne(x => x.Bet)
-                .HasForeignKey(x => x.BetId);
         }
     }
 }

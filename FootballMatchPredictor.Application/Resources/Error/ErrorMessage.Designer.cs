@@ -61,6 +61,33 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Значения для ставок не найдены.
+        /// </summary>
+        internal static string BetValuesNotFound {
+            get {
+                return ResourceManager.GetString("BetValuesNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Коэффициент не найден.
+        /// </summary>
+        internal static string CoefficientNotFound {
+            get {
+                return ResourceManager.GetString("CoefficientNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сумма должна быть больше 1000 рублей!.
+        /// </summary>
+        internal static string IncorrectAmount {
+            get {
+                return ResourceManager.GetString("IncorrectAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Матчи не найдены.
         /// </summary>
         internal static string MatchesNotFound {

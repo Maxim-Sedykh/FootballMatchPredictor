@@ -26,6 +26,11 @@ namespace FootballMatchPredictor.Domain.Entities
         public Match Match { get; set; }
 
         /// <summary>
+        /// тип ставки
+        /// </summary>
+        public List<Bet> Bets { get; set; }
+
+        /// <summary>
         /// значение коэффициента
         /// </summary>
         public float CoefficientValue { get; set; }
@@ -44,11 +49,6 @@ namespace FootballMatchPredictor.Domain.Entities
         /// К чему относится данный коэффициент
         /// </summary>
         public CoefficientRefer CoefficientRefer { get; set; }
-
-        /// <summary>
-        /// Ставки
-        /// </summary>
-        public List<Bet> Bets { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿@using FootballMatchPredictor.Domain.Enums
+@using FootballMatchPredictor.Domain.Extensions
 @using FootballMatchPredictor.Domain.ViewModels.UserProfile
 @model UserProfileViewModel
 
@@ -90,7 +91,7 @@
                                     @foreach(Sex sex in Enum.GetValues(typeof(Sex)))
                                     {
                                         <option value="@sex">
-                                            @sex
+                                            @sex.GetDisplayName()
                                         </option>
                                     }
                                 </select>

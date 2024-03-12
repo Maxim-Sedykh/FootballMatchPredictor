@@ -15,8 +15,6 @@ namespace FootballMatchPredictor.Persistence
     {
         public DbSet<Bet> Bets { get; set; }
         public DbSet<BetType> BetTypes { get; set; }
-        public DbSet<BetValue> BetValues { get; set; }
-        public DbSet<BetValueInfo> BetValueInfos { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Coefficient> Coefficients { get; set; }
         public DbSet<Country> Countries { get; set; }
