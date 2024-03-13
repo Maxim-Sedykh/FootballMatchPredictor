@@ -36,6 +36,8 @@ namespace FootballMatchPredictor.Persistence.DependencyInjection
                 typeof(Country),
                 typeof(Match),
                 typeof(Team),
+                typeof(CoefficientRefer),
+                typeof(Withdrawing),
             };
 
             foreach (var type in types)

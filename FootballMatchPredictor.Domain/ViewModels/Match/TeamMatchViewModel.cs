@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace FootballMatchPredictor.Domain.ViewModels.Match
 {
     /// <summary>
-    /// Модель представления для предоставления информации по матчам
+    /// Модель представления для получения информации по матчам команд
     /// </summary>
     /// <param name="Id"></param>
     /// <param name="Team1Name"></param>
@@ -18,15 +18,13 @@ namespace FootballMatchPredictor.Domain.ViewModels.Match
     /// <param name="Team2GoalsCount"></param>
     /// <param name="MatchState"></param>
     /// <param name="MatchDate"></param>
-    /// <param name="Coefficients"></param>
-    public record MatchViewModel(
+    public record TeamMatchViewModel(
             long Id,
             string Team1Name,
             string Team2Name,
             byte Team1GoalsCount,
             byte Team2GoalsCount,
             string MatchState,
-            DateTime MatchDate,
-            List<MatchCoefficientViewModel> Coefficients
+            DateTime MatchDate
         );
 }

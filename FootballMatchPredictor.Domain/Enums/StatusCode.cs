@@ -8,28 +8,46 @@ namespace FootballMatchPredictor.Domain.Enums
 {
     public enum StatusCode
     {
+        /// <summary>
+        /// Статус коды для пользователя
+        /// </summary>
         UserNotFound = 11,
         UserAlreadyExist = 12,
 
+        /// <summary>
+        /// Статус коды для аутентификации
+        /// </summary>
         PasswordIsWrong = 21,
         PasswordNotEqualsPasswordConfirm = 22,
 
+        /// <summary>
+        /// Статус коды для работы с командами
+        /// </summary>
         TeamsAreEqual = 31,
+        TeamNotFound = 32,
+        TeamsNotFound = 33,
 
+        /// <summary>
+        /// Статус коды для работы с матчами
+        /// </summary>
         MatchNotFound = 41,
         MatchesNotFound = 42,
-
-        TeamNotFound = 51,
-        TeamsNotFound = 52,
-
-        BetValuesNotFound = 61,
-
+        
+        /// <summary>
+        /// Статус коды для работы с коэффициентами
+        /// </summary>
         CoefficientNotFound = 71,
 
+        /// <summary>
+        /// Статус коды для работы с денежными транзакциями
+        /// </summary>
         IncorrectAmount = 81,
+        InsufficientFunds = 82,
 
+        /// <summary>
+        /// Статус коды для редких ситуаций
+        /// </summary>
         Unauthorized = 401,
-
         InternalServerError = 500,
     }
 }

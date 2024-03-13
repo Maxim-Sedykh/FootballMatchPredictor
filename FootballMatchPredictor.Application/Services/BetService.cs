@@ -8,14 +8,10 @@ using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.Result;
 using FootballMatchPredictor.Domain.ViewModels.Bet;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Application.Services
 {
+    /// <inheritdoc/>
     public class BetService : IBetService
     {
         private readonly IBaseRepository<Coefficient> _coefficientRepository;
@@ -29,6 +25,7 @@ namespace FootballMatchPredictor.Application.Services
             _betRepository = betRepository;
         }
 
+        /// <inheritdoc/>
         public async Task<BaseResult<MakeBetViewModel>> GetDataToMakeBet(long id)
         {
             var paymentMethods = ((PaymentMethod[])Enum.GetValues(typeof(PaymentMethod)))
@@ -51,6 +48,7 @@ namespace FootballMatchPredictor.Application.Services
             };
         }
 
+        /// <inheritdoc/>
         public async Task<BaseResult> MakeBet(MakeBetViewModel viewModel, string userName)
         {
             if (viewModel.MoneyAmount < 1000m)

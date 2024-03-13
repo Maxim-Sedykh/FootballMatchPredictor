@@ -88,6 +88,15 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Недостаточно средств.
+        /// </summary>
+        internal static string InsufficientFunds {
+            get {
+                return ResourceManager.GetString("InsufficientFunds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Матчи не найдены.
         /// </summary>
         internal static string MatchesNotFound {

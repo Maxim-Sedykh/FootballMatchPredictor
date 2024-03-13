@@ -11,7 +11,7 @@ using FootballMatchPredictor.Domain.Helpers;
 
 namespace FootballMatchPredictor.Persistence.Configutations
 {
-    public class CardConfiguration : IEntityTypeConfiguration<User>
+    public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
@@ -54,6 +54,10 @@ namespace FootballMatchPredictor.Persistence.Configutations
             builder.Property(x => x.SurName).IsRequired().HasMaxLength(30);
 
             builder.HasMany(x => x.Bets)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId);
+
+            builder.HasMany(x => x.Withdrawings)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId);
         }

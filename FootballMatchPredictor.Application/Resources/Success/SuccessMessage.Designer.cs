@@ -70,6 +70,15 @@ namespace FootballMatchPredictor.Application.Resources.Success {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Средства успешно выведены.
+        /// </summary>
+        internal static string FundsWithdrawn {
+            get {
+                return ResourceManager.GetString("FundsWithdrawn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Матч успешно создан.
         /// </summary>
         internal static string MatchCreated {

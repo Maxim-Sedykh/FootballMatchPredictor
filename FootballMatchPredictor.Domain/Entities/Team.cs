@@ -9,15 +9,22 @@ namespace FootballMatchPredictor.Domain.Entities
 {
     public class Team: IAuditable, IEntityId<short>
     {
-        /// <summary>
-        /// Идентификатор команды
-        /// </summary>
         public short Id { get; set; }
 
         /// <summary>
         /// Название команды
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Матчей выиграно
+        /// </summary>
+        public int MatchesPlayed { get; set; }
+
+        /// <summary>
+        /// Матчей выиграно
+        /// </summary>
+        public int MatchesWon { get; set; }
 
         /// <summary>
         /// Внешний ключ для связи с пользователем

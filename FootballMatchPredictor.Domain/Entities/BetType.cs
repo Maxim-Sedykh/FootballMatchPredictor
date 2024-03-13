@@ -9,9 +9,6 @@ namespace FootballMatchPredictor.Domain.Entities
 {
     public class BetType: IAuditable, IEntityId<byte>
     {
-        /// <summary>
-        /// Идентификатор типа ставки
-        /// </summary>
         public byte Id { get; set; }
 
         /// <summary>

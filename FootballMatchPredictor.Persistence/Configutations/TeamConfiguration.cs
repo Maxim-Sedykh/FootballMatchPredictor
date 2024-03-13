@@ -21,6 +21,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
                 {
                     Id = 1,
                     Name = "Краснодар",
+                    MatchesPlayed = 2,
+                    MatchesWon = 1,
                     CountryId = 1,
                     CreatedAt = DateTime.UtcNow,
                 },
@@ -28,6 +30,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
                 {
                     Id = 2,
                     Name = "ЦСКА",
+                    MatchesPlayed = 2,
+                    MatchesWon = 0,
                     CountryId = 1,
                     CreatedAt = DateTime.UtcNow,
                 },
@@ -35,6 +39,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
                 {
                     Id = 3,
                     Name = "Зенит",
+                    MatchesPlayed = 0,
+                    MatchesWon = 0,
                     CountryId = 1,
                     CreatedAt = DateTime.UtcNow,
                 },
@@ -42,6 +48,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
                 {
                     Id = 4,
                     Name = "Манчестер Юнайтед",
+                    MatchesPlayed = 1,
+                    MatchesWon = 0,
                     CountryId = 2,
                     CreatedAt = DateTime.UtcNow,
                 }

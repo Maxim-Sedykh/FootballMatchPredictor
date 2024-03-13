@@ -14,6 +14,11 @@ namespace FootballMatchPredictor.Controllers
             _betService = betService;
         }
 
+        /// <summary>
+        /// Модальное окно для того, чтобы сделать ставку
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> MakeBet(long id)
         {
@@ -25,6 +30,11 @@ namespace FootballMatchPredictor.Controllers
             return View("Error", new ErrorViewModel("Internal server error", 500));
         }
 
+        /// <summary>
+        /// Сделать ставку
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> MakeBet(MakeBetViewModel viewModel)
         {

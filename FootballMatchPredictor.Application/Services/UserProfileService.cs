@@ -10,26 +10,25 @@ using FootballMatchPredictor.Domain.ViewModels.Bet;
 using FootballMatchPredictor.Domain.ViewModels.UserProfile;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Application.Services
 {
+    /// <inheritdoc/>
     public class UserProfileService : IUserProfileService
     {
         private readonly IBaseRepository<User> _userRepository;
         private readonly IBaseRepository<Bet> _betRepository;
+        private readonly IBaseRepository<Withdrawing> _withdrawingRepository;
 
-        public UserProfileService(IBaseRepository<User> userRepository, IBaseRepository<Bet> betRepository)
+        public UserProfileService(IBaseRepository<User> userRepository, IBaseRepository<Bet> betRepository,
+            IBaseRepository<Withdrawing> withdrawingRepository)
         {
             _userRepository = userRepository;
             _betRepository = betRepository;
+            _withdrawingRepository = withdrawingRepository;
         }
 
+        /// <inheritdoc/>
         public async Task<BaseResult<UserProfileViewModel>> GetUserProfile(string userName)
         {
             var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Username == userName);
@@ -67,6 +66,57 @@ namespace FootballMatchPredictor.Application.Services
             };
         }
 
+        /// <inheritdoc/>
+        public async Task<BaseResult<UserStatisticsViewModel>> GetUserStatistics(string userName)
+        {
+            var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Username == userName);
+
+            if (user == null)
+            {
+                return new BaseResult<UserStatisticsViewModel>()
+                {
+                    ErrorCode = (int)StatusCode.UserNotFound,
+                    ErrorMessage = ErrorMessage.UserNotFound,
+                };
+            }
+
+            var bets = await _betRepository.GetAll()
+                .Where(x => x.UserId == user.Id || x.BetState != BetState.Unknown)
+                .ToListAsync();
+
+            var betsCount = bets.Count;
+
+            var winningBetsCount = bets.Where(x => x.BetState == BetState.Winning).ToList().Count;
+
+            var winRate = (float)winningBetsCount / betsCount * 100;
+
+            return new BaseResult<UserStatisticsViewModel>()
+            {
+                Data = new UserStatisticsViewModel(user.WinningSum, betsCount, winRate),
+            };
+        }
+
+        /// <inheritdoc/>
+        public async Task<BaseResult<WithdrawingMoneyViewModel>> GetUserWinningSum(string userName)
+        {
+            var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Username == userName);
+
+            if (user == null)
+            {
+                return new BaseResult<WithdrawingMoneyViewModel>()
+                {
+                    ErrorCode = (int)StatusCode.UserNotFound,
+                    ErrorMessage = ErrorMessage.UserNotFound,
+                };
+            }
+
+            return new BaseResult<WithdrawingMoneyViewModel>()
+            {
+                Data = new WithdrawingMoneyViewModel(default, default, user.WinningSum)
+            };
+        }
+
+        /// <inheritdoc/>
         public async Task<BaseResult> UpdateUserInfo(UserProfileViewModel viewModel)
         {
             var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Id == viewModel.Id);
@@ -90,6 +140,49 @@ namespace FootballMatchPredictor.Application.Services
             return new BaseResult()
             {
                 SuccessMessage = SuccessMessage.UserDataUpdated,
+            };
+        }
+
+        /// <inheritdoc/>
+        public async Task<BaseResult> WithdrawingMoney(WithdrawingMoneyViewModel viewModel, string userName)
+        {
+            var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Username == userName);
+
+            if (user == null)
+            {
+                return new BaseResult<WithdrawingMoneyViewModel>()
+                {
+                    ErrorCode = (int)StatusCode.UserNotFound,
+                    ErrorMessage = ErrorMessage.UserNotFound,
+                };
+            }
+
+            if (user.WinningSum < viewModel.OutputAmount)
+            {
+                return new BaseResult()
+                {
+                    ErrorCode = (int)StatusCode.InsufficientFunds,
+                    ErrorMessage = ErrorMessage.InsufficientFunds,
+                };
+            }
+
+            var withDrawing = new Withdrawing()
+            {
+                OutputAmount = viewModel.OutputAmount,
+                paymentMethod = viewModel.PaymentMethod,
+                UserId = user.Id,
+                CreatedAt = DateTime.UtcNow,
+            };
+
+            await _withdrawingRepository.CreateAsync(withDrawing);
+
+            user.WinningSum -= viewModel.OutputAmount;
+
+            await _userRepository.UpdateAsync(user);
+
+            return new BaseResult()
+            {
+                SuccessMessage = SuccessMessage.FundsWithdrawn,
             };
         }
     }

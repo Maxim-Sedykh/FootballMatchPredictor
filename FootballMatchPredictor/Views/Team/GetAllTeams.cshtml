@@ -1,0 +1,51 @@
+﻿@using FootballMatchPredictor.Domain.ViewModels.Team
+@model TeamViewModel[]
+
+@{
+    ViewBag.Title = "Команды";
+}
+
+<div class="container">
+    <div class="row text-center">
+        <p class="fs-2 text-center mt-4">Команды</p>
+        <div class="col-md-12 text-center w-100">
+            <img src="https://sportishka.com/uploads/posts/2022-08/1660167882_1-sportishka-com-p-futbolnie-foni-sport-krasivo-foto-1.jpg" class="img-fluid br-40 w-50" />
+        </div>
+        
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Название команды</th>
+                            <th scope="col">Страна</th>
+                            <th scope="col">Матчей сыиграно</th>
+                            <th scope="col">Матчей выиграно</th>
+                            <th scope="col">Матчи команды</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Length; i++)
+                        {
+                            <tr>
+                                <th scope="row">@(i + 1)</th>
+                                <td>@Model[i].TeamName</td>
+                                <td>@Model[i].CountryName</td>
+                                <td>@Model[i].MatchesPlayed</td>
+                                <td>@Model[i].MatchesWon</td>
+                                <td><button type="button" class="btn bg-indigo br-40 text-white"
+                                            data-bs-toggle="modal" data-bs-target="#modalWideWindow" onclick="openModal({ url: '/Match/GetTeamMatches/@Model[i].Id', modalId: 'modalWideWindow', modalTitle:'Матчи команды @Model[i].TeamName' })">
+                                        Матчи в которых учавствовала команда
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

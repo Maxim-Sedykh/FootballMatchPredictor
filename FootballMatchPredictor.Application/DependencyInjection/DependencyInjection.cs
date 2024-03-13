@@ -25,7 +25,6 @@ namespace FootballMatchPredictor.Application.DependencyInjection
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IBetService, BetService>();
-            services.AddScoped<ICoefficientService, CoefficientService>();
             services.AddScoped<IMatchService, MatchService>();
             services.AddScoped<ITeamService, TeamService>();
         }

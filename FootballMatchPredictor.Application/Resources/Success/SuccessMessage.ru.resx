@@ -120,6 +120,9 @@
   <data name="BetCreated" xml:space="preserve">
     <value>Ставка успешно поставлена</value>
   </data>
+  <data name="FundsWithdrawn" xml:space="preserve">
+    <value>Средства успешно выведены</value>
+  </data>
   <data name="MatchCreated" xml:space="preserve">
     <value>Матч успешно создан</value>
   </data>

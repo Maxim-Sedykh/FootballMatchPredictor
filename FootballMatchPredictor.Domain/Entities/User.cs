@@ -11,9 +11,6 @@ namespace FootballMatchPredictor.Domain.Entities
 {
     public class User: IAuditable, IEntityId<long>
     {
-        /// <summary>
-        /// Идентификатор пользователя
-        /// </summary>
         public long Id { get; set; }
 
         /// <summary>
@@ -55,6 +52,11 @@ namespace FootballMatchPredictor.Domain.Entities
         /// Ставки пользователя
         /// </summary>
         public List<Bet> Bets { get; set; }
+
+        /// <summary>
+        /// Ставки пользователя
+        /// </summary>
+        public List<Withdrawing> Withdrawings { get; set; }
 
         /// <summary>
         /// Захэшированный пароль пользователя

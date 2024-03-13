@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Interfaces.Services
 {
+    /// <summary>
+    /// Сервис для работы с командами
+    /// </summary>
     public interface ITeamService
     {
-        Task<BaseResult> CreateTeam(CreateTeamViewModel viewModel);
-
+        /// <summary>
+        /// Получение информации по командам
+        /// </summary>
+        /// <returns></returns>
         Task<CollectionResult<TeamViewModel>> GetAllTeams();
-
-        Task<BaseResult> UpdateTeam(UpdateTeamViewModel viewModel);
-
-        Task<BaseResult> DeleteTeam(short id);
     }
 }

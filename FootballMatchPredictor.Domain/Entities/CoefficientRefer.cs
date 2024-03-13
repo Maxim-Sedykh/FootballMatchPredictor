@@ -9,9 +9,6 @@ namespace FootballMatchPredictor.Domain.Entities
 {
     public class CoefficientRefer : IAuditable, IEntityId<int>
     {
-        /// <summary>
-        /// Идентификатор сущности
-        /// </summary>
         public int Id { get; set; }
 
         /// <summary>

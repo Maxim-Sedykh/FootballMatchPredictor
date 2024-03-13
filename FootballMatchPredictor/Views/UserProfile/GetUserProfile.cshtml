@@ -15,6 +15,12 @@
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item text-white"><a asp-controller="Home" asp-action="Index">Главная</a></li>
                         <li class="breadcrumb-item text-white"><a @(User.IsInRole("Admin") ? "" : "text-muted")> Страница админа</a></li>
+                        <li class="breadcrumb-item text-white"><button class="all-unset text-white br-40" type="button"
+                                    onclick="openModal({ url: '/UserProfile/WithdrawingMoney/', modalId: 'modalWindow', modalTitle:'Вывод денег'})"
+                                    data-toggle="ajax-modal" data-target="Modal">
+                                Вывод денежных средств
+                            </button>
+                        </li>
                         <li class="breadcrumb-item active text-white" aria-current="page">Профиль пользователя</li>
                     </ol>
                 </nav>
@@ -37,11 +43,15 @@
                         <p class="mb-1 text-white">Сделайте ставку!</p>
                         <p class="mb-4 text-white">Ставки на фатбольные матчи – это захватывающий способ испытать свою удачу</p>
                         <div class="d-flex justify-content-center mb-2">
-                            <button type="button" class="btn btn-primary"
+                            <button type="button" class="btn btn-primary" style="height:40px;"
                                     onclick="doActionWithPopupWindow(event, { url: '/UserProfile/UpdateUserInfo', formId: 'updateUserData' })">
                                 Обновить данные
                             </button>
-                            <button type="button" class="btn btn-outline-primary ms-1">Ваша статистика</button>
+                            <button class="btn btn-outline-primary text-white mb-4 ms-1" type="button" style="height:40px;"
+                                    onclick="openModal({ url: '/UserProfile/GetUserStatistics/', modalId: 'modalWindow', modalTitle:'Статистика'})"
+                                    data-toggle="ajax-modal" data-target="Modal">
+                                Ваша статистика
+                            </button>
                         </div>
                     </div>
                 </div>

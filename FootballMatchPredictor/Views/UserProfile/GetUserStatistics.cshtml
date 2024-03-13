@@ -1,0 +1,18 @@
+﻿@using FootballMatchPredictor.Domain.ViewModels.UserProfile
+@model UserStatisticsViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 card br-40">
+            <p class="text-center fs-5">
+                Количество сделанных ставок: @Model.BetsCount
+            </p>
+            <p class="text-center fs-5">
+                Вы выиграли: @Model.WinningSum.ToString("0.00") ₽
+            </p>
+            <p class="text-center fs-5">
+                Доля побед: @Model.WinRate%
+            </p>
+        </div>
+    </div>
+</div>

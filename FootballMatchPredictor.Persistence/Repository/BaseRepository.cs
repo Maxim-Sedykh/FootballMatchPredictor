@@ -51,16 +51,6 @@ namespace FootballMatchPredictor.Persistence.Repository
             return entity;
         }
 
-        public async Task UpdateRangeAsync(IEnumerable<TEntity> entities)
-        {
-            if (entities == null)
-            {
-                throw new ArgumentException("Entities is null");
-            }
-            _dbContext.UpdateRange(entities);
-            await _dbContext.SaveChangesAsync();
-        }
-
         private void ValidateEntityOnNull(TEntity entity)
         {
             if (entity == null)

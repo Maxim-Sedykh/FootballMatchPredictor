@@ -10,9 +10,6 @@ namespace FootballMatchPredictor.Domain.Entities
 {
     public class Bet: IAuditable, IEntityId<long>
     {
-        /// <summary>
-        /// Идентификатор ставки
-        /// </summary>
         public long Id { get; set; }
 
         /// <summary>

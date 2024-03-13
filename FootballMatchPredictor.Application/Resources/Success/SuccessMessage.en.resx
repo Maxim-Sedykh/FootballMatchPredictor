@@ -120,6 +120,9 @@
   <data name="BetCreated" xml:space="preserve">
     <value>Bet is successfully completed!</value>
   </data>
+  <data name="FundsWithdrawn" xml:space="preserve">
+    <value>Funds were successfully withdrawn</value>
+  </data>
   <data name="MatchCreated" xml:space="preserve">
     <value>Match is successfully created!</value>
   </data>

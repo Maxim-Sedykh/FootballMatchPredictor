@@ -9,9 +9,6 @@ namespace FootballMatchPredictor.Domain.Entities
 {
     public class Country: IAuditable, IEntityId<byte>
     {
-        /// <summary>
-        /// Идентификатор сущности
-        /// </summary>
         public byte Id { get; set; }
 
         /// <summary>

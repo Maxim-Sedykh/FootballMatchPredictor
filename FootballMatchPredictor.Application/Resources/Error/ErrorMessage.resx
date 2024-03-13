@@ -126,6 +126,9 @@
   <data name="IncorrectAmount" xml:space="preserve">
     <value>Сумма должна быть больше 1000 рублей!</value>
   </data>
+  <data name="InsufficientFunds" xml:space="preserve">
+    <value>Недостаточно средств</value>
+  </data>
   <data name="MatchesNotFound" xml:space="preserve">
     <value>Матчи не найдены</value>
   </data>
