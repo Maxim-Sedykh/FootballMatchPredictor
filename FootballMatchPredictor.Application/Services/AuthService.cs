@@ -7,6 +7,7 @@ using FootballMatchPredictor.Domain.Interfaces.Repository;
 using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.Result;
 using FootballMatchPredictor.Domain.ViewModels.Auth;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -77,18 +78,7 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
-            user = new User()
-            {
-                Username = viewModel.Username,
-                FirstName = viewModel.FirstName,
-                SurName = viewModel.SurName,
-                Email = viewModel.Email,
-                Password = HashPasswordHelper.HashPassword(viewModel.Password),
-                Role = Role.User,
-                CreatedAt = DateTime.UtcNow,
-                Gender = Gender.Man,
-                WinningSum = PROMOTION_AMOUNT,
-            };
+            user = viewModel.Adapt<User>();
 
             await _userRepository.CreateAsync(user);
 

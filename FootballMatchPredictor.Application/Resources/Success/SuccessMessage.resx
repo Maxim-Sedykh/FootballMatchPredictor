@@ -135,6 +135,9 @@
   <data name="MatchUpdated" xml:space="preserve">
     <value>Матч успешно обновлён</value>
   </data>
+  <data name="NoChangesDetected" xml:space="preserve">
+    <value>Изменений в данных пользователя не найдено!</value>
+  </data>
   <data name="RegistrationCompleted" xml:space="preserve">
     <value>Вы успешно зарегистрировались!</value>
   </data>

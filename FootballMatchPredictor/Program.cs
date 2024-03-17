@@ -2,10 +2,11 @@ using FootballMatchPredictor;
 using FootballMatchPredictor.Persistence.DependencyInjection;
 using FootballMatchPredictor.Application.DependencyInjection;
 using Serilog;
+using Mapster;
+using MapsterMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthenticationAndAuthorization(builder);
@@ -17,11 +18,9 @@ builder.Services.AddApplication();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

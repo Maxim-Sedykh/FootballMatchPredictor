@@ -7,6 +7,7 @@ using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.Result;
 using FootballMatchPredictor.Domain.ViewModels.Coefficient;
 using FootballMatchPredictor.Domain.ViewModels.Match;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace FootballMatchPredictor.Application.Services
@@ -27,9 +28,7 @@ namespace FootballMatchPredictor.Application.Services
             var matches = await _matchRepository.GetAll()
                 .Include(x => x.Team1)
                 .Include(x => x.Team2)
-                .Include(x => x.Coefficients)
-                .ThenInclude(x => x.CoefficientRefer)
-                .Select(x => new MatchViewModel(x.Id, x.Team1.Name, x.Team2.Name, x.Team1GoalsCount, x.Team2GoalsCount, x.MatchState.GetDisplayName(), x.MatchDate))
+                .Select(x => x.Adapt<MatchViewModel>())
                 .ToListAsync();
 
             if (matches == null)
@@ -55,7 +54,7 @@ namespace FootballMatchPredictor.Application.Services
                 .Include(x => x.Team1)
                 .Include(x => x.Team2)
                 .Where(x => x.Team1Id == id || x.Team2Id == id)
-                .Select(x => new MatchViewModel(x.Id, x.Team1.Name, x.Team2.Name, x.Team1GoalsCount, x.Team2GoalsCount, x.MatchState.GetDisplayName(), x.MatchDate))
+                .Select(x => x.Adapt<MatchViewModel>())
                 .ToListAsync();
 
             return new CollectionResult<MatchViewModel>()

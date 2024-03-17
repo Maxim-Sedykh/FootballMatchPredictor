@@ -135,6 +135,9 @@
   <data name="MatchUpdated" xml:space="preserve">
     <value>Match is successfully updated!</value>
   </data>
+  <data name="NoChangesDetected" xml:space="preserve">
+    <value>No changes found in user data!</value>
+  </data>
   <data name="RegistrationCompleted" xml:space="preserve">
     <value>You have successfully registered!</value>
   </data>

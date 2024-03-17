@@ -8,6 +8,7 @@ using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.Result;
 using FootballMatchPredictor.Domain.ViewModels.Bet;
 using FootballMatchPredictor.Domain.ViewModels.Coefficient;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace FootballMatchPredictor.Application.Services
@@ -57,10 +58,12 @@ namespace FootballMatchPredictor.Application.Services
             
             return new BaseResult<MakeBetViewModel>()
             {
-                Data = new MakeBetViewModel(coefficient.Id, default, default)
+                Data = coefficient.Adapt<MakeBetViewModel>()
+                //new MakeBetViewModel(coefficient.Id, default, default)
             };
         }
 
+        /// <inheritdoc/>
         public async Task<CollectionResult<BetViewModel>> GetUserBets(string userName)
         {
             var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Username == userName);
@@ -75,25 +78,18 @@ namespace FootballMatchPredictor.Application.Services
             }
 
             var userBets = await _betRepository.GetAll()
-                .Include(x => x.Coefficient)
-                .ThenInclude(x => x.Match)
-                .ThenInclude(x => x.Team1)
-                .Include(x => x.Coefficient)
-                .ThenInclude(x => x.Match)
-                .ThenInclude(x => x.Team2)
-                .Include(x => x.Coefficient)
-                .ThenInclude(x => x.CoefficientRefer)
+                .Include(x => x.Match.Team1)
+                .Include(x => x.Match.Team2)
+                .Include(x => x.Coefficient.CoefficientRefer)
                 .Include(x => x.BetType)
                 .Where(x => x.UserId == user.Id)
-                .Select(x => new BetViewModel(x.Id, x.Coefficient.Match.Team1.Name,
-                x.Coefficient.Match.Team1.Name, x.Coefficient.CoefficientValue,
-                x.Coefficient.CoefficientRefer.Description, x.BetAmountMoney, x.WinningAmount, x.BetType.TypeName, x.BetState.GetDisplayName(), x.CreatedAt))
+                .Select(x => x.Adapt<BetViewModel>())
                 .ToListAsync();
 
             return new CollectionResult<BetViewModel>()
             {
                 Data = userBets,
-                Count = userBets.Count()
+                Count = userBets.Count
             };
         }
 
@@ -160,7 +156,7 @@ namespace FootballMatchPredictor.Application.Services
 
             return new BaseResult<WithdrawingMoneyViewModel>()
             {
-                Data = new WithdrawingMoneyViewModel(default, default, user.WinningSum)
+                Data = user.Adapt<WithdrawingMoneyViewModel>()
             };
         }
 

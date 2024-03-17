@@ -5,6 +5,7 @@ using FootballMatchPredictor.Domain.Interfaces.Repository;
 using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.Result;
 using FootballMatchPredictor.Domain.ViewModels.Team;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace FootballMatchPredictor.Application.Services
@@ -24,7 +25,7 @@ namespace FootballMatchPredictor.Application.Services
         {
             var teams = await _teamRepository.GetAll()
                 .Include(x => x.Country)
-                .Select(x => new TeamViewModel(x.Id, x.Name, x.Country.CountryName, x.MatchesPlayed, x.MatchesWon)).ToArrayAsync();
+                .Select(x => x.Adapt<TeamViewModel>()).ToArrayAsync();
 
             if (teams.Length == 0)
             {

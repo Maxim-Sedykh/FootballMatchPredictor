@@ -4,6 +4,7 @@ using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.Result;
 using FootballMatchPredictor.Domain.ViewModels.Coefficient;
 using FootballMatchPredictor.Domain.ViewModels.Match;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,14 +29,11 @@ namespace FootballMatchPredictor.Application.Services
         public async Task<CollectionResult<CoefficientViewModel>> GetMatchCoefficients(long matchId)
         {
             var coefficients = await _coefficientRepository.GetAll()
-                .Include(x => x.Match)
-                .ThenInclude(x => x.Team1)
-                .Include(x => x.Match)
-                .ThenInclude(x => x.Team2)
+                .Include(x => x.Match.Team1)
+                .Include(x => x.Match.Team2)
                 .Include(x => x.CoefficientRefer)
                 .Where(x => x.MatchId == matchId)
-                .Select(x => new CoefficientViewModel(x.Id, x.Match.Team1.Name, x.Match.Team2.Name, x.CoefficientValue,
-                x.CoefficientRefer.Description, x.IsActive, x.Match.MatchDate, x.CreatedAt)).ToListAsync();
+                .Select(x => x.Adapt<CoefficientViewModel>()).ToListAsync();
 
             return new CollectionResult<CoefficientViewModel>()
             {

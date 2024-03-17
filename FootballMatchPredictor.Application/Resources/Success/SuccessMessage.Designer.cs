@@ -115,6 +115,15 @@ namespace FootballMatchPredictor.Application.Resources.Success {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Изменений в данных пользователя не найдено!.
+        /// </summary>
+        internal static string NoChangesDetected {
+            get {
+                return ResourceManager.GetString("NoChangesDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Вы успешно зарегистрировались!.
         /// </summary>
         internal static string RegistrationCompleted {

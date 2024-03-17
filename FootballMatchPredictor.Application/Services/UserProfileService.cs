@@ -9,6 +9,7 @@ using FootballMatchPredictor.Domain.Result;
 using FootballMatchPredictor.Domain.ViewModels.Bet;
 using FootballMatchPredictor.Domain.ViewModels.UserProfile;
 using Mapster;
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace FootballMatchPredictor.Application.Services
@@ -52,11 +53,10 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
-            var userProfile = new UserProfileViewModel(user.Id, user.Username, user.FirstName, user.SurName, user.Email, user.Gender.GetDisplayName());
-
             return new BaseResult<UserProfileViewModel>()
             {
-                Data = userProfile,
+                Data = user.Adapt<UserProfileViewModel>()
+
             };
         }
 
@@ -79,10 +79,7 @@ namespace FootballMatchPredictor.Application.Services
                 .ToListAsync();
 
             var betsCount = bets.Count;
-
-            var winningBetsCount = bets.Where(x => x.BetState == BetState.Winning).ToList().Count;
-
-            var winRate = (float)winningBetsCount / betsCount * 100;
+            var winRate = (float)bets.Where(x => x.BetState == BetState.Winning).ToList().Count / betsCount * 100;
 
             return new BaseResult<UserStatisticsViewModel>()
             {
@@ -104,16 +101,24 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
-            user.FirstName = viewModel.FirstName;
-            user.SurName = viewModel.SurName;
-            user.Email = viewModel.Email;
-            user.Gender = (Gender)Convert.ToInt32(viewModel.Gender);
+            if (user.FirstName != viewModel.FirstName ||
+                user.SurName != viewModel.SurName ||
+                user.Email != viewModel.Email ||
+                user.Gender.GetDisplayName() != viewModel.Gender)
+            {
+                user = viewModel.Adapt(user);
 
-            await _userRepository.UpdateAsync(user);
+                await _userRepository.UpdateAsync(user);
+
+                return new BaseResult()
+                {
+                    SuccessMessage = SuccessMessage.UserDataUpdated,
+                };
+            }
 
             return new BaseResult()
             {
-                SuccessMessage = SuccessMessage.UserDataUpdated,
+                SuccessMessage = SuccessMessage.NoChangesDetected,
             };
         }
     }
