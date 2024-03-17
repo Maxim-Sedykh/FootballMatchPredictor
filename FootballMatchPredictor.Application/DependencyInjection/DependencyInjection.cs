@@ -27,6 +27,7 @@ namespace FootballMatchPredictor.Application.DependencyInjection
             services.AddScoped<IBetService, BetService>();
             services.AddScoped<IMatchService, MatchService>();
             services.AddScoped<ITeamService, TeamService>();
+            services.AddScoped<ICoefficientService, CoefficientService>();
         }
     }
 }

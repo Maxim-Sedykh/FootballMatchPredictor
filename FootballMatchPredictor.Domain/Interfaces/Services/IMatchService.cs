@@ -15,16 +15,16 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
     public interface IMatchService
     {
         /// <summary>
-        /// Получение матчей разных типов (ещё не сыиграны, )
+        /// Получение матчей разных типов (ещё не сыиграны, играются сейчас, сыиграны)
         /// </summary>
         /// <returns></returns>
-        Task<BaseResult<MatchPageViewModel>> GetAllMatches();
+        Task<CollectionResult<MatchViewModel>> GetAllMatches();
 
         /// <summary>
         /// Получение матчей определённых команд
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<CollectionResult<TeamMatchViewModel>> GetTeamMatches(long id);
+        Task<CollectionResult<MatchViewModel>> GetTeamMatches(long id);
     }
 }

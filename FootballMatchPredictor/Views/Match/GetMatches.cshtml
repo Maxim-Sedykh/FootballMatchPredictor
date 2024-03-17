@@ -1,180 +1,55 @@
-﻿@using FootballMatchPredictor.Domain.Enums
-@model FootballMatchPredictor.Domain.ViewModels.Match.MatchPageViewModel
+﻿@using FootballMatchPredictor.Domain.ViewModels.Match
+@model List<MatchViewModel>
 
 @{
     ViewBag.Title = "Все матчи";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 pt-4">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="btn bg-indigo text-white me-3 br-40" id="pills-live-tab" data-bs-toggle="pill" data-bs-target="#pills-live" type="button" role="tab" aria-controls="pills-live" aria-selected="false">Live-Матчи</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="btn bg-indigo text-white active me-3 br-40" id="pills-not-played-tab" data-bs-toggle="pill" data-bs-target="#pills-not-played" type="button" role="tab" aria-controls="pills-not-played" aria-selected="true">Будущие матчи</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="btn bg-indigo text-white me-3 br-40" id="pills-played-tab" data-bs-toggle="pill" data-bs-target="#pills-played" type="button" role="tab" aria-controls="pills-played" aria-selected="false">Сыигранные матчи</button>
-                </li>
-            </ul>
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane show fade" id="pills-live" role="tabpanel" aria-labelledby="pills-live-tab">
-                    @foreach (var match in Model.liveMathes)
-                    {
-                        <div class="row d-flex justify-content-start bg-dark text-white br-40 w-100 px-5 my-4 pt-2" style="min-height:130px;">
-                            <div class="col-md-2">
-                                <p class="fw-bold">
-                                    Команды:
-                                </p>
-                                <p>
-                                    @match.Team1Name
-                                </p>
-                                <p>
-                                    @match.Team2Name
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Коэффициенты
-                                </p>
-                                @foreach (var coefficient in match.Coefficients)
-                                {
-                                    <p>
-                                        @coefficient.CoefficientReferDescription - @coefficient.CoefficientValue
-                                    </p>
-                                    <button class="btn bg-indigo text-white br-40 mb-4" type="button" @(coefficient.IsActive ? string.Empty : "disabled") onclick="openModal({ url: '/Bet/MakeBet/@coefficient.Id', modalId: 'modalWindow', modalTitle:'Сделать ставку'})"
-                                            data-toggle="ajax-modal" data-target="Modal">
-                                        Поставить на коэффициент
-                                    </button>
-                                }
-                            </div>
-                            <div class="col-md-2">
-                                <p class="fw-bold">
-                                    Забитые голы
-                                </p>
-                                <p>
-                                    @match.Team1GoalsCount
-                                </p>
-                                <p>
-                                    @match.Team2GoalsCount
-                                </p>
-                            </div>
-                            <div class="col-md-2">
-                                <p class="fw-bold">
-                                    Другая информация
-                                </p>
-                                <p>
-                                    @match.MatchState
-                                </p>
-                                <p>
-                                    @match.MatchDate
-                                </p>
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div class="tab-pane fade show active" id="pills-not-played" role="tabpanel" aria-labelledby="pills-not-played-tab">
-                    @foreach (var match in Model.notPlayedMathes)
-                    {
-                        <div class="row d-flex justify-content-start bg-dark text-white br-40 w-100 px-5 my-4 pt-2" style="min-height:130px;">
-                            <div class="col-md-2">
-                                <p class="fw-bold">
-                                    Команды:
-                                </p>
-                                <p>
-                                    @match.Team1Name
-                                </p>
-                                <p>
-                                    @match.Team2Name
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Коэффициенты
-                                </p>
-                                @foreach (var coefficient in match.Coefficients)
-                                {
-                                    <p>
-                                        @coefficient.CoefficientReferDescription - @coefficient.CoefficientValue
-                                    </p>
-                                    <button class="btn bg-indigo text-white br-40 mb-4" type="button"  
-                                            @(coefficient.IsActive ? string.Empty : "disabled")
-                                            onclick="openModal({ url: '/Bet/MakeBet/@coefficient.Id', modalId: 'modalWindow', modalTitle:'Сделать ставку'})"
-                                            data-toggle="ajax-modal" data-target="Modal">
-                                        Поставить на коэффициент
-                                    </button>
-                                }
-                            </div>
-                            <div class="col-md-2">
-                            </div>
-                            <div class="col-md-2">
-                                <p class="fw-bold">
-                                    Другая информация
-                                </p>
-                                <p>
-                                    @match.MatchState
-                                </p>
-                                <p>
-                                    @match.MatchDate
-                                </p>
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div class="tab-pane fade" id="pills-played" role="tabpanel" aria-labelledby="pills-played-tab">
-                    @foreach (var match in Model.playedMathes)
-                    {
-                        <div class="row d-flex justify-content-start bg-dark text-white br-40 w-100 px-5 my-4 pt-2" style="min-height:130px;">
-                            <div class="col-md-2">
-                                <p class="fw-bold">
-                                    Команды:
-                                </p>
-                                <p>
-                                    @match.Team1Name
-                                </p>
-                                <p>
-                                    @match.Team2Name
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="fw-bold">
-                                    Коэффициенты
-                                </p>
-                                @foreach (var coefficient in match.Coefficients)
-                                {
-                                    <p>
-                                        @coefficient.CoefficientReferDescription - @coefficient.CoefficientValue
-                                    </p>
-                                }
-                            </div>
-                            <div class="col-md-2">
-                                <p class="fw-bold">
-                                    Забитые голы
-                                </p>
-                                <p>
-                                    @match.Team1GoalsCount
-                                </p>
-                                <p>
-                                    @match.Team2GoalsCount
-                                </p>
-                            </div>
-                            <div class="col-md-2">
-                                <p class="fw-bold">
-                                    Другая информация
-                                </p>
-                                <p>
-                                    @match.MatchState
-                                </p>
-                                <p>
-                                    @match.MatchDate
-                                </p>
-                            </div>
-                        </div>
-                    }
-                </div>
+<div class="container pb-5">
+    @foreach (var match in Model)
+    {
+        <div class="row d-flex justify-content-start bg-dark text-white br-40 w-100 px-5 my-4 pt-2" style="min-height:130px;">
+            <div class="col-md-3">
+                <p class="fw-bold">
+                    Команды:
+                </p>
+                <p>
+                    @match.Team1Name
+                </p>
+                <p>
+                    @match.Team2Name
+                </p>
+            </div>
+            <div class="col-md-3">
+                <p class="fw-bold">
+                    Коэффициенты
+                </p>
+                <a type="button" class="btn bg-indigo br-40 text-white" asp-controller="Coefficient" asp-action="GetMatchCoefficients" asp-route-id="@match.Id">
+                    Коэффициенты на этот матч
+                </a>
+            </div>
+            <div class="col-md-3">
+                <p class="fw-bold">
+                    Забитые голы
+                </p>
+                <p>
+                    @match.Team1GoalsCount
+                </p>
+                <p>
+                    @match.Team2GoalsCount
+                </p>
+            </div>
+            <div class="col-md-3">
+                <p class="fw-bold">
+                    Другая информация
+                </p>
+                <p>
+                    @match.MatchState
+                </p>
+                <p>
+                    @match.MatchDate
+                </p>
             </div>
         </div>
-    </div>
+    }
 </div>

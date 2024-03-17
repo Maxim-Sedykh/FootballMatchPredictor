@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form asp-controller="Auth" asp-action="Register">
+            <form id="registerForm">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Логин пользователя</label>
                     <input type="text" class="form-control" asp-for="Username" aria-describedby="emailHelp">
@@ -16,12 +16,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Имя пользователя</label>
-                    <input type="text" class="form-control" asp-for="Username" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" asp-for="FirstName" aria-describedby="emailHelp">
                     <div id="emailHelp" class="form-text">Мы никогда не делимся вашей почтой с кем то ещё.</div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Фамилия пользователя</label>
-                    <input type="text" class="form-control" asp-for="Username" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" asp-for="SurName" aria-describedby="emailHelp">
                     <div id="emailHelp" class="form-text">Мы никогда не делимся вашей почтой с кем то ещё.</div>
                 </div>
                 <div class="mb-3">
@@ -32,7 +32,10 @@
                     <label for="exampleInputPassword1" class="form-label">Подтвердите пароль</label>
                     <input type="password" asp-for="PasswordConfirm" class="form-control" id="exampleInputPassword1">
                 </div>
-                <button type="submit" class="btn  bg-indigo text-white">Регистрация</button>
+                <button type="button" class="btn  bg-indigo text-white" style="height:40px;"
+                        onclick="doActionWithPopupWindow(event, { url: '/Auth/Register', formId: 'registerForm' })">
+                    Регистрация
+                </button>
             </form>
         </div>
     </div>

@@ -1,4 +1,5 @@
 ﻿using FootballMatchPredictor.Application.Resources.Error;
+using FootballMatchPredictor.Application.Resources.Success;
 using FootballMatchPredictor.Domain.Entities;
 using FootballMatchPredictor.Domain.Enums;
 using FootballMatchPredictor.Domain.Helpers;
@@ -15,6 +16,7 @@ namespace FootballMatchPredictor.Application.Services
     public class AuthService : IAuthService
     {
         private readonly IBaseRepository<User> _userRepository;
+        private const decimal PROMOTION_AMOUNT = 1000;
 
         public AuthService(IBaseRepository<User> userRepository)
         {
@@ -48,6 +50,7 @@ namespace FootballMatchPredictor.Application.Services
 
             return new BaseResult<ClaimsIdentity>()
             {
+                SuccessMessage = SuccessMessage.LoginCompleted,
                 Data = result,
             };
         }
@@ -77,10 +80,14 @@ namespace FootballMatchPredictor.Application.Services
             user = new User()
             {
                 Username = viewModel.Username,
+                FirstName = viewModel.FirstName,
+                SurName = viewModel.SurName,
                 Email = viewModel.Email,
                 Password = HashPasswordHelper.HashPassword(viewModel.Password),
                 Role = Role.User,
                 CreatedAt = DateTime.UtcNow,
+                Gender = Gender.Man,
+                WinningSum = PROMOTION_AMOUNT,
             };
 
             await _userRepository.CreateAsync(user);
@@ -89,6 +96,7 @@ namespace FootballMatchPredictor.Application.Services
 
             return new BaseResult<ClaimsIdentity>()
             {
+                SuccessMessage = SuccessMessage.RegistrationCompleted,
                 Data = result,
             };
         }

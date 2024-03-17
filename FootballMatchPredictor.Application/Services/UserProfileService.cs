@@ -18,14 +18,24 @@ namespace FootballMatchPredictor.Application.Services
     {
         private readonly IBaseRepository<User> _userRepository;
         private readonly IBaseRepository<Bet> _betRepository;
-        private readonly IBaseRepository<Withdrawing> _withdrawingRepository;
 
-        public UserProfileService(IBaseRepository<User> userRepository, IBaseRepository<Bet> betRepository,
-            IBaseRepository<Withdrawing> withdrawingRepository)
+        public UserProfileService(IBaseRepository<User> userRepository, IBaseRepository<Bet> betRepository)
         {
             _userRepository = userRepository;
             _betRepository = betRepository;
-            _withdrawingRepository = withdrawingRepository;
+        }
+
+        public CollectionResult<KeyValuePair<int, string>> GetGenders()
+        {
+            var genders = Enum.GetValues(typeof(Gender))
+                    .Cast<Gender>()
+                    .ToDictionary(k => (int)k, t => t.GetDisplayName());
+
+            return new CollectionResult<KeyValuePair<int, string>>()
+            {
+                Data = genders,
+                Count = genders.Count
+            };
         }
 
         /// <inheritdoc/>
@@ -42,23 +52,7 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
-            var userBets = await _betRepository.GetAll()
-                .Include(x => x.Coefficient)
-                .ThenInclude(x => x.Match)
-                .ThenInclude(x => x.Team1)
-                .Include(x => x.Coefficient)
-                .ThenInclude(x => x.Match)
-                .ThenInclude(x => x.Team2)
-                .Include(x => x.Coefficient)
-                .ThenInclude(x => x.CoefficientRefer)
-                .Include(x => x.BetType)
-                .Where(x => x.UserId == user.Id)
-                .Select(x => new BetViewModel(x.Id, x.Coefficient.Match.Team1.Name,
-                x.Coefficient.Match.Team1.Name, x.Coefficient.CoefficientValue,
-                x.Coefficient.CoefficientRefer.Description, x.BetAmountMoney, x.WinningAmount, x.BetType.TypeName, x.BetState.GetDisplayName(), x.CreatedAt))
-                .ToListAsync();
-
-            var userProfile = user.Adapt<UserProfileViewModel>() with { UserBets = userBets };
+            var userProfile = new UserProfileViewModel(user.Id, user.Username, user.FirstName, user.SurName, user.Email, user.Gender.GetDisplayName());
 
             return new BaseResult<UserProfileViewModel>()
             {
@@ -81,7 +75,7 @@ namespace FootballMatchPredictor.Application.Services
             }
 
             var bets = await _betRepository.GetAll()
-                .Where(x => x.UserId == user.Id || x.BetState != BetState.Unknown)
+                .Where(x => x.UserId == user.Id && x.BetState != BetState.Unknown)
                 .ToListAsync();
 
             var betsCount = bets.Count;
@@ -93,26 +87,6 @@ namespace FootballMatchPredictor.Application.Services
             return new BaseResult<UserStatisticsViewModel>()
             {
                 Data = new UserStatisticsViewModel(user.WinningSum, betsCount, winRate),
-            };
-        }
-
-        /// <inheritdoc/>
-        public async Task<BaseResult<WithdrawingMoneyViewModel>> GetUserWinningSum(string userName)
-        {
-            var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Username == userName);
-
-            if (user == null)
-            {
-                return new BaseResult<WithdrawingMoneyViewModel>()
-                {
-                    ErrorCode = (int)StatusCode.UserNotFound,
-                    ErrorMessage = ErrorMessage.UserNotFound,
-                };
-            }
-
-            return new BaseResult<WithdrawingMoneyViewModel>()
-            {
-                Data = new WithdrawingMoneyViewModel(default, default, user.WinningSum)
             };
         }
 
@@ -133,56 +107,13 @@ namespace FootballMatchPredictor.Application.Services
             user.FirstName = viewModel.FirstName;
             user.SurName = viewModel.SurName;
             user.Email = viewModel.Email;
-            user.Sex = viewModel.Sex;
+            user.Gender = (Gender)Convert.ToInt32(viewModel.Gender);
 
             await _userRepository.UpdateAsync(user);
 
             return new BaseResult()
             {
                 SuccessMessage = SuccessMessage.UserDataUpdated,
-            };
-        }
-
-        /// <inheritdoc/>
-        public async Task<BaseResult> WithdrawingMoney(WithdrawingMoneyViewModel viewModel, string userName)
-        {
-            var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Username == userName);
-
-            if (user == null)
-            {
-                return new BaseResult<WithdrawingMoneyViewModel>()
-                {
-                    ErrorCode = (int)StatusCode.UserNotFound,
-                    ErrorMessage = ErrorMessage.UserNotFound,
-                };
-            }
-
-            if (user.WinningSum < viewModel.OutputAmount)
-            {
-                return new BaseResult()
-                {
-                    ErrorCode = (int)StatusCode.InsufficientFunds,
-                    ErrorMessage = ErrorMessage.InsufficientFunds,
-                };
-            }
-
-            var withDrawing = new Withdrawing()
-            {
-                OutputAmount = viewModel.OutputAmount,
-                paymentMethod = viewModel.PaymentMethod,
-                UserId = user.Id,
-                CreatedAt = DateTime.UtcNow,
-            };
-
-            await _withdrawingRepository.CreateAsync(withDrawing);
-
-            user.WinningSum -= viewModel.OutputAmount;
-
-            await _userRepository.UpdateAsync(user);
-
-            return new BaseResult()
-            {
-                SuccessMessage = SuccessMessage.FundsWithdrawn,
             };
         }
     }

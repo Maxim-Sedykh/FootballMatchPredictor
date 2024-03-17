@@ -1,0 +1,76 @@
+﻿@using FootballMatchPredictor.Domain.ViewModels.Coefficient
+@model List<CoefficientViewModel>
+
+@{
+    ViewBag.Title = "Коэффициенты матча";
+}
+
+<div class="container mb-4 pb-5">
+    <div class="row coefficient-image mx-5 mb-4 br-40" style="height:450px;">
+        <div class="col-md-3 ms-3 mt-4">
+            <a asp-controller="Match" asp-action="GetMatches"><i class="fa text-white fa-arrow-left fa-2x" aria-hidden="true"></i></a>
+        </div>
+        <div class="col-md-2 d-flex align-items-center justify-content-center fs-3 fw-bolder">
+            <p>
+                @Model.First().Team1Name
+            </p>
+        </div>
+        <div class="col-md-2 my-auto">
+            <p class="fs-3 fw-bolder text-center text-white">Матч</p>
+            <img class="img-fluid" src="~/images/crossed-sword-coefficient-page-pic.png"/>
+            <p class="fs-5 fw-bolder text-center">
+                @Model.First().MatchDate
+            </p>
+        </div>
+        <div class="col-md-2 d-flex align-items-center justify-content-center fs-3 fw-bolder">
+            <p>
+                @Model.First().Team2Name
+            </p>
+        </div>
+        <div class="col-md-3">
+ 
+        </div>
+    </div>
+    @foreach (var coefficient in Model)
+    {
+        <div class="row bg-dark br-40 mb-4 text-white pt-4 px-5" style="min-height:130px; margin: 0px 15% 0px 15%;">
+            <div class="col-md-3 text-center mb-4">
+                <img src="~/images/coefficient-default-pic.jpg" class="img-fluid rounded-circle" style="height:100px;">
+            </div>
+            <div class="col-md-3">
+                <button class="btn bg-indigo text-white br-40 mb-4" type="button" @(coefficient.IsActive ? string.Empty : "disabled")
+                        onclick="openModal({ url: '/Bet/MakeBet/@coefficient.Id', modalId: 'modalWindow', modalTitle:'Сделать ставку'})"
+                        data-toggle="ajax-modal" data-target="Modal">
+                    Сделать ставку
+                </button>
+            </div>
+            <div class="col-md-3">
+                <p>
+                    @coefficient.CoefficientValue
+                </p>
+                <p>
+                    @coefficient.CoefficientReferDescription
+                </p>
+            </div>
+            <div class="col-md-3">
+                
+                @if (@coefficient.IsActive)
+                {
+                    <p>
+                        Активен
+                    </p>
+                        
+                }
+                else
+                {
+                    <p>
+                        Не активен
+                    </p>
+                }
+                <p>
+                    Коэффициент создан: @coefficient.CreatedAt
+                </p>
+            </div>
+        </div>
+    }
+</div>

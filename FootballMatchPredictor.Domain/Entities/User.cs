@@ -31,7 +31,7 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Пол пользователя
         /// </summary>
-        public Sex Sex { get; set; }
+        public Gender Gender { get; set; }
 
         /// <summary>
         /// Почта пользователя

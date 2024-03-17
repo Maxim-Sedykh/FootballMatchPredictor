@@ -79,6 +79,15 @@ namespace FootballMatchPredictor.Application.Resources.Success {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы успешно авторизовались!.
+        /// </summary>
+        internal static string LoginCompleted {
+            get {
+                return ResourceManager.GetString("LoginCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Матч успешно создан.
         /// </summary>
         internal static string MatchCreated {
@@ -102,6 +111,15 @@ namespace FootballMatchPredictor.Application.Resources.Success {
         internal static string MatchUpdated {
             get {
                 return ResourceManager.GetString("MatchUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы успешно зарегистрировались!.
+        /// </summary>
+        internal static string RegistrationCompleted {
+            get {
+                return ResourceManager.GetString("RegistrationCompleted", resourceCulture);
             }
         }
         

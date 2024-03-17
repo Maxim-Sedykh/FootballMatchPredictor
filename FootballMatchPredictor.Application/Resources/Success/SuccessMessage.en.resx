@@ -123,6 +123,9 @@
   <data name="FundsWithdrawn" xml:space="preserve">
     <value>Funds were successfully withdrawn</value>
   </data>
+  <data name="LoginCompleted" xml:space="preserve">
+    <value>You have successfully logged in!</value>
+  </data>
   <data name="MatchCreated" xml:space="preserve">
     <value>Match is successfully created!</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="MatchUpdated" xml:space="preserve">
     <value>Match is successfully updated!</value>
+  </data>
+  <data name="RegistrationCompleted" xml:space="preserve">
+    <value>You have successfully registered!</value>
   </data>
   <data name="TeamCreated" xml:space="preserve">
     <value>Team is successfully created!</value>

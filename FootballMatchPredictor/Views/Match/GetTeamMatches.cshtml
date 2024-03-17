@@ -1,42 +1,41 @@
 ﻿@using FootballMatchPredictor.Domain.ViewModels.Match
-@model List<TeamMatchViewModel>
+@model List<MatchViewModel>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-12 pt-3">
-            @foreach (var teamMatch in Model)
-            {
-                <div class="d-flex bg-dark br-40 text-white mb-3 p-4">
-                    <div class="flex-fill">
-                        <img src="/images/team-match-picture.jpg" class="img-fluid d-block ms-3 br-40" style="height:100px;" />                            
-                    </div>
-                    <div class="flex-fill">
-                        <p>
-                            Первая команда: @teamMatch.Team1Name
-                        </p>
-                        <p>
-                            Вторая команда: @teamMatch.Team2Name
-                        </p>
-                    </div>
-                    <div class="flex-fill">
-                        <p>
-                            @teamMatch.Team1GoalsCount
-                        </p>
-                        <p>
-                            @teamMatch.Team2GoalsCount
-                        </p>
-                    </div>
-                    <div class="flex-fill">
-                        <p>
-                            @teamMatch.MatchState
-                        </p>
-                        <p>
-                            @teamMatch.MatchDate
-                        </p>
-                    </div>
-                </div>
-            }
+    @foreach (var teamMatch in Model)
+        {
+        <div class="row bg-dark br-40 text-white mb-3 p-4">
+            <div class="col-md-3 w-25">
+                <img src="/images/team-match-picture.jpg" class="img-fluid d-block ms-3 br-40" style="height:100px;" />                            
+            </div>
+            <div class="col-md-3">
+                <p>
+                    Первая команда: @teamMatch.Team1Name
+                </p>
+                <p>
+                    Вторая команда: @teamMatch.Team2Name
+                </p>
+            </div>
+            <div class="col-md-3"> 
+                <p class="text-white fs-6 fw-bold">
+                    Голы команд
+                </p>
+                <p>
+                    @teamMatch.Team1GoalsCount
+                </p>
+                <p>
+                    @teamMatch.Team2GoalsCount
+                </p>
+            </div>
+            <div class="col-md-3">
+                <p>
+                    @teamMatch.MatchState
+                </p>
+                <p>
+                    @teamMatch.MatchDate
+                </p>
+            </div>
         </div>
-    </div>
+        }
 </div>
 

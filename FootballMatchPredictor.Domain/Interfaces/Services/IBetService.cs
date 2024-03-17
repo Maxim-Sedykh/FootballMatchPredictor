@@ -19,7 +19,7 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<BaseResult<MakeBetViewModel>> GetDataToMakeBet(long id);
+        Task<BaseResult<MakeBetViewModel>> GetCoefficientToMakeBet(long id);
 
         /// <summary>
         /// Сделать ставку на определённый коэффициент
@@ -28,5 +28,33 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         /// <param name="userName"></param>
         /// <returns></returns>
         Task<BaseResult> MakeBet(MakeBetViewModel viewModel, string userName);
+
+        /// <summary>
+        /// Получить ставки пользователя
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        Task<CollectionResult<BetViewModel>> GetUserBets(string userName);
+
+        /// <summary>
+        /// Получение платёжных методов
+        /// </summary>
+        /// <returns></returns>
+        CollectionResult<KeyValuePair<int, string>> GetPaymentMethods();
+
+        /// <summary>
+        /// Получение суммы выигрышей пользователя, для модального окна для вывода средств
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        Task<BaseResult<WithdrawingMoneyViewModel>> GetUserWinningSum(string userName);
+
+        /// <summary>
+        /// Вывод денег
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        Task<BaseResult> WithdrawingMoney(WithdrawingMoneyViewModel viewModel, string userName);
     }
 }

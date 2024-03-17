@@ -16,7 +16,7 @@
                         <li class="breadcrumb-item text-white"><a asp-controller="Home" asp-action="Index">Главная</a></li>
                         <li class="breadcrumb-item text-white"><a @(User.IsInRole("Admin") ? "" : "text-muted")> Страница админа</a></li>
                         <li class="breadcrumb-item text-white"><button class="all-unset text-white br-40" type="button"
-                                    onclick="openModal({ url: '/UserProfile/WithdrawingMoney/', modalId: 'modalWindow', modalTitle:'Вывод денег'})"
+                                    onclick="openModal({ url: '/Bet/WithdrawingMoney/', modalId: 'modalWindow', modalTitle:'Вывод денег'})"
                                     data-toggle="ajax-modal" data-target="Modal">
                                 Вывод денежных средств
                             </button>
@@ -31,9 +31,9 @@
             <div class="col-md-4">
                 <div class="card mb-4 bg-dark">
                     <div class="card-body text-center pt-5">
-                        @if (Model.Sex == Sex.Man)
+                        @if (Model.Gender == "Мужчина")
                         {
-                            <img class="img-fluid rounded-circle" style="height:200px;" src="https://pushinka.top/uploads/posts/2023-04/1680944641_pushinka-top-p-avatarki-dlya-shkolnogo-chata-avatarka-ins-16.jpg" />
+                            <img class="img-fluid rounded-circle" style="height:200px;" src="/images/avatar-men-default.webp" />
                         }
                         else
                         {
@@ -43,11 +43,11 @@
                         <p class="mb-1 text-white">Сделайте ставку!</p>
                         <p class="mb-4 text-white">Ставки на фатбольные матчи – это захватывающий способ испытать свою удачу</p>
                         <div class="d-flex justify-content-center mb-2">
-                            <button type="button" class="btn btn-primary" style="height:40px;"
+                            <button type="button" class="btn btn-primary br-40" style="height:40px;"
                                     onclick="doActionWithPopupWindow(event, { url: '/UserProfile/UpdateUserInfo', formId: 'updateUserData' })">
                                 Обновить данные
                             </button>
-                            <button class="btn btn-outline-primary text-white mb-4 ms-1" type="button" style="height:40px;"
+                            <button class="btn btn-outline-primary text-white mb-4 ms-1 br-40" type="button" style="height:40px;"
                                     onclick="openModal({ url: '/UserProfile/GetUserStatistics/', modalId: 'modalWindow', modalTitle:'Статистика'})"
                                     data-toggle="ajax-modal" data-target="Modal">
                                 Ваша статистика
@@ -65,7 +65,7 @@
                                 <label class="text-white" asp-for="Username">Логин</label>
                             </div>
                             <div class="col-sm-11 ps-4">
-                                <input type="text" class="form-control" asp-for="Username" value="@Model.Username">
+                                <input type="text" class="form-control" readonly asp-for="Username" value="@Model.Username">
                             </div>
                         </div>
                         <div class="form-group row my-3">
@@ -94,16 +94,11 @@
                         </div>
                         <div class="form-group row my-3">
                             <div class="col-sm-1 pt-2">
-                                <label class="text-white" asp-for="Sex">Пол</label>
+                                <label class="text-white" asp-for="Gender">Пол</label>
                             </div>
                             <div class="col-sm-11 ps-4">
-                                <select class="form-select" asp-for="Sex">
-                                    @foreach(Sex sex in Enum.GetValues(typeof(Sex)))
-                                    {
-                                        <option value="@sex">
-                                            @sex.GetDisplayName()
-                                        </option>
-                                    }
+                                <select class="form-control" id="userGenderId" data-minimum-results-for-search="Infinity" asp-for="Gender">
+                                    <option value="@Model.Gender">@Model.Gender</option>
                                 </select>
                             </div>
                         </div>
@@ -111,49 +106,22 @@
                 </div>
                 <div class="card mb-4 bg-dark px-4 text-white text-center pt-3"> 
                     <p class="text-white fs-4">
-                        Ваши ставки
+                        Ставки
                     </p>
-                    @foreach (var bet in Model.UserBets)
-                    {
-                        <div class="d-flex bg-dark rounded w-100 border border-white px-4 mb-3" style="min-height:100px;">
-                            <div class="p-2 flex-fill">
-                                <p>
-                                    @bet.Team1Name
-                                </p>
-                                <p>
-                                    @bet.Team2Name
-                                </p>
-                            </div>
-                            <div class="p-2 flex-fill ms-3">
-                                <p class="text-start mb-0">
-                                    @bet.CoefficientReferDescription: @bet.CoefficientValue
-                                </p>
-                                <p>
-                                    @bet.BetTypeName
-                                </p>
-                            </div>
-                            <div class="p-2 flex-fill">
-                                <p class="">
-                                    Вы поставили: @bet.BetAmountMoney
-                                </p>
-                                <p>
-                                    Выигрыш: @bet.WinningAmount
-                                </p>
-                            </div>
-                            <div class="p-2 flex-fill">
-                                <p>
-                                    @bet.CreatedAt
-                                </p>
-                                <p>
-                                    @bet.BetState
-                                </p>
-                            </div>
-                        </div>
-                    }
+                    <button type="button" class="btn btn-primary br-40 mb-4"
+                            data-bs-toggle="modal" data-bs-target="#modalWideWindow" onclick="openModal({ url: '/Bet/GetUserBets', modalId: 'modalWideWindow', modalTitle:'Ставки @User.Identity.Name' })">
+                        Ваши ставки
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        initSelect2ForEnum({ url: '/UserProfile/GetGenders', selectId: 'userGenderId', placeholder: 'Выберите пол', isModal: false });
+    });
+</script>
 
 

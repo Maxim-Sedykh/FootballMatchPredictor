@@ -82,6 +82,10 @@ namespace FootballMatchPredictor.Persistence.Configutations
             builder.HasMany(x => x.Coefficients)
                 .WithOne(x => x.Match)
                 .HasForeignKey(x => x.MatchId);
+
+            builder.HasMany(x => x.Bets)
+                .WithOne(x => x.Match)
+                .HasForeignKey(x => x.MatchId);
         }
     }
 }

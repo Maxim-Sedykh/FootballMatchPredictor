@@ -18,15 +18,13 @@ namespace FootballMatchPredictor.Domain.ViewModels.Match
     /// <param name="Team2GoalsCount"></param>
     /// <param name="MatchState"></param>
     /// <param name="MatchDate"></param>
-    /// <param name="Coefficients"></param>
     public record MatchViewModel(
-            long Id,
-            string Team1Name,
-            string Team2Name,
-            byte Team1GoalsCount,
-            byte Team2GoalsCount,
-            string MatchState,
-            DateTime MatchDate,
-            List<MatchCoefficientViewModel> Coefficients
-        );
+        long Id,
+        string Team1Name,
+        string Team2Name,
+        byte Team1GoalsCount,
+        byte Team2GoalsCount,
+        string MatchState,
+        DateTime MatchDate
+    );
 }

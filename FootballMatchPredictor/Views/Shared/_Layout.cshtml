@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -115,7 +116,7 @@
         </main>
     </div>
 
-    <footer class="footer bg-dark text-muted">
+    <footer class="footer bg-dark text-muted mt-4">
         <div class="container text-white">
             &copy; 2024 - FootballMatchPredictor - <a asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
         </div>
@@ -126,7 +127,9 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/popupWindow.js" asp-append-version="true"></script>
     <script src="~/js/confirmationWindow.js" asp-append-version="true"></script>
+    <script src="~/js/selectEnum.js" asp-append-version="true"></script>
     <script src="~/js/modal.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    @await RenderSectionAsync("pageScripts", required: false)
 </body>
 </html>

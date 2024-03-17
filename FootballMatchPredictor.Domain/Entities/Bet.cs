@@ -33,6 +33,16 @@ namespace FootballMatchPredictor.Domain.Entities
         public Coefficient Coefficient { get; set; }
 
         /// <summary>
+        /// Внешний ключ для связи с матчами
+        /// </summary>
+        public long MatchId { get; set; }
+
+        /// <summary>
+        /// Матч
+        /// </summary>
+        public Match Match { get; set; }
+
+        /// <summary>
         /// Количество поставленных денег
         /// </summary>
         public decimal BetAmountMoney { get; set; }

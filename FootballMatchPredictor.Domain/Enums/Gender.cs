@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.Enums
 {
-    public enum Sex
+    public enum Gender
     {
         [Display(Name = "Женщина")]
         Woman = 0,

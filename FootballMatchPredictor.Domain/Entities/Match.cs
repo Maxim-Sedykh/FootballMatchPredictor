@@ -57,6 +57,11 @@ namespace FootballMatchPredictor.Domain.Entities
         /// </summary>
         public List<Coefficient> Coefficients { get; set; }
 
+        /// <summary>
+        /// Ставки на матч
+        /// </summary>
+        public List<Bet> Bets { get; set; }
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

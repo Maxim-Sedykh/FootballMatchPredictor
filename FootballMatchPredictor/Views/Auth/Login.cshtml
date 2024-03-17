@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form asp-controller="Auth" asp-action="Login">
+            <form id="loginForm">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Почта</label>
                     <input type="email" class="form-control" asp-for="Email" aria-describedby="emailHelp">
@@ -14,7 +14,10 @@
                     <label for="exampleInputPassword1" class="form-label">Пароль</label>
                     <input type="password" asp-for="Password" class="form-control" id="exampleInputPassword1">
                 </div>
-                <button type="submit" class="btn bg-indigo text-white">Войти</button>
+                <button type="button" class="btn bg-indigo text-white" style="height:40px;"
+                        onclick="doActionWithPopupWindow(event, { url: '/Auth/Login', formId: 'loginForm' })">
+                    Логин
+                </button>
             </form>
         </div>
     </div>

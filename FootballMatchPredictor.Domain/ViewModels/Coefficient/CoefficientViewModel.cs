@@ -21,6 +21,8 @@ namespace FootballMatchPredictor.Domain.ViewModels.Coefficient
         string Team2Name,
         float CoefficientValue,
         string CoefficientReferDescription,
+        bool IsActive,
+        DateTime MatchDate,
         DateTime CreatedAt
     );
 }

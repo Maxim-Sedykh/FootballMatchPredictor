@@ -123,6 +123,9 @@
   <data name="FundsWithdrawn" xml:space="preserve">
     <value>Средства успешно выведены</value>
   </data>
+  <data name="LoginCompleted" xml:space="preserve">
+    <value>Вы успешно авторизовались!</value>
+  </data>
   <data name="MatchCreated" xml:space="preserve">
     <value>Матч успешно создан</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="MatchUpdated" xml:space="preserve">
     <value>Матч успешно обновлён</value>
+  </data>
+  <data name="RegistrationCompleted" xml:space="preserve">
+    <value>Вы успешно зарегистрировались!</value>
   </data>
   <data name="TeamCreated" xml:space="preserve">
     <value>Команда успешно создана</value>

@@ -1,0 +1,48 @@
+﻿@using FootballMatchPredictor.Domain.ViewModels.Bet
+@model List<BetViewModel>
+
+<div class="container">
+    @foreach (var bet in Model)
+    {
+        <div class="row bg-dark br-40 mb-4 text-white pt-4 px-5" style="min-height:130px;">
+            <div class="col-md-3">
+                <p class="fw-bold">
+                    Команды
+                </p>
+                <p>
+                    @bet.Team1Name
+                </p>
+                <p>
+                    @bet.Team2Name
+                </p>
+            </div>
+            <div class="col-md-3">
+                <p>
+                    @bet.CoefficientValue
+                </p>
+                <p>
+                    @bet.CoefficientReferDescription
+                </p>
+            </div>
+            <div class="col-md-3">
+                <p>
+                    Вы поставили @bet.BetAmountMoney
+                </p>
+                <p>
+                    Сумма выигрыша: @bet.WinningAmount
+                </p>
+                <p>
+                    Тип ставки: @bet.BetTypeName
+                </p>
+            </div>
+            <div class="col-md-3">
+                <p>
+                    @bet.BetState
+                </p>
+                <p>
+                    Коэффициент создан: @bet.CreatedAt
+                </p>
+            </div>
+        </div>
+    }
+</div>

@@ -14,12 +14,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label asp-for="MoneyAmount" class="form-label">Сумма ставки</label>
-                    <select asp-for="SelectedPaymentMethodId" class="form-control">
-                    @foreach (var paymentMethod in Model.PaymentMethods)
-                    {
-                        <option value="@paymentMethod.Key">@paymentMethod.Value</option>
-                    }
+                    <label asp-for="MoneyAmount" class="form-label">Способ платежа</label>
+                    <select asp-for="PaymentMethod" class="form-control" id="paymentMethodToBetId" data-minimum-results-for-search="Infinity" style="width:100%;">
                     </select>
                     <div class="form-text">
                         Вы должны выбрать способ платежа
@@ -35,5 +31,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    initSelect2ForEnum({ url: '/Bet/GetPaymentMethods', selectId: 'paymentMethodToBetId', placeholder: 'Выберите платёжный метод', isModal: true });
+</script>
 
 

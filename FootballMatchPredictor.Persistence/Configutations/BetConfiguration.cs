@@ -24,6 +24,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     BetAmountMoney = 10000,
                     WinningAmount = 17000,
                     BetTypeId = 1,
+                    MatchId = 1,
                     BetState = BetState.Winning,
                     CreatedAt = DateTime.UtcNow,
                 },
@@ -35,6 +36,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     BetAmountMoney = 20000,
                     WinningAmount = 28000,
                     BetTypeId = 1,
+                    MatchId = 2,
                     BetState = BetState.Winning,
                     CreatedAt = DateTime.UtcNow,
                 },
@@ -46,6 +48,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     BetAmountMoney = 10000,
                     WinningAmount = 24000,
                     BetTypeId = 2,
+                    MatchId = 1,
                     BetState = BetState.Losing,
                     CreatedAt = DateTime.UtcNow,
                 }

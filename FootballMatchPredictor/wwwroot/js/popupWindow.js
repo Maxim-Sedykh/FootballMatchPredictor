@@ -23,7 +23,7 @@
         error: function (response) {
             Swal.fire({
                 title: 'Уведомление!',
-                text: response,
+                text: response.responseJSON.errorMessage,
                 icon: 'error',
                 confirmButtonColor: "#0d6efd",
                 confirmButtonText: 'Окей',

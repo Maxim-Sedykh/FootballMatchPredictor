@@ -8,7 +8,7 @@ namespace FootballMatchPredictor.Domain.Extensions
 {
     public static class StringExtension
     {
-        public static string Join(this List<string> words)
+        public static string JoinErrors(this List<string> words)
         {
             var sb = new StringBuilder();
 

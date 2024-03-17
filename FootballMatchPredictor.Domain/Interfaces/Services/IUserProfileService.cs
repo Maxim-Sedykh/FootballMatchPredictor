@@ -35,18 +35,10 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         Task<BaseResult<UserStatisticsViewModel>> GetUserStatistics(string userName);
 
         /// <summary>
-        /// Вывод денежных средств из аккаунта на любой платёжный сервис
+        /// Получение списка полов
         /// </summary>
-        /// <param name="viewModel"></param>
-        /// <param name="userName"></param>
         /// <returns></returns>
-        Task<BaseResult> WithdrawingMoney(WithdrawingMoneyViewModel viewModel, string userName);
-
-        /// <summary>
-        /// Получение суммы выигрыша от ставок для страницы с выводом денег
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <returns></returns>
-        Task<BaseResult<WithdrawingMoneyViewModel>> GetUserWinningSum(string userName);
+        CollectionResult<KeyValuePair<int, string>> GetGenders();
     }
 }
+  
