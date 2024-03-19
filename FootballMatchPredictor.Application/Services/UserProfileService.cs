@@ -10,15 +10,20 @@ using FootballMatchPredictor.Domain.ViewModels.Bet;
 using FootballMatchPredictor.Domain.ViewModels.UserProfile;
 using Mapster;
 using MapsterMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace FootballMatchPredictor.Application.Services
 {
+    [Authorize]
     /// <inheritdoc/>
     public class UserProfileService : IUserProfileService
     {
         private readonly IBaseRepository<User> _userRepository;
         private readonly IBaseRepository<Bet> _betRepository;
+
+        private const decimal PROMOTION_AMOUNT = 1000;
 
         public UserProfileService(IBaseRepository<User> userRepository, IBaseRepository<Bet> betRepository)
         {
@@ -120,6 +125,15 @@ namespace FootballMatchPredictor.Application.Services
             {
                 SuccessMessage = SuccessMessage.NoChangesDetected,
             };
+        }
+
+        public async Task PromotionalBalanceIncrease()
+        {
+            var users = await _userRepository.GetAll().ToListAsync();
+
+            users.ForEach(user => user.WinningSum += PROMOTION_AMOUNT);
+
+            await _userRepository.UpdateRangeAsync(users);
         }
     }
 }

@@ -35,8 +35,8 @@ namespace FootballMatchPredictor.Application.Mapping
                 .Map(dest => dest.Password, src => HashPasswordHelper.HashPassword(src.Password))
                 .Map(dest => dest.Role, src => Role.User)
                 .Map(dest => dest.CreatedAt, src => DateTime.UtcNow)
-                .Map(dest => dest.CreatedAt, src => Gender.Man)
-                .Map(dest => dest.CreatedAt, src => PROMOTION_AMOUNT);
+                .Map(dest => dest.Gender, src => src.Gender)
+                .Map(dest => dest.WinningSum, src => PROMOTION_AMOUNT);
         }
     }
 }

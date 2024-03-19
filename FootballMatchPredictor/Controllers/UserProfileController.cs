@@ -9,9 +9,11 @@ using FootballMatchPredictor.Domain.ViewModels.Error;
 using FootballMatchPredictor.Domain.ViewModels.UserProfile;
 using FootballMatchPredictor.Application.Services;
 using FootballMatchPredictor.Domain.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FootballMatchPredictor.Controllers
 {
+    [Authorize]
     public class UserProfileController : Controller
     {
         private readonly IUserProfileService _userProfileService;
@@ -44,18 +46,20 @@ namespace FootballMatchPredictor.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateUserInfo(UserProfileViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var response = await _userProfileService.UpdateUserInfo(viewModel);
-                if (response.IsSuccess)
-                {
-                    return Ok(response.SuccessMessage);
-                }
-                return BadRequest(new { errorMessage = response.ErrorMessage });
-            }
-            var errorMessage = ModelState.Values
+                var errorMessage = ModelState.Values
                 .SelectMany(v => v.Errors.Select(x => x.ErrorMessage)).ToList().JoinErrors();
-            return StatusCode(StatusCodes.Status500InternalServerError, new {  errorMessage = errorMessage });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage = errorMessage });
+            }
+
+            var response = await _userProfileService.UpdateUserInfo(viewModel);
+
+            if (response.IsSuccess)
+            {
+                return Ok(response.SuccessMessage);
+            }
+            return BadRequest(new { errorMessage = response.ErrorMessage });
         }
 
         /// <summary>

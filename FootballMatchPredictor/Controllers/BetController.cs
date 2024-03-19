@@ -3,10 +3,12 @@ using FootballMatchPredictor.Domain.Extensions;
 using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.ViewModels.Bet;
 using FootballMatchPredictor.Domain.ViewModels.Error;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FootballMatchPredictor.Controllers
 {
+    [Authorize]
     public class BetController: Controller
     {
         private readonly IBetService _betService;
@@ -56,18 +58,20 @@ namespace FootballMatchPredictor.Controllers
         [HttpPost]
         public async Task<IActionResult> MakeBet(MakeBetViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var response = await _betService.MakeBet(viewModel, User.Identity.Name);
-                if (response.IsSuccess)
-                {
-                    return Ok(response.SuccessMessage);
-                }
-                return BadRequest(new { errorMessage = response.ErrorMessage });
-            }
-            var errorMessage = ModelState.Values
+                var errorMessage = ModelState.Values
                 .SelectMany(v => v.Errors.Select(x => x.ErrorMessage)).ToList().JoinErrors();
-            return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage = errorMessage });
+            }
+
+            var response = await _betService.MakeBet(viewModel, User.Identity.Name);
+
+            if (response.IsSuccess)
+            {
+                return Ok(response.SuccessMessage);
+            }
+            return BadRequest(new { errorMessage = response.ErrorMessage });
         }
 
         /// <summary>
@@ -93,18 +97,20 @@ namespace FootballMatchPredictor.Controllers
         [HttpPost]
         public async Task<IActionResult> WithdrawingMoney(WithdrawingMoneyViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var response = await _betService.WithdrawingMoney(viewModel, User.Identity.Name);
-                if (response.IsSuccess)
-                {
-                    return Ok(response.SuccessMessage);
-                }
-                return BadRequest(new { errorMessage = response.ErrorMessage });
-            }
-            var errorMessage = ModelState.Values
+                var errorMessage = ModelState.Values
                 .SelectMany(v => v.Errors.Select(x => x.ErrorMessage)).ToList().JoinErrors();
-            return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage = errorMessage });
+            }
+            
+            var response = await _betService.WithdrawingMoney(viewModel, User.Identity.Name);
+
+            if (response.IsSuccess)
+            {
+                return Ok(response.SuccessMessage);
+            }
+            return BadRequest(new { errorMessage = response.ErrorMessage });
         }
 
         [HttpPost]

@@ -1,6 +1,7 @@
 ﻿using FootballMatchPredictor.Application.Services;
 using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.ViewModels.Error;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FootballMatchPredictor.Controllers

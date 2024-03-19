@@ -33,21 +33,23 @@ namespace FootballMatchPredictor.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var response = await _authService.Login(model);
-                if (response.IsSuccess)
-                {
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(response.Data));
-
-                    return Ok(response.SuccessMessage);
-                }
-                return BadRequest(new { errorMessage = response.ErrorMessage });
-            }
-            var errorMessage = ModelState.Values
+                var errorMessage = ModelState.Values
                 .SelectMany(v => v.Errors.Select(x => x.ErrorMessage)).ToList().JoinErrors();
-            return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage = errorMessage });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage = errorMessage });
+            }
+            
+            var response = await _authService.Login(model);
+
+            if (response.IsSuccess)
+            {
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(response.Data));
+
+                return Ok(response.SuccessMessage);
+            }
+            return BadRequest(new { errorMessage = response.ErrorMessage });
         }
 
         /// <summary>
@@ -65,21 +67,23 @@ namespace FootballMatchPredictor.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var response = await _authService.Register(model);
-                if (response.IsSuccess)
-                {
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(response.Data));
-
-                    return Ok(response.SuccessMessage);
-                }
-                return BadRequest(new { errorMessage = response.ErrorMessage });
-            }
-            var errorMessage = ModelState.Values
+                var errorMessage = ModelState.Values
                 .SelectMany(v => v.Errors.Select(x => x.ErrorMessage)).ToList().JoinErrors();
-            return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage = errorMessage });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage = errorMessage });
+            }
+        
+            var response = await _authService.Register(model);
+
+            if (response.IsSuccess)
+            {
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(response.Data));
+
+                return Ok(response.SuccessMessage);
+            }
+            return BadRequest(new { errorMessage = response.ErrorMessage });
         }
 
         /// <summary>

@@ -17,7 +17,6 @@ namespace FootballMatchPredictor.Application.Services
     public class AuthService : IAuthService
     {
         private readonly IBaseRepository<User> _userRepository;
-        private const decimal PROMOTION_AMOUNT = 1000;
 
         public AuthService(IBaseRepository<User> userRepository)
         {
@@ -100,10 +99,10 @@ namespace FootballMatchPredictor.Application.Services
         private ClaimsIdentity Authenticate(User user)
         {
             var claims = new List<Claim>
-        {
-            new(ClaimsIdentity.DefaultNameClaimType, user.Username),
-            new(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString())
-        };
+            {
+                new(ClaimsIdentity.DefaultNameClaimType, user.Username),
+                new(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString())
+            };
             return new ClaimsIdentity(claims, "ApplicationCookie",
                 ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
         }

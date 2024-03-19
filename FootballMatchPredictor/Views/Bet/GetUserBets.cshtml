@@ -2,47 +2,56 @@
 @model List<BetViewModel>
 
 <div class="container">
-    @foreach (var bet in Model)
+    @if (Model.Count == 0)
     {
-        <div class="row bg-dark br-40 mb-4 text-white pt-4 px-5" style="min-height:130px;">
-            <div class="col-md-3">
-                <p class="fw-bold">
-                    Команды
-                </p>
-                <p>
-                    @bet.Team1Name
-                </p>
-                <p>
-                    @bet.Team2Name
-                </p>
+        <p class="fs-5 text-center">
+            На данный момент вы не сделали ни одной ставки, <a asp-controller="Match" asp-action="GetMatches">перейти к матчам чтобы сделать ставку</a>
+        </p>
+    }
+    else
+    {
+        @foreach (var bet in Model)
+        {
+            <div class="row bg-dark br-40 mb-4 text-white pt-4 px-5" style="min-height:130px;">
+                <div class="col-md-3">
+                    <p class="fw-bold">
+                        Команды
+                    </p>
+                    <p>
+                        @bet.Team1Name
+                    </p>
+                    <p>
+                        @bet.Team2Name
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <p>
+                        @bet.CoefficientValue
+                    </p>
+                    <p>
+                        @bet.CoefficientReferDescription
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <p>
+                        Вы поставили @bet.BetAmountMoney
+                    </p>
+                    <p>
+                        Сумма выигрыша: @bet.WinningAmount
+                    </p>
+                    <p>
+                        Тип ставки: @bet.BetTypeName
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <p>
+                        @bet.BetState
+                    </p>
+                    <p>
+                        Коэффициент создан: @bet.CreatedAt
+                    </p>
+                </div>
             </div>
-            <div class="col-md-3">
-                <p>
-                    @bet.CoefficientValue
-                </p>
-                <p>
-                    @bet.CoefficientReferDescription
-                </p>
-            </div>
-            <div class="col-md-3">
-                <p>
-                    Вы поставили @bet.BetAmountMoney
-                </p>
-                <p>
-                    Сумма выигрыша: @bet.WinningAmount
-                </p>
-                <p>
-                    Тип ставки: @bet.BetTypeName
-                </p>
-            </div>
-            <div class="col-md-3">
-                <p>
-                    @bet.BetState
-                </p>
-                <p>
-                    Коэффициент создан: @bet.CreatedAt
-                </p>
-            </div>
-        </div>
+        }
     }
 </div>

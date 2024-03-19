@@ -1,7 +1,9 @@
-﻿using FootballMatchPredictor.Application.Services;
+﻿using FootballMatchPredictor.Application.Jobs;
+using FootballMatchPredictor.Application.Services;
 using FootballMatchPredictor.Domain.Interfaces.Services;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
+using Quartz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,8 @@ namespace FootballMatchPredictor.Application.DependencyInjection
             InitServices(services);
 
             InitMapping(services);
+
+            InitBackgroundPromotionJob(services);
         }
 
         private static void InitServices(this IServiceCollection services)
@@ -37,6 +41,22 @@ namespace FootballMatchPredictor.Application.DependencyInjection
         private static void InitMapping(this IServiceCollection services)
         {
             TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
+        }
+
+        private static void InitBackgroundPromotionJob(this IServiceCollection services)
+        {
+            services.AddQuartz(options =>
+            {
+                options.SchedulerId = "JobScheduler";
+                options.SchedulerName = "PromotionBackgroundJobScheduler";
+            });
+
+            services.AddQuartzHostedService(options =>
+            {
+                options.WaitForJobsToComplete = true;
+            });
+
+            services.ConfigureOptions<BackgroundJobSetup>();
         }
     }
 }

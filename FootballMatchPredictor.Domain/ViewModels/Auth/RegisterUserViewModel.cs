@@ -41,6 +41,9 @@ namespace FootballMatchPredictor.Domain.ViewModels.Auth
         [DataType(DataType.Password)]
         string Password,
 
+        [Required(ErrorMessage = "Выберите пол")]
+        string Gender,
+
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Подтвердите пароль")]
         string PasswordConfirm

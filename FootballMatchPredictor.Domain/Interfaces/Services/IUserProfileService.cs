@@ -39,6 +39,12 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         /// </summary>
         /// <returns></returns>
         CollectionResult<KeyValuePair<int, string>> GetGenders();
+
+        /// <summary>
+        /// Акция! Каждый месяц всем пользователям даётся 1000 рублей в месяц
+        /// </summary>
+        /// <returns></returns>
+        Task PromotionalBalanceIncrease();
     }
 }
   

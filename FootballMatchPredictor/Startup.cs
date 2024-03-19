@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using FootballMatchPredictor.Application.Jobs;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Quartz.Impl;
+using Quartz;
 
 namespace FootballMatchPredictor
 {

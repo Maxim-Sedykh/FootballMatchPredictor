@@ -2,8 +2,7 @@ using FootballMatchPredictor;
 using FootballMatchPredictor.Persistence.DependencyInjection;
 using FootballMatchPredictor.Application.DependencyInjection;
 using Serilog;
-using Mapster;
-using MapsterMapper;
+using FootballMatchPredictor.Application.Jobs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +28,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCookiePolicy();
 
 app.MapControllerRoute(
     name: "default",
