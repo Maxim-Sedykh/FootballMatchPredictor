@@ -29,19 +29,6 @@ namespace FootballMatchPredictor.Application.Services
             _withdrawingRepository = withdrawingRepository;
         }
 
-        public CollectionResult<KeyValuePair<int, string>> GetPaymentMethods()
-        {
-            var paymentMethod = Enum.GetValues(typeof(PaymentMethod))
-                    .Cast<PaymentMethod>()
-                    .ToDictionary(k => (int)k, t => t.GetDisplayName());
-
-            return new CollectionResult<KeyValuePair<int, string>>()
-            {
-                Data = paymentMethod,
-                Count = paymentMethod.Count
-            };
-        }
-
         /// <inheritdoc/>
         public async Task<BaseResult<MakeBetViewModel>> GetCoefficientToMakeBet(long id)
         {
@@ -105,6 +92,20 @@ namespace FootballMatchPredictor.Application.Services
                     ErrorMessage = ErrorMessage.UserNotFound,
                     ErrorCode = (int)StatusCode.UserNotFound,
                 };
+            }
+
+            if ((PaymentMethod)Convert.ToInt32(viewModel.PaymentMethod) == PaymentMethod.UserWinningAmount)
+            {
+                if (viewModel.MoneyAmount > user.WinningSum)
+                {
+                    return new BaseResult<MakeBetViewModel>()
+                    {
+                        ErrorMessage = ErrorMessage.InsufficientFunds,
+                        ErrorCode = (int)StatusCode.InsufficientFunds,
+                    };
+                }
+
+                user.WinningSum -= viewModel.MoneyAmount;
             }
 
             var coefficient = await _coefficientRepository.GetAll()
@@ -200,6 +201,56 @@ namespace FootballMatchPredictor.Application.Services
             {
                 SuccessMessage = SuccessMessage.FundsWithdrawn,
             };
+        }
+
+        public CollectionResult<KeyValuePair<int, string>> GetPaymentMethods(bool withUserWinnigSum)
+        {
+            var paymentMethods = Enum.GetValues(typeof(PaymentMethod))
+                    .Cast<PaymentMethod>()
+                    .ToDictionary(k => (int)k, t => t.GetDisplayName());
+
+            if (!withUserWinnigSum)
+            {
+                paymentMethods.Remove((int)PaymentMethod.UserWinningAmount);
+            }
+
+            return new CollectionResult<KeyValuePair<int, string>>()
+            {
+                Data = paymentMethods,
+                Count = paymentMethods.Count
+            };
+        }
+
+        public CollectionResult<KeyValuePair<int, string>> GetPaymentMethodsToBet()
+        {
+            var paymentMethodsToBet = GetPaymentMethods();
+            
+            return new CollectionResult<KeyValuePair<int, string>>()
+            {
+                Data = paymentMethodsToBet,
+                Count = paymentMethodsToBet.Count
+            };
+        }
+
+        public CollectionResult<KeyValuePair<int, string>> GetPaymentMethodsToWithdraw()
+        {
+            var paymentMethodsToWithdraw = GetPaymentMethods();
+
+            paymentMethodsToWithdraw.Remove((int)PaymentMethod.UserWinningAmount);
+
+
+            return new CollectionResult<KeyValuePair<int, string>>()
+            {
+                Data = paymentMethodsToWithdraw,
+                Count = paymentMethodsToWithdraw.Count
+            };
+        }
+    
+        private Dictionary<int, string> GetPaymentMethods()
+        {
+            return Enum.GetValues(typeof(PaymentMethod))
+                    .Cast<PaymentMethod>()
+                    .ToDictionary(k => (int)k, t => t.GetDisplayName());
         }
     }
 }

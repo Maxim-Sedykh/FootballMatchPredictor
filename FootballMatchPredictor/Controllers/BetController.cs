@@ -5,6 +5,7 @@ using FootballMatchPredictor.Domain.ViewModels.Bet;
 using FootballMatchPredictor.Domain.ViewModels.Error;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FootballMatchPredictor.Controllers
 {
@@ -114,9 +115,16 @@ namespace FootballMatchPredictor.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetPaymentMethods()
+        public JsonResult GetPaymentMethodsToBet()
         {
-            var types = _betService.GetPaymentMethods();
+           var types = _betService.GetPaymentMethodsToBet();
+            return Json(types.Data);
+        }
+
+        [HttpPost]
+        public JsonResult GetPaymentMethodsToWithDraw()
+        {
+            var types = _betService.GetPaymentMethodsToWithdraw();
             return Json(types.Data);
         }
     }

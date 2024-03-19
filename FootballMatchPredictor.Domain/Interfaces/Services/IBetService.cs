@@ -37,10 +37,16 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         Task<CollectionResult<BetViewModel>> GetUserBets(string userName);
 
         /// <summary>
-        /// Получение платёжных методов
+        /// Получение платёжных методов для ставки
         /// </summary>
         /// <returns></returns>
-        CollectionResult<KeyValuePair<int, string>> GetPaymentMethods();
+        CollectionResult<KeyValuePair<int, string>> GetPaymentMethodsToBet();
+
+        /// <summary>
+        /// Получение платёжных методов для вывода денег
+        /// </summary>
+        /// <returns></returns>
+        CollectionResult<KeyValuePair<int, string>> GetPaymentMethodsToWithdraw();
 
         /// <summary>
         /// Получение суммы выигрышей пользователя, для модального окна для вывода средств

@@ -20,5 +20,8 @@ namespace FootballMatchPredictor.Domain.Enums
 
         [Display(Name = "Qiwi")]
         Qiwi = 3,
+
+        [Display(Name = "Ваш личный баланс на сайте")]
+        UserWinningAmount = 4,
     }
 }
