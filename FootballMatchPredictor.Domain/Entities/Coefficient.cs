@@ -25,7 +25,7 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// тип ставки
         /// </summary>
-        public List<Bet> Bets { get; set; }
+        public ICollection<Bet> Bets { get; set; }
 
         /// <summary>
         /// значение коэффициента

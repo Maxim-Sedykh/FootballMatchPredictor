@@ -29,7 +29,7 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Коэффициенты
         /// </summary>
-        public List<Coefficient> Coefficients { get; set; }
+        public ICollection<Coefficient> Coefficients { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

@@ -29,17 +29,17 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Информация по возможным коэффициентам
         /// </summary>
-        public List<CoefficientRefer> CoefficientRefers { get; set; }
+        public ICollection<CoefficientRefer> CoefficientRefers { get; set; }
 
         /// <summary>
         /// Коэффициенты по этому типу ставки
         /// </summary>
-        public List<Coefficient> Coefficients { get; set; }
+        public ICollection<Coefficient> Coefficients { get; set; }
 
         /// <summary>
         /// Информация по ставкам
         /// </summary>
-        public List<Bet> Bets { get; set; }
+        public ICollection<Bet> Bets { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

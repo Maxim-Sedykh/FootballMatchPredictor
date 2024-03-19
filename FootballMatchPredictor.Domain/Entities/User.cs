@@ -51,12 +51,12 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Ставки пользователя
         /// </summary>
-        public List<Bet> Bets { get; set; }
+        public ICollection<Bet> Bets { get; set; }
 
         /// <summary>
         /// Ставки пользователя
         /// </summary>
-        public List<Withdrawing> Withdrawings { get; set; }
+        public ICollection<Withdrawing> Withdrawings { get; set; }
 
         /// <summary>
         /// Захэшированный пароль пользователя

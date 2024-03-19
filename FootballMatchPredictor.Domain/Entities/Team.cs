@@ -39,12 +39,12 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Матчи команды в качестве первой команды в плане нумерования
         /// </summary>
-        public List<Match> Team1Matches { get; set; }
+        public ICollection<Match> Team1Matches { get; set; }
 
         /// <summary>
         /// Матчи команды в качестве второй команды в плане нумерования
         /// </summary>
-        public List<Match> Team2Matches { get; set; }
+        public ICollection<Match> Team2Matches { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

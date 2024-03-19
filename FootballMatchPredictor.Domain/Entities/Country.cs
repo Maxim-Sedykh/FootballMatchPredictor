@@ -19,7 +19,7 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Команды
         /// </summary>
-        public List<Team> Teams { get; set; }
+        public ICollection<Team> Teams { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

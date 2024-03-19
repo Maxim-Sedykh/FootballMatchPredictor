@@ -55,12 +55,12 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Коэффициенты
         /// </summary>
-        public List<Coefficient> Coefficients { get; set; }
+        public ICollection<Coefficient> Coefficients { get; set; }
 
         /// <summary>
         /// Ставки на матч
         /// </summary>
-        public List<Bet> Bets { get; set; }
+        public ICollection<Bet> Bets { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
