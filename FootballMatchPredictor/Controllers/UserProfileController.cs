@@ -77,6 +77,7 @@ namespace FootballMatchPredictor.Controllers
             return BadRequest(response.ErrorMessage);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult GetGenders()
         {

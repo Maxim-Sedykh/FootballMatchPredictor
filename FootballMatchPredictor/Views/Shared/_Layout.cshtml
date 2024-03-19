@@ -30,13 +30,13 @@
                             <a class="nav-link  text-black" asp-area="" asp-controller="Team" asp-action="GetAllTeams">Команды</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-black" asp-area="" asp-controller="Match" asp-action="GetMatches">Матчи</a>
+                            <a class="nav-link  text-black me-2" asp-area="" asp-controller="Match" asp-action="GetMatches">Матчи</a>
                         </li>
                         <li class="nav-item">
                             <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                                 <ul class="navbar-nav">
                                     <li class="nav-item dropdown">
-                                        <button class="btn text-black dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn text-black dropdown-toggle ps-0" data-bs-toggle="dropdown" aria-expanded="false">
                                             Страницы
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-light">
@@ -64,11 +64,11 @@
                     }
                     else
                     {
-                        <button type="button" class="btn bg-indigo br-40 rounded-pill me-2 text-white btn-layout"
+                        <button type="button" class="btn bg-indigo br-40 rounded-pill me-2 my-2 text-white btn-layout"
                                 data-bs-toggle="modal" data-bs-target="#modalWindow" onclick="openModal({ url: '/Auth/Login', modalId: 'modalWindow', modalTitle:'Логин' })">
                             Логин
                         </button>
-                        <button type="button" class="btn btn-dark br-40 rounded-pill  btn-layout"
+                        <button type="button" class="btn btn-dark br-40 rounded-pill my-2 btn-layout"
                                 data-bs-toggle="modal" data-bs-target="#modalWindow" onclick="openModal({ url: '/Auth/Register', modalId: 'modalWindow', modalTitle:'Регистрация' })">
                             Регистрация
                         </button>

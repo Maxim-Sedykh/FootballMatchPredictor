@@ -43,11 +43,11 @@
                         <p class="mb-1 text-white">Сделайте ставку!</p>
                         <p class="mb-4 text-white">Ставки на фатбольные матчи – это захватывающий способ испытать свою удачу</p>
                         <div class="d-flex justify-content-center mb-2">
-                            <button type="button" class="btn btn-primary br-40" style="height:40px;"
+                            <button type="button" class="btn btn-primary br-40 mb-4" style="min-height:40px;"
                                     onclick="doActionWithPopupWindow(event, { url: '/UserProfile/UpdateUserInfo', formId: 'updateUserData' })">
                                 Обновить данные
                             </button>
-                            <button class="btn btn-outline-primary text-white mb-4 ms-1 br-40" type="button" style="height:40px;"
+                            <button class="btn btn-outline-primary text-white mb-4 ms-1 br-40" type="button"  style="min-height:40px;"
                                     onclick="openModal({ url: '/UserProfile/GetUserStatistics/', modalId: 'modalWindow', modalTitle:'Статистика'})"
                                     data-toggle="ajax-modal" data-target="Modal">
                                 Ваша статистика
