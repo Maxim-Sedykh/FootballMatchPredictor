@@ -27,6 +27,9 @@
 4. Авторизуйтесь от лица админа: Email - Admin_m@mail.ru, Пароль - admin123
 5. Теперь вы можете использовать весь функционал проекта!
 
+## Благодарности
+Отдельная благодарность [Country Data API](https://restcountries.com) за предоставление данных, используемых в этом проекте.
+
 Ниже представлен интерфейс проекта
 
 <img src="https://github.com/Maxim-Sedykh/FootballMatchPredictor/assets/125740808/4cc59bf8-9b97-4e85-a035-590642ed3fd4" width=24%>
