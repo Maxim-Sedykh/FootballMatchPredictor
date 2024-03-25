@@ -31,9 +31,11 @@ namespace FootballMatchPredictor.Controllers
             return View("Error", new ErrorViewModel("Internal server error", 500));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreateTeam() => PartialView();
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateTeam(CreateTeamViewModel viewModel)
         {
@@ -53,7 +55,7 @@ namespace FootballMatchPredictor.Controllers
             return BadRequest(new { errorMessage = response.ErrorMessage });
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<JsonResult> GetAllCountries()
         {

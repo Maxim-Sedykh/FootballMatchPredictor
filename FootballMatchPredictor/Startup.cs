@@ -18,8 +18,8 @@ namespace FootballMatchPredictor
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = new PathString("/Auth/Login");
-                    options.AccessDeniedPath = new PathString("/Auth/Login");
+                    options.LoginPath = new PathString("/Home/AccessDenied");
+                    options.AccessDeniedPath = new PathString("/Home/AccessDenied");
                     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                     options.Cookie.Name = "FootballMatchPredictorCookie";
                     options.ExpireTimeSpan = TimeSpan.FromDays(1);

@@ -16,6 +16,11 @@ namespace FootballMatchPredictor.Controllers
             return View();
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Страница для предоставления информации об ошибке
         /// </summary>
