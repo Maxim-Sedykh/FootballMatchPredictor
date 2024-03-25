@@ -34,10 +34,12 @@
 <img src="https://github.com/Maxim-Sedykh/FootballMatchPredictor/assets/125740808/b5ab19cd-20b0-4f4b-9acf-f3839358e3ee" width=24%>
 <img src="https://github.com/Maxim-Sedykh/FootballMatchPredictor/assets/125740808/5b96d22f-59f7-468e-96ec-6344b972af87" width=24%>
 <img src="https://github.com/Maxim-Sedykh/FootballMatchPredictor/assets/125740808/ba89012d-d3b9-4548-9062-d1933e521011" width=24%>
-<img src="https://github.com/Maxim-Sedykh/FootballMatchPredictor/assets/125740808/24768114-2209-4667-ad59-28b9469d7efb" width=24%>
+<img src="https://github.com/Maxim-Sedykh/FootballMatchPredictor/assets/125740808/ae5d63d9-a3d8-46fe-ae6b-99e01e5d1785" width=24%>
 <img src="https://github.com/Maxim-Sedykh/FootballMatchPredictor/assets/125740808/cb2d5b0d-08b6-49f7-bf34-3285e3ca923e" width=24%>
 <img src="https://github.com/Maxim-Sedykh/FootballMatchPredictor/assets/125740808/0e0e4020-8490-494b-a599-c6fe6987d6b7" width=24%>
 <img src="https://github.com/Maxim-Sedykh/FootballMatchPredictor/assets/125740808/a4d51d91-f39b-4d0b-b814-d9974868f544" width=24%>
+<img src="https://github.com/Maxim-Sedykh/FootballMatchPredictor/assets/125740808/48679280-a4d3-47aa-9bf0-a90b57e2d963" width=24%>
+
 
 
 
