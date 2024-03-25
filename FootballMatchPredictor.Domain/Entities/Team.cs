@@ -27,14 +27,9 @@ namespace FootballMatchPredictor.Domain.Entities
         public int MatchesWon { get; set; }
 
         /// <summary>
-        /// Внешний ключ для связи с пользователем
-        /// </summary>
-        public byte CountryId { get; set; }
-
-        /// <summary>
         /// Страна команды
         /// </summary>
-        public Country Country { get; set; }
+        public string Country { get; set; }
         
         /// <summary>
         /// Матчи команды в качестве первой команды в плане нумерования

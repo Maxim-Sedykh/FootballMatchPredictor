@@ -26,6 +26,7 @@ namespace FootballMatchPredictor.Domain.Enums
         TeamsAreEqual = 31,
         TeamNotFound = 32,
         TeamsNotFound = 33,
+        TeamAlreadyExist = 34,
 
         /// <summary>
         /// Статус коды для работы с матчами
@@ -43,6 +44,11 @@ namespace FootballMatchPredictor.Domain.Enums
         /// </summary>
         IncorrectAmount = 81,
         InsufficientFunds = 82,
+
+        /// <summary>
+        /// Статус коды для работы со странами
+        /// </summary>
+        CountriesNotFound = 91,
 
         /// <summary>
         /// Статус коды для редких ситуаций

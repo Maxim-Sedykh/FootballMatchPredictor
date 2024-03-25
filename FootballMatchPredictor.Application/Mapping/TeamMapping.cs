@@ -16,7 +16,7 @@ namespace FootballMatchPredictor.Application.Mapping
             config.NewConfig<Team, TeamViewModel>()
                 .Map(dest => dest.Id, src => src.Id)
                 .Map(dest => dest.TeamName, src => src.Name)
-                .Map(dest => dest.CountryName, src => src.Country.CountryName)
+                .Map(dest => dest.CountryName, src => src.Country)
                 .Map(dest => dest.MatchesPlayed, src => src.MatchesPlayed)
                 .Map(dest => dest.MatchesWon, src => src.MatchesWon);
         }

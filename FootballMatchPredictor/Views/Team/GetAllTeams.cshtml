@@ -16,6 +16,20 @@
         <div class="col-md-2">
         </div>
     </div>
+    <div class="row my-4 bg-dark br-40 py-3">
+        <div class="col-md-12 ms-3">
+            <p class="text-white fs-5 mb-0">
+                Действия с командами:
+
+                <button class="btn bg-indigo text-white br-40" type="button"
+                        onclick="openModal({ url: '/Team/CreateTeam', modalId: 'modalWindow', modalTitle:'Создать команду'})"
+                        data-toggle="ajax-modal" data-target="Modal">
+                    Создать команду
+                </button>
+            </p>
+            
+        </div>
+    </div>
     <div class="row mt-4">
         <div class="col-md-12">
             <div class="table-responsive">
@@ -24,10 +38,10 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Название команды</th>
-                            <th scope="col">Страна</th>
+                            <th scope="col" class="align-middle text-center">Страна</th>
                             <th scope="col">Матчей сыиграно</th>
                             <th scope="col">Матчей выиграно</th>
-                            <th scope="col">Матчи команды</th>
+                            <th scope="col" class="align-middle text-center">Матчи команды</th>
                         </tr>
                     </thead>
                     <tbody>

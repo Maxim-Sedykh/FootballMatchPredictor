@@ -1,4 +1,6 @@
 ﻿using FootballMatchPredictor.Domain.Result;
+using FootballMatchPredictor.Domain.ViewModels.Bet;
+using FootballMatchPredictor.Domain.ViewModels.Country;
 using FootballMatchPredictor.Domain.ViewModels.Team;
 using FootballMatchPredictor.Domain.ViewModels.UserProfile;
 using System;
@@ -19,5 +21,18 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         /// </summary>
         /// <returns></returns>
         Task<CollectionResult<TeamViewModel>> GetAllTeams();
+
+        /// <summary>
+        /// Получение списка стран
+        /// </summary>
+        /// <returns></returns>
+        Task<CollectionResult<KeyValuePair<int, string>>> GetAllCountries();
+
+        /// <summary>
+        /// Создать футбольную команду
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        Task<BaseResult> CreateTeam(CreateTeamViewModel viewModel);
     }
 }

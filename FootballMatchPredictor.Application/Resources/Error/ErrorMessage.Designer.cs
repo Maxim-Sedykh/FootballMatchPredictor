@@ -79,6 +79,15 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Страны не найдены.
+        /// </summary>
+        internal static string CountriesNotFound {
+            get {
+                return ResourceManager.GetString("CountriesNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Сумма должна быть больше 1000 рублей!.
         /// </summary>
         internal static string IncorrectAmount {
@@ -93,6 +102,15 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         internal static string InsufficientFunds {
             get {
                 return ResourceManager.GetString("InsufficientFunds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Внутренняя ошибка сервера.
+        /// </summary>
+        internal static string InternalServerError {
+            get {
+                return ResourceManager.GetString("InternalServerError", resourceCulture);
             }
         }
         
@@ -129,6 +147,15 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         internal static string PasswordNotEqualsPasswordConfirm {
             get {
                 return ResourceManager.GetString("PasswordNotEqualsPasswordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Команда с таким именем уже существует.
+        /// </summary>
+        internal static string TeamAlreadyExist {
+            get {
+                return ResourceManager.GetString("TeamAlreadyExist", resourceCulture);
             }
         }
         

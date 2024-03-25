@@ -1,0 +1,28 @@
+﻿@using FootballMatchPredictor.Domain.ViewModels.Team
+@model CreateTeamViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form id="createTeamForm">
+                <div class="mb-3">
+                    <label asp-for="TeamName" class="form-label">Имя команды</label>
+                    <input type="text" class="form-control" asp-for="TeamName">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Страна</label>
+                    <select id="countrySelect" class="form-select" asp-for="CountryIdentifier" style="width:100%;">
+                    </select>
+                </div>
+                <button type="button" class="btn bg-indigo br-40 text-white"
+                        onclick="doActionWithConfirmation(event, { url: '/Team/CreateTeam', formId: 'createTeamForm', confirmationTitle: 'создать команду?' })">
+                    Создать команду
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    initSelect2ForEnum({ url: '/Team/GetAllCountries', selectId: 'countrySelect', placeholder: 'Выберите страну', isModal: true });
+</script>

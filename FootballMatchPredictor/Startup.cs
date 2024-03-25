@@ -32,5 +32,13 @@ namespace FootballMatchPredictor
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
         }
+
+        public static void AddHttpClientDI(this IServiceCollection services)
+        {
+            services.AddHttpClient("MyHttpClient", client =>
+            {
+                client.BaseAddress = new Uri("https://restcountries.com/v3.1/all");
+            });
+        }
     }
 }

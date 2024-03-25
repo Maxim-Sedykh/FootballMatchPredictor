@@ -123,11 +123,17 @@
   <data name="CoefficientNotFound" xml:space="preserve">
     <value>Coefficient is not found</value>
   </data>
+  <data name="CountriesNotFound" xml:space="preserve">
+    <value>Countries not found</value>
+  </data>
   <data name="IncorrectAmount" xml:space="preserve">
     <value>The amount must be more than 1000 rubles!</value>
   </data>
   <data name="InsufficientFunds" xml:space="preserve">
     <value>Insufficient funds</value>
+  </data>
+  <data name="InternalServerError" xml:space="preserve">
+    <value>Internal server error</value>
   </data>
   <data name="MatchesNotFound" xml:space="preserve">
     <value>Matches if not found</value>
@@ -140,6 +146,9 @@
   </data>
   <data name="PasswordNotEqualsPasswordConfirm" xml:space="preserve">
     <value>Password mismatch</value>
+  </data>
+  <data name="TeamAlreadyExist" xml:space="preserve">
+    <value>Team already exist</value>
   </data>
   <data name="TeamNotFound" xml:space="preserve">
     <value>Team is not found</value>

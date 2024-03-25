@@ -123,11 +123,17 @@
   <data name="CoefficientNotFound" xml:space="preserve">
     <value>Коэффициент не найден</value>
   </data>
+  <data name="CountriesNotFound" xml:space="preserve">
+    <value>Страны не найдены</value>
+  </data>
   <data name="IncorrectAmount" xml:space="preserve">
     <value>Сумма должна быть больше 1000 рублей!</value>
   </data>
   <data name="InsufficientFunds" xml:space="preserve">
     <value>Недостаточно средств</value>
+  </data>
+  <data name="InternalServerError" xml:space="preserve">
+    <value>Внутренняя ошибка сервера</value>
   </data>
   <data name="MatchesNotFound" xml:space="preserve">
     <value>Матчи не найдены</value>
@@ -140,6 +146,9 @@
   </data>
   <data name="PasswordNotEqualsPasswordConfirm" xml:space="preserve">
     <value>Пароли не совпадают</value>
+  </data>
+  <data name="TeamAlreadyExist" xml:space="preserve">
+    <value>Команда с таким именем уже существует</value>
   </data>
   <data name="TeamNotFound" xml:space="preserve">
     <value>Команда не найдена</value>
