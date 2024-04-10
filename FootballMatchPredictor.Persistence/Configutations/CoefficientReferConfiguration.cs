@@ -65,7 +65,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
 
             builder.HasMany(x => x.Coefficients)
                 .WithOne(x => x.CoefficientRefer)
-                .HasForeignKey(x => x.CoefficientReferId);
+                .HasForeignKey(x => x.CoefficientReferId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -19,10 +19,9 @@ namespace FootballMatchPredictor.Persistence.DependencyInjection
 
             services.AddSingleton<AuditInterceptor>();
             services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                options.UseNpgsql(connectionString);
-            });
-            services.InitRepositories();
+                options.UseNpgsql(connectionString));
+
+            InitRepositories(services);
         }
 
         private static void InitRepositories(this IServiceCollection services)

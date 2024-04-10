@@ -3,6 +3,7 @@ using FootballMatchPredictor.Application.Resources.Success;
 using FootballMatchPredictor.Domain.Entities;
 using FootballMatchPredictor.Domain.Enums;
 using FootballMatchPredictor.Domain.Extensions;
+using FootballMatchPredictor.Domain.Interfaces.Database;
 using FootballMatchPredictor.Domain.Interfaces.Repository;
 using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.Result;
@@ -10,6 +11,7 @@ using FootballMatchPredictor.Domain.ViewModels.Bet;
 using FootballMatchPredictor.Domain.ViewModels.Coefficient;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace FootballMatchPredictor.Application.Services
 {
@@ -20,13 +22,17 @@ namespace FootballMatchPredictor.Application.Services
         private readonly IBaseRepository<User> _userRepository;
         private readonly IBaseRepository<Bet> _betRepository;
         private readonly IBaseRepository<Withdrawing> _withdrawingRepository;
+        private readonly ILogger _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BetService(IBaseRepository<Coefficient> coefficientRepository, IBaseRepository<User> userRepository, IBaseRepository<Bet> betRepository, IBaseRepository<Withdrawing> withdrawingRepository)
+        public BetService(IBaseRepository<Coefficient> coefficientRepository, IBaseRepository<User> userRepository, IBaseRepository<Bet> betRepository, IBaseRepository<Withdrawing> withdrawingRepository, ILogger logger, IUnitOfWork unitOfWork)
         {
             _coefficientRepository = coefficientRepository;
             _userRepository = userRepository;
             _betRepository = betRepository;
             _withdrawingRepository = withdrawingRepository;
+            _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         /// <inheritdoc/>
@@ -94,20 +100,6 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
-            if ((PaymentMethod)Convert.ToInt32(viewModel.PaymentMethod) == PaymentMethod.UserWinningAmount)
-            {
-                if (viewModel.MoneyAmount > user.WinningSum)
-                {
-                    return new BaseResult<MakeBetViewModel>()
-                    {
-                        ErrorMessage = ErrorMessage.InsufficientFunds,
-                        ErrorCode = (int)StatusCode.InsufficientFunds,
-                    };
-                }
-
-                user.WinningSum -= viewModel.MoneyAmount;
-            }
-
             var coefficient = await _coefficientRepository.GetAll()
                 .Include(x => x.CoefficientRefer)
                 .FirstOrDefaultAsync(x => x.Id == viewModel.CoefficientId);
@@ -121,19 +113,46 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
-            Bet bet = new Bet()
+            using (var transaction = await _unitOfWork.BeginTransactionAsync())
             {
-                UserId = user.Id,
-                CoefficientId = coefficient.Id,
-                BetAmountMoney = viewModel.MoneyAmount,
-                MatchId = coefficient.MatchId,
-                WinningAmount = viewModel.MoneyAmount * (decimal)coefficient.CoefficientValue,
-                BetTypeId = coefficient.CoefficientRefer.BetTypeId,
-                CreatedAt = DateTime.UtcNow,
-                BetState = BetState.Unknown
-            };
+                try
+                {
+                    if ((PaymentMethod)Convert.ToInt32(viewModel.PaymentMethod) == PaymentMethod.UserWinningAmount)
+                    {
+                        if (viewModel.MoneyAmount > user.WinningSum)
+                        {
+                            return new BaseResult<MakeBetViewModel>()
+                            {
+                                ErrorMessage = ErrorMessage.InsufficientFunds,
+                                ErrorCode = (int)StatusCode.InsufficientFunds,
+                            };
+                        }
 
-            await _betRepository.CreateAsync(bet);
+                        user.WinningSum -= viewModel.MoneyAmount;
+
+                        await _userRepository.UpdateAsync(user);
+                    }
+
+                    Bet bet = new Bet()
+                    {
+                        UserId = user.Id,
+                        CoefficientId = coefficient.Id,
+                        BetAmountMoney = viewModel.MoneyAmount,
+                        MatchId = coefficient.MatchId,
+                        WinningAmount = viewModel.MoneyAmount * (decimal)coefficient.CoefficientValue,
+                        BetTypeId = coefficient.CoefficientRefer.BetTypeId,
+                        CreatedAt = DateTime.UtcNow,
+                        BetState = BetState.Unknown
+                    };
+
+                    await _betRepository.CreateAsync(bet);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex.Message);
+                    await transaction.RollbackAsync();
+                }
+            }
 
             return new BaseResult()
             {
@@ -184,18 +203,29 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
-            var withDrawing = new Withdrawing()
+            using (var transaction = await _unitOfWork.BeginTransactionAsync())
             {
-                OutputAmount = viewModel.OutputAmount,
-                paymentMethod = (PaymentMethod)Convert.ToInt32(viewModel.PaymentMethod),
-                UserId = user.Id,
-                CreatedAt = DateTime.UtcNow,
-            };
+                try
+                {
+                    var withDrawing = new Withdrawing()
+                    {
+                        OutputAmount = viewModel.OutputAmount,
+                        paymentMethod = (PaymentMethod)Convert.ToInt32(viewModel.PaymentMethod),
+                        UserId = user.Id,
+                        CreatedAt = DateTime.UtcNow,
+                    };
 
-            user.WinningSum -= viewModel.OutputAmount;
+                    user.WinningSum -= viewModel.OutputAmount;
 
-            await _withdrawingRepository.CreateAsync(withDrawing);
-            await _userRepository.UpdateAsync(user);
+                    await _withdrawingRepository.CreateAsync(withDrawing);
+                    await _userRepository.UpdateAsync(user);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex.Message);
+                    await transaction.RollbackAsync();
+                }
+            }
 
             return new BaseResult()
             {

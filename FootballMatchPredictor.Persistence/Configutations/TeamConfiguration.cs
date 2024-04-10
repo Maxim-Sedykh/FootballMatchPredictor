@@ -62,11 +62,13 @@ namespace FootballMatchPredictor.Persistence.Configutations
 
             builder.HasMany(x => x.Team1Matches)
                 .WithOne(x => x.Team1)
-                .HasForeignKey(x => x.Team1Id);
+                .HasForeignKey(x => x.Team1Id)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(x => x.Team2Matches)
                 .WithOne(x => x.Team2)
-                .HasForeignKey(x => x.Team2Id);
+                .HasForeignKey(x => x.Team2Id)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

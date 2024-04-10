@@ -40,11 +40,13 @@ namespace FootballMatchPredictor.Persistence.Configutations
 
             builder.HasMany(x => x.CoefficientRefers)
                 .WithOne(x => x.BetType)
-                .HasForeignKey(x => x.BetTypeId);
+                .HasForeignKey(x => x.BetTypeId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(x => x.Bets)
                 .WithOne(x => x.BetType)
-                .HasForeignKey(x => x.BetTypeId);
+                .HasForeignKey(x => x.BetTypeId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
