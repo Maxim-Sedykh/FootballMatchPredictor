@@ -1,6 +1,7 @@
 ﻿using FootballMatchPredictor.Application.Services;
 using FootballMatchPredictor.Domain.Extensions;
 using FootballMatchPredictor.Domain.Interfaces.Services;
+using FootballMatchPredictor.Domain.Result;
 using FootballMatchPredictor.Domain.ViewModels.Error;
 using FootballMatchPredictor.Domain.ViewModels.Match;
 using FootballMatchPredictor.Domain.ViewModels.Team;
@@ -18,25 +19,18 @@ namespace FootballMatchPredictor.Controllers
             _matchService = matchService;
         }
 
-        /// <summary>
-        /// Получение всех матчей
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
         public async Task<IActionResult> GetMatches()
         {
-            var response = await _matchService.GetAllMatches();
-            if (response.IsSuccess)
-            {
-                return View(response.Data);
-            }
-            return View("Error", new ErrorViewModel("Internal server error", 500));
+            return HandleTeamResponse(await _matchService.GetAllMatches());
         }
 
-        [HttpGet]
         public async Task<IActionResult> GetMatchesByAdmin()
         {
-            var response = await _matchService.GetAllMatches();
+            return HandleTeamResponse(await _matchService.GetAllMatches());
+        }
+
+        private IActionResult HandleTeamResponse(CollectionResult<MatchViewModel> response)
+        {
             if (response.IsSuccess)
             {
                 return View(response.Data);

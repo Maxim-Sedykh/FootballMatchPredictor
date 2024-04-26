@@ -28,7 +28,7 @@
             </div>
         </div>
         <button type="button" class="btn btn-primary mt-3"
-                onclick="doActionWithPopupWindow(event, { url: '/Bet/WithdrawingMoney', formId: 'withdrawingForm' })">
+                onclick="doActionWithPopupWindow(event, { url: '/Withdrawing/WithdrawingMoney', formId: 'withdrawingForm' })">
             Вывести денежные средства
         </button>
     </form>
@@ -36,6 +36,5 @@
 
 
 <script>
-    initSelect2ForEnum({ url: '/Bet/GetPaymentMethodsToWithDraw', selectId: 'paymentMethodId', placeholder: 'Выберите платёжный метод', isModal: true });
+    initSelect2ForEnum({ url: '/Withdrawing/GetPaymentMethodsToWithDraw', selectId: 'paymentMethodId', placeholder: 'Выберите платёжный метод', isModal: true });
 </script>
-

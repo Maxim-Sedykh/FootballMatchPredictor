@@ -1,5 +1,57 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using FootballMatchPredictor.Domain.ViewModels.Match
+
+@model IEnumerable<MatchViewModel>
+
+<div class="container pb-5">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <p class="fs-3 text-center">
+                Матчи
+            </p>
+        </div>
+        <div class="col-md-12 text-center">
+            <a class="btn bg-indigo br-40 text-white" role="button" asp-controller="UserProfile" asp-action="GetAdminPage">
+                Выход на страницу админа
+            </a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                @if (Model.Count() == 0)
+                {
+                    <p class="fs-5">
+                        На данный момент никаких матчей нет...
+                    </p>
+                }
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Название первой команды</th>
+                            <th scope="col">Название второй команды</th>
+                            <th scope="col">Количество голов первой команды</th>
+                            <th scope="col">Количество голов второй команды</th>
+                            <th scope="col">Состояние матча</th>
+                            <th scope="col">Дата матча</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var match in Model)
+                        {
+                            <tr>
+                                <th scope="row">@match.Id</th>
+                                <td>@match.Team1Name</td>
+                                <td>@match.Team2Name</td>
+                                <td>@match.Team1GoalsCount</td>
+                                <td>@match.Team2GoalsCount</td>
+                                <td>@match.MatchState</td>
+                                <td>@match.MatchDate</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

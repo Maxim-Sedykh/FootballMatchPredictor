@@ -13,10 +13,9 @@ namespace FootballMatchPredictor.Domain.ViewModels.Bet
     /// <param name="Team1Name"></param>
     /// <param name="Team2Name"></param>
     /// <param name="CoefficientValue"></param>
-    /// <param name="CoefficientReferDescription"></param>
     /// <param name="BetAmountMoney"></param>
     /// <param name="WinningAmount"></param>
-    /// <param name="BetTypeName"></param>
+    /// <param name="BetType"></param>
     /// <param name="BetState"></param>
     /// <param name="CreatedAt"></param>
     public record BetViewModel(

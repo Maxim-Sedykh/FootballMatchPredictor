@@ -48,8 +48,7 @@ namespace FootballMatchPredictor.Application.Mapping
                 .Map(dest => dest.Gender, src => src.Gender.GetDisplayName())
                 .Map(dest => dest.Role, src => src.Role.GetDisplayName())
                 .Map(dest => dest.WinningSum, src => src.WinningSum)
-                .Map(dest => dest.CreatedAt, src => src.CreatedAt)
-                .Map(dest => dest.UpdatedAt, src => src.UpdatedAt);
+                .Map(dest => dest.CreatedAt, src => src.CreatedAt);
         }
     }
 }

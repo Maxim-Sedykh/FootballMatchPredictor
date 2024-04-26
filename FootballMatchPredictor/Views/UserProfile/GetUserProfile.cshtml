@@ -16,7 +16,7 @@
                         <li class="breadcrumb-item text-white"><a asp-controller="Home" asp-action="Index">Главная</a></li>
                         <li class="breadcrumb-item text-white"><a class="@(User.IsInRole("Admin") ? "" : "text-muted")" asp-controller="UserProfile" asp-action="GetAdminPage"> Страница админа</a></li>
                         <li class="breadcrumb-item text-white"><button class="all-unset text-white br-40" type="button"
-                                    onclick="openModal({ url: '/Bet/WithdrawingMoney/', modalId: 'modalWindow', modalTitle:'Вывод денег'})"
+                                    onclick="openModal({ url: '/Withdrawing/WithdrawingMoney/', modalId: 'modalWindow', modalTitle:'Вывод денег'})"
                                     data-toggle="ajax-modal" data-target="Modal">
                                 Вывод денежных средств
                             </button>

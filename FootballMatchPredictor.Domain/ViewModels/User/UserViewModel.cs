@@ -16,7 +16,6 @@ namespace FootballMatchPredictor.Domain.ViewModels.User
             string Email,
             string Role,
             decimal WinningSum,
-            DateTime CreatedAt,
-            DateTime? UpdatedAt
+            DateTime CreatedAt
         );
 }

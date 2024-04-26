@@ -33,7 +33,7 @@ namespace FootballMatchPredictor.Controllers
         /// Получение модального окна для вывода денег
         /// </summary>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> DeleteUser(long id)
         {
             var response = await _userService.DeleteUser(id);

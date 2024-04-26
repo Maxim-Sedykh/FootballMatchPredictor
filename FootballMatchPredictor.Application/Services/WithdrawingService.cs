@@ -5,6 +5,7 @@ using FootballMatchPredictor.Domain.Enums;
 using FootballMatchPredictor.Domain.Extensions;
 using FootballMatchPredictor.Domain.Interfaces.Database;
 using FootballMatchPredictor.Domain.Interfaces.Repository;
+using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.Result;
 using FootballMatchPredictor.Domain.ViewModels.Bet;
 using FootballMatchPredictor.Domain.ViewModels.Withdrawing;
@@ -19,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Application.Services
 {
-    internal class WithdrawingService
+    internal class WithdrawingService: IWithdrawingService
     {
         private readonly IBaseRepository<User> _userRepository;
         private readonly IBaseRepository<Withdrawing> _withdrawingRepository;
@@ -37,6 +38,19 @@ namespace FootballMatchPredictor.Application.Services
 
         public async Task<CollectionResult<WithdrawingViewModel>> GetAllWithdrawings()
         {
+            //var withdrawings = await _withdrawingRepository.GetAll()
+            //    .Include(x => x.User)
+            //    .Select(x => new WithdrawingViewModel()
+            //    {
+            //        Id = x.Id,
+            //        OutputAmount = x.OutputAmount,
+            //        PaymentMethod = x.PaymentMethod.GetDisplayName(),
+            //        UserName = x.User.Username,
+            //        CreatedAt = x.CreatedAt,
+            //        UpdatedAt = x.UpdatedAt,
+            //    })
+            //    .ToArrayAsync();
+
             var withdrawings = await _withdrawingRepository.GetAll()
                 .Include(x => x.User)
                 .Select(x => x.Adapt<WithdrawingViewModel>())

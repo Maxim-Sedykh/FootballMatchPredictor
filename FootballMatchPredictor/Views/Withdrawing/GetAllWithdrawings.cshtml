@@ -1,5 +1,54 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using FootballMatchPredictor.Domain.ViewModels.Withdrawing
+@model IEnumerable<WithdrawingViewModel>
+
+<div class="container pb-5">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <p class="fs-3 text-center">
+                Денежные выводы
+            </p>
+        </div>
+        <div class="col-md-12 text-center">
+            <a class="btn bg-indigo br-40 text-white" role="button" asp-controller="UserProfile" asp-action="GetAdminPage">
+                Выход на страницу админа
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                @if (Model.Count() == 0)
+                {
+                    <p class="fs-5">
+                        На данный момент выводов нет...
+                    </p>
+                }
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Денежный вывод</th>
+                            <th scope="col">Платёжный способ вывода</th>
+                            <th scope="col">Имя пользователя</th>
+                            <th scope="col">Создан в</th>
+                            <th scope="col">Обновлён в</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var withdrawing in Model)
+                        {
+                            <tr>
+                                <th scope="col">@withdrawing.Id</th>
+                                <th scope="col">@withdrawing.OutputAmount</th>
+                                <th scope="col">@withdrawing.PaymentMethod</th>
+                                <th scope="col">@withdrawing.UserName</th>
+                                <th scope="col">@withdrawing.CreatedAt</th>
+                                <th scope="col">@withdrawing.UpdatedAt</th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,61 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using FootballMatchPredictor.Domain.ViewModels.Bet
+
+@model IEnumerable<BetViewModel>
+
+<div class="container pb-5">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <p class="fs-3 text-center">
+                Ставки
+            </p>
+        </div>
+        <div class="col-md-12 text-center">
+            <a class="btn bg-indigo br-40 text-white" role="button" asp-controller="UserProfile" asp-action="GetAdminPage">
+                Выход на страницу админа
+            </a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                @if (Model.Count() == 0)
+                {
+                    <p class="fs-5">
+                        На данный момент никаких ставок нет...
+                    </p>
+                }
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Название первой команды</th>
+                            <th scope="col">Название второй команды</th>
+                            <th scope="col">Коэффициент</th>
+                            <th scope="col">Денежная сумма ставки</th>
+                            <th scope="col">Возможная сумма выигрыша</th>
+                            <th scope="col">Тип ставки</th>
+                            <th scope="col">Состояние ставки</th>
+                            <th scope="col">Была поставлена в</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var bet in Model)
+                        {
+                            <tr>
+                                <th scope="row">@bet.Id</th>
+                                <td>@bet.Team1Name</td>
+                                <td>@bet.Team2Name</td>
+                                <td>@bet.CoefficientValue</td>
+                                <td>@bet.BetAmountMoney</td>
+                                <td>@bet.WinningAmount</td>
+                                <td>@bet.BetType</td>
+                                <td>@bet.BetState</td>
+                                <td>@bet.CreatedAt</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

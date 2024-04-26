@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FootballMatchPredictor.Domain.Extensions;
 using FootballMatchPredictor.Application.Services;
+using FootballMatchPredictor.Domain.Entities;
+using FootballMatchPredictor.Domain.Result;
 
 namespace FootballMatchPredictor.Controllers
 {
@@ -18,23 +20,18 @@ namespace FootballMatchPredictor.Controllers
             _teamService = teamService;
         }
 
-        /// <summary>
-        /// Страница с информацией по командами
-        /// </summary>
-        /// <returns></returns>
         public async Task<IActionResult> GetAllTeams()
         {
-            var response = await _teamService.GetAllTeams();
-            if (response.IsSuccess)
-            {
-                return View(response.Data);
-            }
-            return View("Error", new ErrorViewModel("Internal server error", 500));
+            return HandleTeamResponse(await _teamService.GetAllTeams());
         }
 
         public async Task<IActionResult> GetAllTeamsByAdmin()
         {
-            var response = await _teamService.GetAllTeams();
+            return HandleTeamResponse(await _teamService.GetAllTeams());
+        }
+
+        private IActionResult HandleTeamResponse(CollectionResult<TeamViewModel> response)
+        {
             if (response.IsSuccess)
             {
                 return View(response.Data);

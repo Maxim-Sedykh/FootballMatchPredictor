@@ -24,54 +24,54 @@
                             <td scope="row" class="ps-5">Пользователи</td>
                             <td>Просмотр, удаление</td>
                             <td>
-                                <button class="btn btn-primary br-40">
+                                <a class="btn btn-primary br-40" role="button" asp-controller="User" asp-action="GetAllUsers">
                                     Перейти
-                                </button>
+                                </a>
                             </td>
                         </tr>
                         <tr>
                             <td scope="row" class="ps-5">Коэффициенты</td>
                             <td>Просмотр, удаление, изменение</td>
                             <td>
-                                <button class="btn btn-primary br-40">
+                                <a class="btn btn-primary br-40" role="button" asp-controller="Coefficient" asp-action="GetAllCoefficients">
                                     Перейти
-                                </button>
+                                </a>
                             </td>
                         </tr>
                         <tr>
                             <td scope="row" class="ps-5">Матчи</td>
                             <td>Просмотр, удаление, изменение, создание</td>
                             <td>
-                                <button class="btn btn-primary br-40">
+                                <a class="btn btn-primary br-40" role="button" asp-controller="Match" asp-action="GetMatchesByAdmin">
                                     Перейти
-                                </button>
+                                </a>
                             </td>
                         </tr>
                         <tr>
                             <td scope="row" class="ps-5">Команды</td>
                             <td>Просмотр, удаление, изменение, создание</td>
                             <td>
-                                <button class="btn btn-primary br-40">
+                                <a class="btn btn-primary br-40" role="button" asp-controller="Team" asp-action="GetAllTeamsByAdmin">
                                     Перейти
-                                </button>
+                                </a>
                             </td>
                         </tr>
                         <tr>
                             <td scope="row" class="ps-5">Денежные выводы</td>
                             <td>Просмотр</td>
                             <td>
-                                <button class="btn btn-primary br-40">
+                                <a class="btn btn-primary br-40" role="button" asp-controller="Withdrawing" asp-action="GetAllWithdrawings">
                                     Перейти
-                                </button>
+                                </a>
                             </td>
                         </tr>
                         <tr>
                             <td scope="row" class="ps-5">Ставки</td>
                             <td>Просмотр</td>
                             <td>
-                                <button class="btn btn-primary br-40">
+                                <a class="btn btn-primary br-40" role="button" asp-controller="Bet" asp-action="GetAllBets">
                                     Перейти
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     </tbody>

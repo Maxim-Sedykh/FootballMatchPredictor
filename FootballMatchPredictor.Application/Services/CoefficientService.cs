@@ -53,6 +53,8 @@ namespace FootballMatchPredictor.Application.Services
         public async Task<CollectionResult<CoefficientViewModel>> GetAllCoefficients()
         {
             var coefficients = await _coefficientRepository.GetAll()
+                .Include(x => x.Match.Team1)
+                .Include(x => x.Match.Team2)
                 .Select(x => x.Adapt<CoefficientViewModel>())
                 .ToListAsync();
 

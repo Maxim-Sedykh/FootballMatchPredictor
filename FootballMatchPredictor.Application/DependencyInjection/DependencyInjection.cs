@@ -36,6 +36,8 @@ namespace FootballMatchPredictor.Application.DependencyInjection
             services.AddScoped<IMatchService, MatchService>();
             services.AddScoped<ITeamService, TeamService>();
             services.AddScoped<ICoefficientService, CoefficientService>();
+            services.AddScoped<IWithdrawingService, WithdrawingService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         private static void InitMapping(this IServiceCollection services)

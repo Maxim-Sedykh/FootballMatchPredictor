@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace FootballMatchPredictor.Domain.ViewModels.Withdrawing
 {
-    public record WithdrawingViewModel(
-            long Id,
-            decimal OutputAmount,
-            string PaymentMethod,
-            string UserName,
-            DateTime CreatedAt,
-            DateTime UpdatedAt
-        );
+    public class WithdrawingViewModel
+    {
+        public long Id { get; set; }
+        public decimal OutputAmount { get; set; }
+        public string PaymentMethod { get; set; }
+        public string UserName { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+    }
 }

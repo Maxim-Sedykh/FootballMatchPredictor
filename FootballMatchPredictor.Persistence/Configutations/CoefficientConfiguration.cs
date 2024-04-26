@@ -120,7 +120,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
             builder.HasMany(x => x.Bets)
                 .WithOne(x => x.Coefficient)
                 .HasForeignKey(x => x.CoefficientId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

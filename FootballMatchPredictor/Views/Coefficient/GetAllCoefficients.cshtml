@@ -1,5 +1,59 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using FootballMatchPredictor.Domain.ViewModels.Coefficient
+
+@model IEnumerable<CoefficientViewModel>
+
+<div class="container pb-5">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <p class="fs-3 text-center">
+                Коэффициенты
+            </p>
+        </div>
+        <div class="col-md-12 text-center">
+            <a class="btn bg-indigo br-40 text-white" role="button" asp-controller="UserProfile" asp-action="GetAdminPage">
+                Выход на страницу админа
+            </a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                @if (Model.Count() == 0)
+                {
+                    <p class="fs-5">
+                        На данный момент никаких коэффициентов нет...
+                    </p>
+                }
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Название первой команды</th>
+                            <th scope="col">Название второй команды</th>
+                            <th scope="col">Коэффициент</th>
+                            <th scope="col">Тип ставки</th>
+                            <th scope="col">Активный</th>
+                            <th scope="col">Время матча</th>
+                            <th scope="col">Запись создана в</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var coefficient in Model)
+                        {
+                            <tr>
+                                <th scope="row">@coefficient.Id</th>
+                                <td>@coefficient.Team1Name</td>
+                                <td>@coefficient.Team2Name</td>
+                                <td>@coefficient.CoefficientValue</td>
+                                <td>@coefficient.BetType</td>
+                                <td>@(coefficient.IsActive ? "Активный" : "Не активный")</td>
+                                <td>@coefficient.MatchDate</td>
+                                <td>@coefficient.CreatedAt</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
