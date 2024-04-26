@@ -70,6 +70,26 @@ namespace FootballMatchPredictor.Application.Services
             };
         }
 
+        public async Task<CollectionResult<KeyValuePair<short, string>>> GetTeamsDictionary()
+        {
+            var teamDictionary = await _teamRepository.GetAll().ToDictionaryAsync(k => k.Id, v => v.Name);
+
+            if (teamDictionary.Count == 0)
+            {
+                return new CollectionResult<KeyValuePair<short, string>>()
+                {
+                    ErrorMessage = ErrorMessage.CountriesNotFound,
+                    ErrorCode = (int)StatusCode.CountriesNotFound
+                };
+            }
+
+            return new CollectionResult<KeyValuePair<short, string>>()
+            {
+                Data = teamDictionary,
+                Count = teamDictionary.Count
+            };
+        }
+
         public async Task<BaseResult> CreateTeam(CreateTeamViewModel viewModel)
         {
             var team = await _teamRepository.GetAll().FirstOrDefaultAsync(x => x.Name == viewModel.TeamName);
@@ -130,6 +150,71 @@ namespace FootballMatchPredictor.Application.Services
             }
 
             return new Dictionary<int, string>();
+        }
+
+        public async Task<BaseResult> DeleteTeam(short id)
+        {
+            var team = await _teamRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
+
+            if (team == null)
+            {
+                return new BaseResult()
+                {
+                    ErrorCode = (int)StatusCode.TeamNotFound,
+                    ErrorMessage = ErrorMessage.TeamNotFound
+                };
+            }
+
+            await _teamRepository.RemoveAsync(team);
+
+            return new BaseResult()
+            {
+                SuccessMessage = SuccessMessage.TeamDeleted
+            };
+        }
+
+        public async Task<BaseResult<TeamViewModel>> GetTeamData(short id)
+        {
+            var team = await _teamRepository.GetAll()
+                .Select(x => x.Adapt<TeamViewModel>())
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (team == null)
+            {
+                return new BaseResult<TeamViewModel>()
+                {
+                    ErrorMessage = ErrorMessage.TeamNotFound,
+                    ErrorCode = (int)StatusCode.TeamNotFound
+                };
+            }
+
+            return new BaseResult<TeamViewModel>()
+            {
+                Data = team
+            };
+        }
+
+        public async Task<BaseResult<TeamViewModel>> UpdateTeam(UpdateTeamViewModel viewModel)
+        {
+            var team = await _teamRepository.GetAll().FirstOrDefaultAsync(x => x.Id == viewModel.Id);
+
+            if (team == null)
+            {
+                return new BaseResult<TeamViewModel>()
+                {
+                    ErrorCode = (int)StatusCode.TeamNotFound,
+                    ErrorMessage = ErrorMessage.TeamNotFound
+                };
+            }
+
+            team = viewModel.Adapt<Team>();
+
+            await _teamRepository.RemoveAsync(team);
+
+            return new BaseResult<TeamViewModel>()
+            {
+                SuccessMessage = SuccessMessage.TeamUpdated
+            };
         }
     }
 }

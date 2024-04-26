@@ -1,10 +1,13 @@
 ﻿using FootballMatchPredictor.Domain.Entities;
+using FootballMatchPredictor.Domain.Interfaces.Database;
 using FootballMatchPredictor.Domain.Interfaces.Repository;
 using FootballMatchPredictor.Persistence.Interceptor;
 using FootballMatchPredictor.Persistence.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net.NetworkInformation;
+using FootballMatchPredictor.Persistence.Database;
 
 namespace FootballMatchPredictor.Persistence.DependencyInjection
 {
@@ -22,6 +25,8 @@ namespace FootballMatchPredictor.Persistence.DependencyInjection
                 options.UseNpgsql(connectionString));
 
             InitRepositories(services);
+
+            InitUnitOfWork(services);
         }
 
         private static void InitRepositories(this IServiceCollection services)
@@ -29,12 +34,10 @@ namespace FootballMatchPredictor.Persistence.DependencyInjection
             var types = new List<Type>()
             {
                 typeof(Bet),
-                typeof(BetType),
                 typeof(Coefficient),
                 typeof(User),
                 typeof(Match),
                 typeof(Team),
-                typeof(CoefficientRefer),
                 typeof(Withdrawing)
             };
 
@@ -44,6 +47,11 @@ namespace FootballMatchPredictor.Persistence.DependencyInjection
                 var implementationType = typeof(BaseRepository<>).MakeGenericType(type);
                 services.AddScoped(interfaceType, implementationType);
             }
+        }
+
+        private static void InitUnitOfWork(this IServiceCollection services)
+        {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }

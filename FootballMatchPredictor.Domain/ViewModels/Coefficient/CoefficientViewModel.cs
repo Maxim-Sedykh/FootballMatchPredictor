@@ -20,7 +20,7 @@ namespace FootballMatchPredictor.Domain.ViewModels.Coefficient
         string Team1Name,
         string Team2Name,
         float CoefficientValue,
-        string CoefficientReferDescription,
+        string BetType,
         bool IsActive,
         DateTime MatchDate,
         DateTime CreatedAt

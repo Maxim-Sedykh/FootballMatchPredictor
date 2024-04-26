@@ -34,5 +34,26 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         /// <param name="viewModel"></param>
         /// <returns></returns>
         Task<BaseResult> CreateTeam(CreateTeamViewModel viewModel);
+
+        /// <summary>
+        /// удалить футбольную команду
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        Task<BaseResult> DeleteTeam(short id);
+
+        /// <summary>
+        /// Создать футбольную команду
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<BaseResult<TeamViewModel>> GetTeamData(short id);
+
+        /// <summary>
+        /// Создать футбольную команду
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<BaseResult<TeamViewModel>> UpdateTeam(UpdateTeamViewModel viewModel);
     }
 }

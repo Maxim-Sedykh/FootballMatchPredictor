@@ -120,6 +120,12 @@
   <data name="BetCreated" xml:space="preserve">
     <value>Ставка успешно поставлена</value>
   </data>
+  <data name="CoefficientDeleted" xml:space="preserve">
+    <value>Коэффициент удалён</value>
+  </data>
+  <data name="CoefficientUpdated" xml:space="preserve">
+    <value>Коэффициент обновлён</value>
+  </data>
   <data name="FundsWithdrawn" xml:space="preserve">
     <value>Средства успешно выведены</value>
   </data>
@@ -152,5 +158,8 @@
   </data>
   <data name="UserDataUpdated" xml:space="preserve">
     <value>Данные пользователя успешно обновлены!</value>
+  </data>
+  <data name="UserDeleted" xml:space="preserve">
+    <value>Пользователь удалён</value>
   </data>
 </root>

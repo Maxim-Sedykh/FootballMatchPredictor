@@ -19,5 +19,29 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         /// </summary>
         /// <returns></returns>
         Task<CollectionResult<CoefficientViewModel>> GetMatchCoefficients(long matchId);
+
+        /// <summary>
+        /// Получение всех коэффициентов
+        /// </summary>
+        /// <returns></returns>
+        Task<CollectionResult<CoefficientViewModel>> GetAllCoefficients();
+
+        /// <summary>
+        /// Получение данных о коэффициенте по его идентификатору
+        /// </summary>
+        /// <returns></returns>
+        Task<BaseResult<CoefficientViewModel>> GetCoefficientById(long id);
+
+        /// <summary>
+        /// Удаление коэффициента по его идентификатору
+        /// </summary>
+        /// <returns></returns>
+        Task<BaseResult> DeleteCoefficientById(long id);
+
+        /// <summary>
+        /// Обновление данных коэффициента
+        /// </summary>
+        /// <returns></returns>
+        Task<BaseResult> UpdateCoefficient(UpdateCoefficientViewModel viewModel);
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using FootballMatchPredictor.Domain.Enums;
 
 namespace FootballMatchPredictor.Persistence.Configutations
 {
@@ -21,8 +22,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 1,
                     MatchId = 1,
                     CoefficientValue = 2.4f,
-                    CoefficientReferId = 1,
                     IsActive = false,
+                    BetType = BetType.SecondTeamWon,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -30,7 +31,6 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 2,
                     MatchId = 1,
                     CoefficientValue = 1.7f,
-                    CoefficientReferId = 5,
                     IsActive = false,
                     CreatedAt = DateTime.UtcNow,
                 },
@@ -39,8 +39,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 3,
                     MatchId = 2,
                     CoefficientValue = 1.4f,
-                    CoefficientReferId = 6,
                     IsActive = false,
+                    BetType = BetType.FirstTeamWon,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -48,8 +48,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 4,
                     MatchId = 3,
                     CoefficientValue = 2.5f,
-                    CoefficientReferId = 2,
                     IsActive = true,
+                    BetType = BetType.FirstTeamWon,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -57,7 +57,6 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 5,
                     MatchId = 3,
                     CoefficientValue = 1.3f,
-                    CoefficientReferId = 5,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -65,8 +64,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 6,
                     MatchId = 4,
                     CoefficientValue = 1.4f,
-                    CoefficientReferId = 6,
                     IsActive = true,
+                    BetType = BetType.FirstTeamWon,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -74,8 +73,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 7,
                     MatchId = 4,
                     CoefficientValue = 2.4f,
-                    CoefficientReferId = 3,
                     IsActive = true,
+                    BetType = BetType.FirstTeamWon,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -83,8 +82,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 8,
                     MatchId = 4,
                     CoefficientValue = 3.4f,
-                    CoefficientReferId = 4,
                     IsActive = true,
+                    BetType = BetType.SecondTeamWon,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -93,7 +92,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     MatchId = 5,
                     CoefficientValue = 4.4f,
                     IsActive = false,
-                    CoefficientReferId = 1,
+                    BetType = BetType.FirstTeamWon,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -101,8 +100,8 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Id = 10,
                     MatchId = 6,
                     CoefficientValue = 1.3f,
-                    CoefficientReferId = 5,
                     IsActive = false,
+                    BetType = BetType.Draw,
                     CreatedAt = DateTime.UtcNow,
                 },
                 new()
@@ -111,7 +110,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     MatchId = 6,
                     CoefficientValue = 1.1f,
                     IsActive = true,
-                    CoefficientReferId = 6,
+                    BetType = BetType.SecondTeamWon,
                     CreatedAt = DateTime.UtcNow,
                 },
             });

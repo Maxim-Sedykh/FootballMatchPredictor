@@ -53,16 +53,6 @@ namespace FootballMatchPredictor.Domain.Entities
         public decimal WinningAmount { get; set; }
 
         /// <summary>
-        /// Внешний ключ для типа связи
-        /// </summary>
-        public byte BetTypeId { get; set; } 
-
-        /// <summary>
-        /// Тип ставки
-        /// </summary>
-        public BetType BetType { get; set; }
-
-        /// <summary>
         /// Состояние ставки
         /// </summary>
         public BetState BetState { get; set; }

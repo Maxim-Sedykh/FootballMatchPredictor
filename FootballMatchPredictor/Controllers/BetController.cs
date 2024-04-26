@@ -75,45 +75,6 @@ namespace FootballMatchPredictor.Controllers
             return BadRequest(new { errorMessage = response.ErrorMessage });
         }
 
-        /// <summary>
-        /// Получение модального окна для вывода денег
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<IActionResult> WithdrawingMoney()
-        {
-            var response = await _betService.GetUserWinningSum(User.Identity.Name);
-            if (response.IsSuccess)
-            {
-                return PartialView(response.Data);
-            }
-            return View("Error", new ErrorViewModel("Internal server error", 500));
-        }
-
-        /// <summary>
-        /// Вывод денег пользователя
-        /// </summary>
-        /// <param name="viewModel"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> WithdrawingMoney(WithdrawingMoneyViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                var errorMessage = ModelState.Values
-                .SelectMany(v => v.Errors.Select(x => x.ErrorMessage)).ToList().JoinErrors();
-                return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage = errorMessage });
-            }
-            
-            var response = await _betService.WithdrawingMoney(viewModel, User.Identity.Name);
-
-            if (response.IsSuccess)
-            {
-                return Ok(response.SuccessMessage);
-            }
-            return BadRequest(new { errorMessage = response.ErrorMessage });
-        }
-
         [HttpPost]
         public JsonResult GetPaymentMethodsToBet()
         {
@@ -122,10 +83,25 @@ namespace FootballMatchPredictor.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetPaymentMethodsToWithDraw()
+        public JsonResult GetBetTypes()
         {
-            var types = _betService.GetPaymentMethodsToWithdraw();
-            return Json(types.Data);
+            var betTypes = _betService.GetBetTypes();
+            return Json(betTypes.Data);
+        }
+
+        /// <summary>
+        /// Получение списка всех выводов
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAllBets()
+        {
+            var response = await _betService.GetAllBets();
+            if (response.IsSuccess)
+            {
+                return View(response.Data);
+            }
+            return View("Error", new ErrorViewModel("Internal server error", 500));
         }
     }
 }

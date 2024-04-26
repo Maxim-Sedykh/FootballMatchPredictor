@@ -123,6 +123,9 @@
   <data name="CoefficientNotFound" xml:space="preserve">
     <value>Coefficient is not found</value>
   </data>
+  <data name="CoefficientsNotFound" xml:space="preserve">
+    <value>Coefficients not found</value>
+  </data>
   <data name="CountriesNotFound" xml:space="preserve">
     <value>Countries not found</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="InternalServerError" xml:space="preserve">
     <value>Internal server error</value>
+  </data>
+  <data name="MatchAlreadyExist" xml:space="preserve">
+    <value>Match with this info is already exist</value>
   </data>
   <data name="MatchesNotFound" xml:space="preserve">
     <value>Matches if not found</value>

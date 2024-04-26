@@ -79,6 +79,15 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Коэффициенты не найдены.
+        /// </summary>
+        internal static string CoefficientsNotFound {
+            get {
+                return ResourceManager.GetString("CoefficientsNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Страны не найдены.
         /// </summary>
         internal static string CountriesNotFound {
@@ -111,6 +120,15 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         internal static string InternalServerError {
             get {
                 return ResourceManager.GetString("InternalServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Матч с такими данными уже существует.
+        /// </summary>
+        internal static string MatchAlreadyExist {
+            get {
+                return ResourceManager.GetString("MatchAlreadyExist", resourceCulture);
             }
         }
         

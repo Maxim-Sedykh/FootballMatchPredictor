@@ -33,19 +33,14 @@ namespace FootballMatchPredictor.Domain.Entities
         public float CoefficientValue { get; set; }
 
         /// <summary>
-        /// Внешний ключ для коэффициента
-        /// </summary>
-        public int CoefficientReferId { get; set; }
-
-        /// <summary>
         /// Активный ли коэффициент, если коэффициент активный, значит на него ещё можно поставить
         /// </summary>
         public bool IsActive { get; set; }
 
         /// <summary>
-        /// К чему относится данный коэффициент
+        /// Тип ставки (Выигрыш первой команды, выигрыш второй команды, ничья)
         /// </summary>
-        public CoefficientRefer CoefficientRefer { get; set; }
+        public BetType BetType { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

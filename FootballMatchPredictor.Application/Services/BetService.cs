@@ -9,6 +9,7 @@ using FootballMatchPredictor.Domain.Interfaces.Services;
 using FootballMatchPredictor.Domain.Result;
 using FootballMatchPredictor.Domain.ViewModels.Bet;
 using FootballMatchPredictor.Domain.ViewModels.Coefficient;
+using FootballMatchPredictor.Domain.ViewModels.Withdrawing;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -52,7 +53,6 @@ namespace FootballMatchPredictor.Application.Services
             return new BaseResult<MakeBetViewModel>()
             {
                 Data = coefficient.Adapt<MakeBetViewModel>()
-                //new MakeBetViewModel(coefficient.Id, default, default)
             };
         }
 
@@ -73,8 +73,7 @@ namespace FootballMatchPredictor.Application.Services
             var userBets = await _betRepository.GetAll()
                 .Include(x => x.Match.Team1)
                 .Include(x => x.Match.Team2)
-                .Include(x => x.Coefficient.CoefficientRefer)
-                .Include(x => x.BetType)
+                .Include(x => x.Coefficient)
                 .Where(x => x.UserId == user.Id)
                 .Select(x => x.Adapt<BetViewModel>())
                 .ToListAsync();
@@ -101,7 +100,6 @@ namespace FootballMatchPredictor.Application.Services
             }
 
             var coefficient = await _coefficientRepository.GetAll()
-                .Include(x => x.CoefficientRefer)
                 .FirstOrDefaultAsync(x => x.Id == viewModel.CoefficientId);
 
             if (coefficient == null)
@@ -140,7 +138,6 @@ namespace FootballMatchPredictor.Application.Services
                         BetAmountMoney = viewModel.MoneyAmount,
                         MatchId = coefficient.MatchId,
                         WinningAmount = viewModel.MoneyAmount * (decimal)coefficient.CoefficientValue,
-                        BetTypeId = coefficient.CoefficientRefer.BetTypeId,
                         CreatedAt = DateTime.UtcNow,
                         BetState = BetState.Unknown
                     };
@@ -157,79 +154,6 @@ namespace FootballMatchPredictor.Application.Services
             return new BaseResult()
             {
                 SuccessMessage = SuccessMessage.BetCreated
-            };
-        }
-
-        /// <inheritdoc/>
-        public async Task<BaseResult<WithdrawingMoneyViewModel>> GetUserWinningSum(string userName)
-        {
-            var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Username == userName);
-
-            if (user == null)
-            {
-                return new BaseResult<WithdrawingMoneyViewModel>()
-                {
-                    ErrorCode = (int)StatusCode.UserNotFound,
-                    ErrorMessage = ErrorMessage.UserNotFound,
-                };
-            }
-
-            return new BaseResult<WithdrawingMoneyViewModel>()
-            {
-                Data = user.Adapt<WithdrawingMoneyViewModel>()
-            };
-        }
-
-        /// <inheritdoc/>
-        public async Task<BaseResult> WithdrawingMoney(WithdrawingMoneyViewModel viewModel, string userName)
-        {
-            var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Username == userName);
-
-            if (user == null)
-            {
-                return new BaseResult<WithdrawingMoneyViewModel>()
-                {
-                    ErrorCode = (int)StatusCode.UserNotFound,
-                    ErrorMessage = ErrorMessage.UserNotFound,
-                };
-            }
-
-            if (user.WinningSum < viewModel.OutputAmount)
-            {
-                return new BaseResult()
-                {
-                    ErrorCode = (int)StatusCode.InsufficientFunds,
-                    ErrorMessage = ErrorMessage.InsufficientFunds,
-                };
-            }
-
-            using (var transaction = await _unitOfWork.BeginTransactionAsync())
-            {
-                try
-                {
-                    var withDrawing = new Withdrawing()
-                    {
-                        OutputAmount = viewModel.OutputAmount,
-                        paymentMethod = (PaymentMethod)Convert.ToInt32(viewModel.PaymentMethod),
-                        UserId = user.Id,
-                        CreatedAt = DateTime.UtcNow,
-                    };
-
-                    user.WinningSum -= viewModel.OutputAmount;
-
-                    await _withdrawingRepository.CreateAsync(withDrawing);
-                    await _userRepository.UpdateAsync(user);
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex.Message);
-                    await transaction.RollbackAsync();
-                }
-            }
-
-            return new BaseResult()
-            {
-                SuccessMessage = SuccessMessage.FundsWithdrawn,
             };
         }
 
@@ -261,26 +185,41 @@ namespace FootballMatchPredictor.Application.Services
                 Count = paymentMethodsToBet.Count
             };
         }
-
-        public CollectionResult<KeyValuePair<int, string>> GetPaymentMethodsToWithdraw()
-        {
-            var paymentMethodsToWithdraw = GetPaymentMethods();
-
-            paymentMethodsToWithdraw.Remove((int)PaymentMethod.UserWinningAmount);
-
-
-            return new CollectionResult<KeyValuePair<int, string>>()
-            {
-                Data = paymentMethodsToWithdraw,
-                Count = paymentMethodsToWithdraw.Count
-            };
-        }
     
         private Dictionary<int, string> GetPaymentMethods()
         {
             return Enum.GetValues(typeof(PaymentMethod))
                     .Cast<PaymentMethod>()
                     .ToDictionary(k => (int)k, t => t.GetDisplayName());
+        }
+
+        public async Task<CollectionResult<BetViewModel>> GetAllBets()
+        {
+            var userBets = await _betRepository.GetAll()
+                .Include(x => x.Match.Team1)
+                .Include(x => x.Match.Team2)
+                .Include(x => x.Coefficient)
+                .Select(x => x.Adapt<BetViewModel>())
+                .ToArrayAsync();
+
+            return new CollectionResult<BetViewModel>()
+            {
+                Data = userBets,
+                Count = userBets.Length
+            };
+        }
+
+        public CollectionResult<KeyValuePair<int, string>> GetBetTypes()
+        {
+            var betTypes = Enum.GetValues(typeof(BetType))
+                    .Cast<BetType>()
+                    .ToDictionary(k => (int)k, t => t.GetDisplayName());
+
+            return new CollectionResult<KeyValuePair<int, string>>()
+            {
+                Data = betTypes,
+                Count = betTypes.Count
+            };
         }
     }
 }

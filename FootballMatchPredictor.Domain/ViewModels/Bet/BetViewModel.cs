@@ -24,10 +24,9 @@ namespace FootballMatchPredictor.Domain.ViewModels.Bet
         string Team1Name,
         string Team2Name,
         float CoefficientValue,
-        string CoefficientReferDescription,
         decimal BetAmountMoney,
         decimal WinningAmount,
-        string BetTypeName,
+        string BetType,
         string BetState,
         DateTime CreatedAt
     );

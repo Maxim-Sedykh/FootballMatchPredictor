@@ -2,11 +2,12 @@
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FootballMatchPredictor.Persistence.UnitOfWork
+namespace FootballMatchPredictor.Persistence.Database
 {
     public class UnitOfWork : IUnitOfWork
     {

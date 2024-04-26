@@ -1,6 +1,7 @@
 ﻿using FootballMatchPredictor.Domain.Result;
 using FootballMatchPredictor.Domain.ViewModels.Bet;
 using FootballMatchPredictor.Domain.ViewModels.Coefficient;
+using FootballMatchPredictor.Domain.ViewModels.Withdrawing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,24 +44,15 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         CollectionResult<KeyValuePair<int, string>> GetPaymentMethodsToBet();
 
         /// <summary>
-        /// Получение платёжных методов для вывода денег
+        /// Получение всех ставок пользователя
         /// </summary>
         /// <returns></returns>
-        CollectionResult<KeyValuePair<int, string>> GetPaymentMethodsToWithdraw();
+        Task<CollectionResult<BetViewModel>> GetAllBets();
 
         /// <summary>
-        /// Получение суммы выигрышей пользователя, для модального окна для вывода средств
+        /// Получить типы ставок
         /// </summary>
-        /// <param name="userName"></param>
         /// <returns></returns>
-        Task<BaseResult<WithdrawingMoneyViewModel>> GetUserWinningSum(string userName);
-
-        /// <summary>
-        /// Вывод денег
-        /// </summary>
-        /// <param name="viewModel"></param>
-        /// <param name="userName"></param>
-        /// <returns></returns>
-        Task<BaseResult> WithdrawingMoney(WithdrawingMoneyViewModel viewModel, string userName);
+        CollectionResult<KeyValuePair<int, string>> GetBetTypes();
     }
 }

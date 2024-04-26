@@ -20,7 +20,7 @@ namespace FootballMatchPredictor.Domain.Entities
         /// <summary>
         /// Платёжный способ
         /// </summary>
-        public PaymentMethod paymentMethod { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
 
         /// <summary>
         /// Внешний ключ для связи с пользователем

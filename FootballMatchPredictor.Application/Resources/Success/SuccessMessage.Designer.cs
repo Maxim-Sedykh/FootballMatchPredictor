@@ -70,6 +70,24 @@ namespace FootballMatchPredictor.Application.Resources.Success {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Коэффициент удалён.
+        /// </summary>
+        internal static string CoefficientDeleted {
+            get {
+                return ResourceManager.GetString("CoefficientDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Коэффициент обновлён.
+        /// </summary>
+        internal static string CoefficientUpdated {
+            get {
+                return ResourceManager.GetString("CoefficientUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Средства успешно выведены.
         /// </summary>
         internal static string FundsWithdrawn {
@@ -165,6 +183,15 @@ namespace FootballMatchPredictor.Application.Resources.Success {
         internal static string UserDataUpdated {
             get {
                 return ResourceManager.GetString("UserDataUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Пользователь удалён.
+        /// </summary>
+        internal static string UserDeleted {
+            get {
+                return ResourceManager.GetString("UserDeleted", resourceCulture);
             }
         }
     }

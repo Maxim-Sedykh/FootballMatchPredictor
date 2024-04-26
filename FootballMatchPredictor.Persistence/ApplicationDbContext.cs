@@ -14,7 +14,6 @@ namespace FootballMatchPredictor.Persistence
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Bet> Bets { get; set; }
-        public DbSet<BetType> BetTypes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Coefficient> Coefficients { get; set; }
         public DbSet<Match> Matches { get; set; }

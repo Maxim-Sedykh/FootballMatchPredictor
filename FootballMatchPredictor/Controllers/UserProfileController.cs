@@ -77,6 +77,13 @@ namespace FootballMatchPredictor.Controllers
             return BadRequest(response.ErrorMessage);
         }
 
+        /// <summary>
+        /// Страница админа
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetAdminPage() => View();
+
         [AllowAnonymous]
         [HttpPost]
         public JsonResult GetGenders()

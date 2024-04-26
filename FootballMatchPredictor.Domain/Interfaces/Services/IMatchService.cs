@@ -26,5 +26,39 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         /// <param name="id"></param>
         /// <returns></returns>
         Task<CollectionResult<MatchViewModel>> GetTeamMatches(long id);
+
+        /// <summary>
+        /// Получение информации по матчу
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<BaseResult<MatchViewModel>> GetMatch(long id);
+
+        /// <summary>
+        /// Удаление матча
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<BaseResult> DeleteMatch(long id);
+
+        /// <summary>
+        /// Обновление данных матча
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        Task<BaseResult<MatchViewModel>> UpdateMatch(UpdateMatchViewModel viewModel);
+
+        /// <summary>
+        /// Обновление данных матча
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        Task<BaseResult> CreateMatch(CreateMatchViewModel viewModel);
+
+        /// <summary>
+        /// Получение списка состояний матче
+        /// </summary>
+        /// <returns></returns>
+        CollectionResult<KeyValuePair<int, string>> GetMatchState();
     }
 }

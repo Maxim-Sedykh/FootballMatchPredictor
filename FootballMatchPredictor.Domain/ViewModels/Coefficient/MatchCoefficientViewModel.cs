@@ -18,7 +18,7 @@ namespace FootballMatchPredictor.Domain.ViewModels.Coefficient
         long Id,
         float CoefficientValue,
         bool IsActive,
-        string CoefficientReferDescription,
+        string BetType,
         DateTime CreatedAt
     );
 }

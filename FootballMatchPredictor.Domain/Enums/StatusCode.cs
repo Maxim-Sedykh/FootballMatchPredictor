@@ -33,11 +33,13 @@ namespace FootballMatchPredictor.Domain.Enums
         /// </summary>
         MatchNotFound = 41,
         MatchesNotFound = 42,
-        
+        MatchAlreadyExist = 43,
+
         /// <summary>
         /// Статус коды для работы с коэффициентами
         /// </summary>
         CoefficientNotFound = 71,
+        CoefficientsNotFound = 72,
 
         /// <summary>
         /// Статус коды для работы с денежными транзакциями
