@@ -17,11 +17,13 @@ namespace FootballMatchPredictor.Domain.ViewModels.Team
     /// <param name="CountryName"></param>
     /// <param name="MatchesPlayed"></param>
     /// <param name="MatchesWon"></param>
-    public record TeamViewModel(
-         short Id,
-         string TeamName,
-         string CountryName,
-         int MatchesPlayed,
-         int MatchesWon
-    );
+
+    public class TeamViewModel
+    {
+        public int Id { get; set; }
+        public string TeamName { get; set; }
+        public string? CountryName { get; set; }
+        public int MatchesPlayed { get; set; }
+        public int MatchesWon { get; set; }
+    }
 }

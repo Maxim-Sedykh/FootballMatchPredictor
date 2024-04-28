@@ -29,7 +29,16 @@ namespace FootballMatchPredictor.Application.Services
             var match = await _matchRepository.GetAll()
                 .FirstOrDefaultAsync(x => (x.Team1Id == viewModel.Team1Id || x.Team1Id == viewModel.Team2Id)
                                         && (x.Team2Id == viewModel.Team1Id || x.Team2Id == viewModel.Team2Id)
-                                        && x.MatchDate == viewModel.MatchDate);
+                                        && x.MatchDate == DateTime.SpecifyKind(viewModel.MatchDate, DateTimeKind.Utc));
+
+            if (viewModel.Team1Id == viewModel.Team2Id)
+            {
+                return new BaseResult()
+                {
+                    ErrorCode = (int)StatusCode.MatchTeamsAreEqual,
+                    ErrorMessage = ErrorMessage.MatchTeamsAreEqual
+                };
+            }
 
             if (match != null)
             {
@@ -41,6 +50,13 @@ namespace FootballMatchPredictor.Application.Services
             }
 
             match = viewModel.Adapt<Match>();
+
+            match.MatchDate = DateTime.SpecifyKind(viewModel.MatchDate, DateTimeKind.Utc);
+            match.Team1Id = viewModel.Team1Id;
+            match.Team2Id = viewModel.Team1Id;
+
+            //Здесь должна быть транзакция и логика для создания коэффициентов и шансов на победу команд
+            //Плюс дополнительная логика с коэффициентами и командами
 
             await _matchRepository.CreateAsync(match);
 
@@ -90,8 +106,9 @@ namespace FootballMatchPredictor.Application.Services
             var matches = await _matchRepository.GetAll()
                 .Include(x => x.Team1)
                 .Include(x => x.Team2)
-                .Select(x => x.Adapt<MatchViewModel>())
                 .ToListAsync();
+
+            var matchViewModels = matches.Select(x => x.Adapt<MatchViewModel>()).OrderBy(x => x.Id).ToList();
 
             if (matches == null)
             {
@@ -104,27 +121,32 @@ namespace FootballMatchPredictor.Application.Services
 
             return new CollectionResult<MatchViewModel>()
             {
-                Data = matches,
-                Count = matches.Count   
+                Data = matchViewModels,
+                Count = matchViewModels.Count   
             };
         }
 
-        public async Task<BaseResult<MatchViewModel>> GetMatch(long id)
+        public async Task<BaseResult<UpdateMatchViewModel>> GetMatchToUpdate(long id)
         {
-            var match = await _matchRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
+            var match = await _matchRepository.GetAll()
+                .Include(x => x.Team1)
+                .Include(x => x.Team2)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (match == null)
             {
-                return new BaseResult<MatchViewModel>()
+                return new BaseResult<UpdateMatchViewModel>()
                 {
                     ErrorMessage = ErrorMessage.MatchNotFound,
                     ErrorCode = (int)StatusCode.MatchNotFound
                 };
             }
 
-            return new BaseResult<MatchViewModel>()
+            var result = match.Adapt<UpdateMatchViewModel>();
+            
+            return new BaseResult<UpdateMatchViewModel>()
             {
-                Data = match.Adapt<MatchViewModel>()
+                Data = match.Adapt<UpdateMatchViewModel>()
             };
         }
 
@@ -147,7 +169,19 @@ namespace FootballMatchPredictor.Application.Services
 
         public async Task<BaseResult<MatchViewModel>> UpdateMatch(UpdateMatchViewModel viewModel)
         {
-            var match = await _matchRepository.GetAll().FirstOrDefaultAsync(x => x.Id == viewModel.Id);
+            if (viewModel.Team1 == viewModel.Team2)
+            {
+                return new BaseResult<MatchViewModel>()
+                {
+                    ErrorCode = (int)StatusCode.MatchTeamsAreEqual,
+                    ErrorMessage = ErrorMessage.MatchTeamsAreEqual
+                };
+            }
+
+            var match = await _matchRepository.GetAll()
+                .Include(x => x.Team1)
+                .Include(x => x.Team2)
+                .FirstOrDefaultAsync(x => x.Id == viewModel.Id);
 
             if (match == null)
             {
@@ -158,7 +192,14 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
-            match = viewModel.Adapt<Match>();
+            match.MatchState  = EnumExtension.GetEnumFromDisplay<MatchState>(viewModel.MatchState);
+            match.Team1Id = Convert.ToInt16(viewModel.Team1);
+            match.Team2Id = Convert.ToInt16(viewModel.Team2);
+            match.Team1GoalsCount = viewModel.Team1GoalsCount;
+            match.Team2GoalsCount = viewModel.Team2GoalsCount;
+            match.MatchDate = viewModel.MatchDate;
+
+            await _matchRepository.UpdateAsync(match);
 
             return new BaseResult<MatchViewModel>()
             {

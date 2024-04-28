@@ -14,6 +14,13 @@
                 Выход на страницу админа
             </a>
         </div>
+        <div class="col-md-12 text-center my-3">
+            <button class="btn btn-success text-white br-40" type="button"
+                    onclick="openModal({ url: '/Team/CreateTeam', modalId: 'modalWindow', modalTitle:'Создать команду'})"
+                    data-toggle="ajax-modal" data-target="Modal">
+                Создать команду
+            </button>
+        </div>
     </div>
     <div class="row mt-4">
         <div class="col-md-12">
@@ -30,6 +37,8 @@
                             <th scope="col">Id</th>
                             <th scope="col">Название команды</th>
                             <th scope="col">Страна</th>
+                            <th scope="col">Изменение</th>
+                            <th scope="col">Удаление</th>
                             <th scope="col">Матчей сыиграно</th>
                             <th scope="col">Матчей выиграно</th>
                         </tr>
@@ -41,6 +50,21 @@
                                 <th scope="row">@team.Id</th>
                                 <td>@team.TeamName</td>
                                 <td>@team.CountryName</td>
+                                <td>
+                                    <button class="btn btn-info br-40 text-white" type="button"
+                                            onclick="openModal({ url: '/Team/GetTeam/@team.Id', modalId: 'modalWindow', modalTitle:'Обновление команды'})"
+                                            data-toggle="ajax-modal" data-target="Modal">
+                                        Обновить
+                                    </button>
+                                </td>
+                                <td>
+                                    <form id="teamDelete-@team.Id">
+                                        <input type="hidden" value="@team.Id" name="id" />
+                                        <button class="btn bg-danger br-40 text-white" onclick="doActionWithConfirmation(event, { url: '/Team/DeleteTeam/@team.Id', formId: 'teamDelete-@team.Id', confirmationTitle: 'удалить команду?' })">
+                                            Удалить
+                                        </button>
+                                    </form>
+                                </td>
                                 <td>@team.MatchesPlayed</td>
                                 <td>@team.MatchesWon</td>
                             </tr>

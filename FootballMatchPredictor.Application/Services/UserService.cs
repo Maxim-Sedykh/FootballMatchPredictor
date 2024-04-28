@@ -50,13 +50,17 @@ namespace FootballMatchPredictor.Application.Services
         public async Task<CollectionResult<UserViewModel>> GetAllUsers()
         {
             var users = await _userRepository.GetAll()
+                .ToListAsync();
+
+            var userViewModels = users
                 .Select(x => x.Adapt<UserViewModel>())
-                .ToArrayAsync();
+                .OrderBy(x => x.Id)
+                .ToList();
 
             return new CollectionResult<UserViewModel>()
             {
-                Data = users,
-                Count = users.Length
+                Data = userViewModels,
+                Count = userViewModels.Count
             };
         }
     }

@@ -14,6 +14,12 @@
                 Выход на страницу админа
             </a>
         </div>
+        <div class="col-md-12 text-center my-3">
+            <button class="btn btn-success br-40 text-white" onclick="openModal({ url: '/Match/CreateMatch/', modalId: 'modalWindow', modalTitle:'Создание матча'})"
+                    data-toggle="ajax-modal" data-target="Modal" type="button">
+                Создать запись о новом матче
+            </button>
+        </div>
     </div>
     <div class="row mt-4">
         <div class="col-md-12">
@@ -33,6 +39,8 @@
                             <th scope="col">Количество голов первой команды</th>
                             <th scope="col">Количество голов второй команды</th>
                             <th scope="col">Состояние матча</th>
+                            <th scope="col">Изменение</th>
+                            <th scope="col">Удаление</th>
                             <th scope="col">Дата матча</th>
                         </tr>
                     </thead>
@@ -46,6 +54,21 @@
                                 <td>@match.Team1GoalsCount</td>
                                 <td>@match.Team2GoalsCount</td>
                                 <td>@match.MatchState</td>
+                                <td>
+                                    <button class="btn btn-info br-40 text-white" type="button"
+                                            onclick="openModal({ url: '/Match/GetMatch/@match.Id', modalId: 'modalWindow', modalTitle:'Обновление матча'})"
+                                            data-toggle="ajax-modal" data-target="Modal">
+                                        Обновить
+                                    </button>
+                                </td>
+                                <td>
+                                    <form id="matchDelete-@match.Id">
+                                        <input type="hidden" value="@match.Id" name="id" />
+                                        <button class="btn bg-danger br-40 text-white" onclick="doActionWithConfirmation(event, { url: '/Match/DeleteMatch/@match.Id', formId: 'matchDelete-@match.Id', confirmationTitle: 'удалить матч?' })">
+                                            Удалить
+                                        </button>
+                                    </form>
+                                </td>
                                 <td>@match.MatchDate</td>
                             </tr>
                         }

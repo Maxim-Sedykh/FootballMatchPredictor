@@ -25,6 +25,12 @@ namespace FootballMatchPredictor.Application.Mapping
                 .Map(dest => dest.CreatedAt, src => src.CreatedAt)
                 .Map(dest => dest.BetType, src => src.BetType.GetDisplayName());
 
+            config.NewConfig<Coefficient, UpdateCoefficientViewModel>()
+                .Map(dest => dest.Id, src => src.Id)
+                .Map(dest => dest.CoefficientValue, src => src.CoefficientValue)
+                .Map(dest => dest.BetType, src => src.BetType.GetDisplayName())
+                .Map(dest => dest.IsActive, src => src.IsActive);
+
             config.NewConfig<Coefficient, MakeBetViewModel>()
                 .Map(dest => dest.CoefficientId, src => src.Id);
         }

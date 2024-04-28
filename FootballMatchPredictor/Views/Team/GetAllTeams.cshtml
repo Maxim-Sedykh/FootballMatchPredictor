@@ -1,5 +1,5 @@
 ﻿@using FootballMatchPredictor.Domain.ViewModels.Team
-@model TeamViewModel[]
+@model List<TeamViewModel>
 
 @{
     ViewBag.Title = "Команды";
@@ -14,20 +14,6 @@
             <img src="https://sportishka.com/uploads/posts/2022-08/1660167882_1-sportishka-com-p-futbolnie-foni-sport-krasivo-foto-1.jpg" class="img-fluid br-40 w-100" />
         </div>
         <div class="col-md-2">
-        </div>
-    </div>
-    <div class="row my-4 bg-dark br-40 py-3">
-        <div class="col-md-12 ms-3">
-            <p class="text-white fs-5 mb-0">
-                Действия с командами:
-
-                <button class="btn bg-indigo text-white br-40" type="button"
-                        onclick="openModal({ url: '/Team/CreateTeam', modalId: 'modalWindow', modalTitle:'Создать команду'})"
-                        data-toggle="ajax-modal" data-target="Modal">
-                    Создать команду
-                </button>
-            </p>
-            
         </div>
     </div>
     <div class="row mt-4">
@@ -45,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (int i = 0; i < Model.Length; i++)
+                        @for (int i = 0; i < Model.Count; i++)
                         {
                             <tr>
                                 <th scope="row">@(i + 1)</th>

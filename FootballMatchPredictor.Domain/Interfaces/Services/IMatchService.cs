@@ -32,7 +32,7 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<BaseResult<MatchViewModel>> GetMatch(long id);
+        Task<BaseResult<UpdateMatchViewModel>> GetMatchToUpdate(long id);
 
         /// <summary>
         /// Удаление матча

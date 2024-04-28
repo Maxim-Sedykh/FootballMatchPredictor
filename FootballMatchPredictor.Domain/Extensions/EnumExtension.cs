@@ -18,5 +18,29 @@ namespace FootballMatchPredictor.Domain.Extensions
                 .GetCustomAttribute<DisplayAttribute>()
                 ?.GetName() ?? "Неопределенный";
         }
+
+        public static TEnum GetEnumFromDisplay<TEnum>(string displayName) where TEnum : Enum
+        {
+            var enumType = typeof(TEnum);
+
+            if (int.TryParse(displayName, out int numericValue) && Enum.IsDefined(enumType, numericValue))
+            {
+                return (TEnum)Enum.ToObject(enumType, numericValue);
+            }
+
+            var members = enumType.GetMembers();
+
+            foreach (var member in members)
+            {
+                var displayAttribute = member.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
+
+                if (displayAttribute != null && displayAttribute.GetName() == displayName)
+                {
+                    return (TEnum)Enum.Parse(enumType, member.Name);
+                }
+            }
+
+            throw new ArgumentException($"Enum value with display name '{displayName}' not found.");
+        }
     }
 }

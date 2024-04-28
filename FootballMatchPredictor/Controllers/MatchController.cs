@@ -86,7 +86,7 @@ namespace FootballMatchPredictor.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMatch(long id)
         {
-            var response = await _matchService.GetMatch(id);
+            var response = await _matchService.GetMatchToUpdate(id);
             if (response.IsSuccess)
             {
                 return PartialView(response.Data);
@@ -94,8 +94,8 @@ namespace FootballMatchPredictor.Controllers
             return View("Error", new ErrorViewModel("Internal server error", 500));
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteTeam(long id)
+        [HttpPost]
+        public async Task<IActionResult> DeleteMatch(long id)
         {
             var response = await _matchService.DeleteMatch(id);
             if (response.IsSuccess)
@@ -105,8 +105,8 @@ namespace FootballMatchPredictor.Controllers
             return BadRequest(new { errorMessage = response.ErrorMessage });
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateTeam(UpdateMatchViewModel viewModel)
+        [HttpPost]
+        public async Task<IActionResult> UpdateMatch(UpdateMatchViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {

@@ -30,7 +30,7 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         /// Получение данных о коэффициенте по его идентификатору
         /// </summary>
         /// <returns></returns>
-        Task<BaseResult<CoefficientViewModel>> GetCoefficientById(long id);
+        Task<BaseResult<UpdateCoefficientViewModel>> GetCoefficientById(long id);
 
         /// <summary>
         /// Удаление коэффициента по его идентификатору

@@ -151,6 +151,15 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Команда не может играть против себя.
+        /// </summary>
+        internal static string MatchTeamsAreEqual {
+            get {
+                return ResourceManager.GetString("MatchTeamsAreEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Неправильный пароль.
         /// </summary>
         internal static string PasswordIsWrong {

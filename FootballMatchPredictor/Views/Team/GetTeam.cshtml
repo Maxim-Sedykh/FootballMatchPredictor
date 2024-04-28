@@ -1,5 +1,40 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using FootballMatchPredictor.Domain.ViewModels.Team
+
+@model TeamViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form id="updateTeamForm">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="TeamName" class="form-label">Название команды</label>
+                    <input type="text" asp-for="TeamName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="CountryName" class="form-label">Текущая страна: @Model.CountryName, выберите другую страну</label>
+                    <select id="countrySelect" class="form-select" asp-for="CountryName" style="width:100%;">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MatchesPlayed" class="form-label">Матчей сыиграно</label>
+                    <input type="number" asp-for="MatchesPlayed" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="MatchesWon" class="form-label">Матчей выиграно</label>
+                    <input type="number" asp-for="MatchesWon" class="form-control">
+                </div>
+                <div class="text-center mt-3">
+                    <button type="button" class="btn bg-indigo br-40 text-white"
+                            onclick="doActionWithPopupWindow(event, { url: '/Team/UpdateTeam', formId: 'updateTeamForm' })">
+                        Обновить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    initSelect2ForEnum({ url: '/Team/GetAllCountries', selectId: 'countrySelect', placeholder: 'Выберите страну', isModal: true });
+</script>

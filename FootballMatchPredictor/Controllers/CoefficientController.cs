@@ -51,7 +51,7 @@ namespace FootballMatchPredictor.Controllers
             return View("Error", new ErrorViewModel("Internal server error", 500));
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> DeleteCoefficient(long id)
         {
             var response = await _coefficientService.DeleteCoefficientById(id);
@@ -66,7 +66,7 @@ namespace FootballMatchPredictor.Controllers
         /// Получение модального окна для вывода денег
         /// </summary>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> UpdateCoefficient(UpdateCoefficientViewModel viewModel)
         {
             if (!ModelState.IsValid)

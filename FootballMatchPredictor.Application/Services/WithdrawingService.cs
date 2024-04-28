@@ -38,28 +38,18 @@ namespace FootballMatchPredictor.Application.Services
 
         public async Task<CollectionResult<WithdrawingViewModel>> GetAllWithdrawings()
         {
-            //var withdrawings = await _withdrawingRepository.GetAll()
-            //    .Include(x => x.User)
-            //    .Select(x => new WithdrawingViewModel()
-            //    {
-            //        Id = x.Id,
-            //        OutputAmount = x.OutputAmount,
-            //        PaymentMethod = x.PaymentMethod.GetDisplayName(),
-            //        UserName = x.User.Username,
-            //        CreatedAt = x.CreatedAt,
-            //        UpdatedAt = x.UpdatedAt,
-            //    })
-            //    .ToArrayAsync();
-
             var withdrawings = await _withdrawingRepository.GetAll()
                 .Include(x => x.User)
+                .ToListAsync();
+
+            var withdrawingViewModels = withdrawings
                 .Select(x => x.Adapt<WithdrawingViewModel>())
-                .ToArrayAsync();
+                .ToList();
 
             return new CollectionResult<WithdrawingViewModel>()
             {
-                Data = withdrawings,
-                Count = withdrawings.Length
+                Data = withdrawingViewModels,
+                Count = withdrawingViewModels.Count
             };
         }
 

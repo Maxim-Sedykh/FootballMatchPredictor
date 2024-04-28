@@ -8,8 +8,6 @@ namespace FootballMatchPredictor.Domain.ViewModels.Coefficient
 {
     public record UpdateCoefficientViewModel(
         long Id,
-        string Team1Name,
-        string Team2Name,
         float CoefficientValue,
         string BetType,
         bool IsActive

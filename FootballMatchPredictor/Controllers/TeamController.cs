@@ -94,7 +94,7 @@ namespace FootballMatchPredictor.Controllers
         /// Получение модального окна для вывода денег
         /// </summary>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> DeleteTeam(short id)
         {
             var response = await _teamService.DeleteTeam(id);
@@ -109,8 +109,8 @@ namespace FootballMatchPredictor.Controllers
         /// Получение модального окна для вывода денег
         /// </summary>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<IActionResult> UpdateTeam(UpdateTeamViewModel viewModel)
+        [HttpPost]
+        public async Task<IActionResult> UpdateTeam(TeamViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -125,6 +125,13 @@ namespace FootballMatchPredictor.Controllers
                 return Ok(response.SuccessMessage);
             }
             return BadRequest(new { errorMessage = response.ErrorMessage });
+        }
+
+        [HttpPost]
+        public JsonResult GetTeamDictionary()
+        {
+            var types = _teamService.GetTeamsDictionary();
+            return Json(types.Data);
         }
     }
 }

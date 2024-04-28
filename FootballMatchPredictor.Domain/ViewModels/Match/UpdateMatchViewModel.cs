@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballMatchPredictor.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace FootballMatchPredictor.Domain.ViewModels.Match
 {
     public record UpdateMatchViewModel(
         long Id,
+        string Team1,
+        string Team2,
         byte Team1GoalsCount,
         byte Team2GoalsCount,
         string MatchState,

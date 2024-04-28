@@ -1,5 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using FootballMatchPredictor.Domain.ViewModels.Coefficient
+@model UpdateCoefficientViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form id="updateCoefficientForm">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="CoefficientValue" class="form-label">Коэффициент</label>
+                    <input type="number" asp-for="CoefficientValue" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="BetType" class="form-label">Тип ставки</label>
+                    <select asp-for="BetType" class="form-control" id="betTypeSelect" data-minimum-results-for-search="Infinity" style="width:100%;">
+                        <option>@Model.BetType</option>
+                    </select>
+                </div>
+                <div class="form-check mt-3">
+                    <label asp-for="IsActive" class="form-check-label">Активный</label>
+                    <input type="checkbox" asp-for="IsActive" class="form-check-input">
+                </div>
+                <div class="text-center mt-3">
+                    <button type="button" class="btn bg-indigo br-40 text-white"
+                            onclick="doActionWithPopupWindow(event, { url: '/Coefficient/UpdateCoefficient', formId: 'updateCoefficientForm' })">
+                        Обновить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    initSelect2ForEnum({ url: '/Bet/GetBetTypes', selectId: 'betTypeSelect', placeholder: 'Выберите тип ставки', isModal: true });
+</script>

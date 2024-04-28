@@ -147,6 +147,9 @@
   <data name="MatchNotFound" xml:space="preserve">
     <value>Матч не найден</value>
   </data>
+  <data name="MatchTeamsAreEqual" xml:space="preserve">
+    <value>Команда не может играть против себя</value>
+  </data>
   <data name="PasswordIsWrong" xml:space="preserve">
     <value>Неправильный пароль</value>
   </data>

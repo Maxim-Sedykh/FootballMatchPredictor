@@ -1,5 +1,67 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using FootballMatchPredictor.Domain.ViewModels.Match
+
+@model UpdateMatchViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form id="updateMatchForm">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Team1" class="form-label">Первая команда</label>
+                    <select asp-for="@Model.Team1" class="form-control" id="team1Select" data-minimum-results-for-search="Infinity" style="width:100%;">
+                        <option>
+                            @Model.Team1
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Team2" class="form-label">Вторая команда</label>
+                    <select asp-for="@Model.Team2" class="form-control" id="team2Select" data-minimum-results-for-search="Infinity" style="width:100%;">\
+                        <option>
+                            @Model.Team2
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Team1GoalsCount" class="form-label">Количество голов первой команды</label>
+                    <input type="number" asp-for="Team1GoalsCount" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Team2GoalsCount" class="form-label">Количество голов второй команды</label>
+                    <input type="number" asp-for="Team2GoalsCount" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.MatchState" class="form-label">Состояние матча</label>
+                    <select asp-for="@Model.MatchState" class="form-control" id="matchStateSelect" data-minimum-results-for-search="Infinity" style="width:100%;">
+                        <option>
+                            @Model.MatchState
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MatchDate" class="form-label">Дата и время матча</label>
+                    <input type="datetime" asp-for="MatchDate" class="form-control">
+                </div>
+                <div class="text-center mt-3">
+                    <button type="button" class="btn bg-indigo br-40 text-white"
+                            onclick="doActionWithPopupWindow(event, { url: '/Match/UpdateMatch', formId: 'updateMatchForm' })">
+                        Обновить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    initSelect2ForEnum({ url: '/Team/GetTeamDictionary', selectId: 'team1Select', placeholder: 'Выберите команду', isModal: true });
+</script>
+
+<script>
+    initSelect2ForEnum({ url: '/Team/GetTeamDictionary', selectId: 'team2Select', placeholder: 'Выберите команду', isModal: true });
+</script>
+
+<script>
+    initSelect2ForEnum({ url: '/Match/GetMatchStates', selectId: 'matchStateSelect', placeholder: 'Выберите состояние матча', isModal: true });
+</script>

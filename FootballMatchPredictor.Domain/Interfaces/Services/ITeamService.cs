@@ -54,6 +54,8 @@ namespace FootballMatchPredictor.Domain.Interfaces.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<BaseResult<TeamViewModel>> UpdateTeam(UpdateTeamViewModel viewModel);
+        Task<BaseResult<TeamViewModel>> UpdateTeam(TeamViewModel viewModel);
+
+        CollectionResult<KeyValuePair<short, string>> GetTeamsDictionary();
     }
 }

@@ -202,6 +202,11 @@ namespace FootballMatchPredictor.Application.Services
                 .Select(x => x.Adapt<BetViewModel>())
                 .ToArrayAsync();
 
+            var userBetViewModels = userBets
+                .Select(x => x.Adapt<BetViewModel>())
+                .OrderBy(x => x.Id)
+                .ToList();
+
             return new CollectionResult<BetViewModel>()
             {
                 Data = userBets,

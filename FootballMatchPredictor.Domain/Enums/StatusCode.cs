@@ -34,6 +34,7 @@ namespace FootballMatchPredictor.Domain.Enums
         MatchNotFound = 41,
         MatchesNotFound = 42,
         MatchAlreadyExist = 43,
+        MatchTeamsAreEqual = 44,
 
         /// <summary>
         /// Статус коды для работы с коэффициентами

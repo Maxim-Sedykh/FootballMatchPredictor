@@ -34,6 +34,8 @@
                             <th scope="col">Тип ставки</th>
                             <th scope="col">Активный</th>
                             <th scope="col">Время матча</th>
+                            <th scope="col">Изменение</th>
+                            <th scope="col">Удаление</th>
                             <th scope="col">Запись создана в</th>
                         </tr>
                     </thead>
@@ -48,6 +50,21 @@
                                 <td>@coefficient.BetType</td>
                                 <td>@(coefficient.IsActive ? "Активный" : "Не активный")</td>
                                 <td>@coefficient.MatchDate</td>
+                                <td>
+                                    <button class="btn btn-info br-40 text-white" type="button"
+                                            onclick="openModal({ url: '/Coefficient/GetCoefficient/@coefficient.Id', modalId: 'modalWindow', modalTitle:'Обновление коэффициента'})"
+                                            data-toggle="ajax-modal" data-target="Modal">
+                                        Обновить
+                                    </button>
+                                </td>
+                                <td>
+                                    <form id="coefficientDelete-@coefficient.Id">
+                                        <input type="hidden" value="@coefficient.Id" name="id" />
+                                        <button class="btn bg-danger br-40 text-white" onclick="doActionWithConfirmation(event, { url: '/Coefficient/DeleteCoefficient/@coefficient.Id', formId: 'coefficientDelete-@coefficient.Id', confirmationTitle: 'удалить коэффициент?' })">
+                                            Удалить
+                                        </button>
+                                    </form>
+                                </td>
                                 <td>@coefficient.CreatedAt</td>
                             </tr>
                         }

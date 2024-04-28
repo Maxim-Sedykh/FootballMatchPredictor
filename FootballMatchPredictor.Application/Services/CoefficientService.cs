@@ -55,10 +55,14 @@ namespace FootballMatchPredictor.Application.Services
             var coefficients = await _coefficientRepository.GetAll()
                 .Include(x => x.Match.Team1)
                 .Include(x => x.Match.Team2)
-                .Select(x => x.Adapt<CoefficientViewModel>())
                 .ToListAsync();
 
-            if (coefficients == null)
+            var coefficientViewModels = coefficients
+                .Select(x => x.Adapt<CoefficientViewModel>())
+                .OrderBy(x => x.Id)
+                .ToList();
+
+            if (coefficientViewModels == null)
             {
                 return new CollectionResult<CoefficientViewModel>()
                 {
@@ -69,27 +73,30 @@ namespace FootballMatchPredictor.Application.Services
 
             return new CollectionResult<CoefficientViewModel>()
             {
-                Data = coefficients,
-                Count = coefficients.Count
+                Data = coefficientViewModels,
+                Count = coefficientViewModels.Count
             };
         }
 
-        public async Task<BaseResult<CoefficientViewModel>> GetCoefficientById(long id)
+        public async Task<BaseResult<UpdateCoefficientViewModel>> GetCoefficientById(long id)
         {
-            var coefficient = await _coefficientRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
+            var coefficient = await _coefficientRepository.GetAll()
+                .Include(x => x.Match.Team1)
+                .Include(x => x.Match.Team2)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (coefficient == null)
             {
-                return new BaseResult<CoefficientViewModel>()
+                return new BaseResult<UpdateCoefficientViewModel>()
                 {
                     ErrorMessage = ErrorMessage.CoefficientNotFound,
                     ErrorCode = (int)StatusCode.CoefficientNotFound
                 };
             }
 
-            return new BaseResult<CoefficientViewModel>()
+            return new BaseResult<UpdateCoefficientViewModel>()
             {
-                Data = coefficient.Adapt<CoefficientViewModel>()
+                Data = coefficient.Adapt<UpdateCoefficientViewModel>()
             };
         }
 
@@ -120,7 +127,9 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
-            coefficient = viewModel.Adapt<Coefficient>();
+            coefficient.CoefficientValue = viewModel.CoefficientValue;
+            coefficient.IsActive = viewModel.IsActive;
+            coefficient.BetType = (BetType)Convert.ToInt32(viewModel.BetType);
 
             await _coefficientRepository.UpdateAsync(coefficient);
 

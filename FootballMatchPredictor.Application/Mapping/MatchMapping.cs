@@ -22,6 +22,15 @@ namespace FootballMatchPredictor.Application.Mapping
                 .Map(dest => dest.Team2GoalsCount, src => src.Team2GoalsCount)
                 .Map(dest => dest.MatchState, src => src.MatchState.GetDisplayName())
                 .Map(dest => dest.MatchDate, src => src.MatchDate);
+
+            config.NewConfig<Match, UpdateMatchViewModel>()
+                .Map(dest => dest.Id, src => src.Id)
+                .Map(dest => dest.Team1, src => Convert.ToInt32(src.Team1.Id))
+                .Map(dest => dest.Team2, src => Convert.ToInt32(src.Team2.Id))
+                .Map(dest => dest.Team1GoalsCount, src => src.Team1GoalsCount)
+                .Map(dest => dest.Team2GoalsCount, src => src.Team2GoalsCount)
+                .Map(dest => dest.MatchState, src => src.MatchState.GetDisplayName())
+                .Map(dest => dest.MatchDate, src => src.MatchDate);
         }
     }
 }
