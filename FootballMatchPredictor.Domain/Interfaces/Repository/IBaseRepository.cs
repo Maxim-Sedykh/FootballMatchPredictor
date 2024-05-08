@@ -17,5 +17,7 @@ namespace FootballMatchPredictor.Domain.Interfaces.Repository
         Task<TEntity> RemoveAsync(TEntity entity);
 
         Task UpdateRangeAsync(IEnumerable<TEntity> entities);
+
+        Task AddRangeAsync(IEnumerable<TEntity> entities);
     }
 }

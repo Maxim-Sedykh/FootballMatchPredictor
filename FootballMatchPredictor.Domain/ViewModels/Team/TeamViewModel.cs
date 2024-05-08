@@ -23,6 +23,8 @@ namespace FootballMatchPredictor.Domain.ViewModels.Team
         public int Id { get; set; }
         public string TeamName { get; set; }
         public string? CountryName { get; set; }
+
+        public double Rating { get; set; }
         public int MatchesPlayed { get; set; }
         public int MatchesWon { get; set; }
     }

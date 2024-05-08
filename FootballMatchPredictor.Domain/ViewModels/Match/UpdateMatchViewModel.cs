@@ -16,7 +16,9 @@ namespace FootballMatchPredictor.Domain.ViewModels.Match
 
         [Required(ErrorMessage = "Укажите вторую команду")]
         string Team2,
+
         byte Team1GoalsCount,
+
         byte Team2GoalsCount,
 
         string MatchState,

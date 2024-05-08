@@ -68,5 +68,16 @@ namespace FootballMatchPredictor.Persistence.Repository
             _dbContext.UpdateRange(entities);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentException("Entities is null");
+            }
+            await _dbContext.AddRangeAsync(entities);
+
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

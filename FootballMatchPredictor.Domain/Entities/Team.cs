@@ -17,6 +17,13 @@ namespace FootballMatchPredictor.Domain.Entities
         public string Name { get; set; }
 
         /// <summary>
+        /// Рейтинг команды по методу Эло, этот рейтинг показывает мастерство команды,
+        /// чем он выше, тем команда лучше играет, начальный рейтинг команды - 1500,
+        /// самый маленький рейтинг, который может быть - 1000, самый большой - 2500
+        /// </summary>
+        public float Rating { get; set; }
+
+        /// <summary>
         /// Матчей выиграно
         /// </summary>
         public int MatchesPlayed { get; set; }

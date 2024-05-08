@@ -118,6 +118,7 @@ namespace FootballMatchPredictor.Application.Services
             {
                 Country = countryDictionary[viewModel.CountryIdentifier],
                 Name = viewModel.TeamName,
+                Rating = 1500,
                 MatchesPlayed = 0,
                 MatchesWon = 0,
             };

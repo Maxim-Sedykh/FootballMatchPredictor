@@ -37,6 +37,7 @@
                             <th scope="col">Id</th>
                             <th scope="col">Название команды</th>
                             <th scope="col">Страна</th>
+                            <th scope="col">Рейтинг</th>
                             <th scope="col">Изменение</th>
                             <th scope="col">Удаление</th>
                             <th scope="col">Матчей сыиграно</th>
@@ -50,6 +51,7 @@
                                 <th scope="row">@team.Id</th>
                                 <td>@team.TeamName</td>
                                 <td>@team.CountryName</td>
+                                <td>@Math.Round(@team.Rating, 2)</td>
                                 <td>
                                     <button class="btn btn-info br-40 text-white" type="button"
                                             onclick="openModal({ url: '/Team/GetTeam/@team.Id', modalId: 'modalWindow', modalTitle:'Обновление команды'})"

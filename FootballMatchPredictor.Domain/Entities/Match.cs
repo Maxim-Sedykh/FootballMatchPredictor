@@ -33,6 +33,26 @@ namespace FootballMatchPredictor.Domain.Entities
         public Team Team2 { get; set; }
 
         /// <summary>
+        /// Завершён ли матч
+        /// </summary>
+        public bool IsEnded { get; set; }
+
+        /// <summary>
+        /// Вероятность победы первой команды
+        /// </summary>
+        public float Team1WinRate { get; set; }
+
+        /// <summary>
+        /// Вероятность победы второй команды
+        /// </summary>
+        public float Team2WinRate { get; set; }
+        
+        /// <summary>
+        /// Вероятность ничьи
+        /// </summary>
+        public float DrawProbability { get; set; }
+
+        /// <summary>
         /// Количество забитых голов первой команды
         /// </summary>
         public byte Team1GoalsCount { get; set; }

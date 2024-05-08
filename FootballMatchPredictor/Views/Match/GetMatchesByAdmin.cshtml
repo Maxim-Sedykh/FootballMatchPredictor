@@ -38,6 +38,9 @@
                             <th scope="col">Название второй команды</th>
                             <th scope="col">Количество голов первой команды</th>
                             <th scope="col">Количество голов второй команды</th>
+                            <th scope="col">Вероятность победы первой команды</th>
+                            <th scope="col">Вероятность победы второй команды</th>
+                            <th scope="col">Вероятность ничьи</th>
                             <th scope="col">Состояние матча</th>
                             <th scope="col">Изменение</th>
                             <th scope="col">Удаление</th>
@@ -53,6 +56,9 @@
                                 <td>@match.Team2Name</td>
                                 <td>@match.Team1GoalsCount</td>
                                 <td>@match.Team2GoalsCount</td>
+                                <td>@match.Team1WinRate</td>
+                                <td>@match.Team2WinRate</td>
+                                <td>@match.DrawProbability</td>
                                 <td>@match.MatchState</td>
                                 <td>
                                     <button class="btn btn-info br-40 text-white" type="button"

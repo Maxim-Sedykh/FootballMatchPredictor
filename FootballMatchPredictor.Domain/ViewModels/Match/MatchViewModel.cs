@@ -24,6 +24,9 @@ namespace FootballMatchPredictor.Domain.ViewModels.Match
         string Team2Name,
         byte Team1GoalsCount,
         byte Team2GoalsCount,
+        float Team1WinRate,
+        float Team2WinRate,
+        float DrawProbability,
         string MatchState,
         DateTime MatchDate
     );

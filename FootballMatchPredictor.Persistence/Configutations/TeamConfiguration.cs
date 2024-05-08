@@ -23,6 +23,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Name = "Краснодар",
                     MatchesPlayed = 2,
                     MatchesWon = 1,
+                    Rating = 1650,
                     Country = "Russia - Russian Federation",
                     CreatedAt = DateTime.UtcNow,
                 },
@@ -32,6 +33,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Name = "ЦСКА",
                     MatchesPlayed = 2,
                     MatchesWon = 0,
+                    Rating = 1760,
                     Country = "Russia - Russian Federation",
                     CreatedAt = DateTime.UtcNow,
                 },
@@ -41,6 +43,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Name = "Зенит",
                     MatchesPlayed = 0,
                     MatchesWon = 0,
+                    Rating = 1500,
                     Country = "Russia - Russian Federation",
                     CreatedAt = DateTime.UtcNow,
                 },
@@ -50,6 +53,7 @@ namespace FootballMatchPredictor.Persistence.Configutations
                     Name = "Манчестер Юнайтед",
                     MatchesPlayed = 1,
                     MatchesWon = 0,
+                    Rating = 1970,
                     Country = "United Kingdom - United Kingdom of Great Britain and Northern Ireland",
                     CreatedAt = DateTime.UtcNow,
                 }
@@ -59,6 +63,10 @@ namespace FootballMatchPredictor.Persistence.Configutations
 
             builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
             builder.Property(x => x.Country).IsRequired().HasMaxLength(150);
+            builder.Property(e => e.Rating)
+                .IsRequired()
+                .HasPrecision(10, 2)
+                .HasDefaultValue(1000);
 
             builder.HasMany(x => x.Team1Matches)
                 .WithOne(x => x.Team1)
