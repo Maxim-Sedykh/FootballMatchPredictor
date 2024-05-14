@@ -20,9 +20,9 @@ namespace FootballMatchPredictor.Application.Mapping
                 .Map(dest => dest.Team2Name, src => src.Team2.Name)
                 .Map(dest => dest.Team1GoalsCount, src => src.Team1GoalsCount)
                 .Map(dest => dest.Team2GoalsCount, src => src.Team2GoalsCount)
-                .Map(dest => dest.Team1WinRate, src => src.Team1WinRate)
-                .Map(dest => dest.Team2WinRate, src => src.Team2WinRate)
-                .Map(dest => dest.DrawProbability, src => src.DrawProbability)
+                .Map(dest => dest.Team1WinRate, src => Math.Round(src.Team1WinRate, 2))
+                .Map(dest => dest.Team2WinRate, src => Math.Round(src.Team2WinRate, 2))
+                .Map(dest => dest.DrawProbability, src => Math.Round(src.DrawProbability, 2))
                 .Map(dest => dest.MatchState, src => src.MatchState.GetDisplayName())
                 .Map(dest => dest.MatchDate, src => src.MatchDate);
 

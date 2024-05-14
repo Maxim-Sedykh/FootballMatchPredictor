@@ -27,6 +27,7 @@ namespace FootballMatchPredictor.Domain.Enums
         TeamNotFound = 32,
         TeamsNotFound = 33,
         TeamAlreadyExist = 34,
+        IncorrectRating = 35,
 
         /// <summary>
         /// Статус коды для работы с матчами

@@ -181,7 +181,8 @@ namespace FootballMatchPredictor.Application.Services
                     TeamName = x.Name,
                     CountryName = x.Country,
                     MatchesPlayed = x.MatchesPlayed,
-                    MatchesWon = x.MatchesWon
+                    MatchesWon = x.MatchesWon,
+                    Rating = x.Rating
                 })
                 .FirstOrDefaultAsync(x => x.Id == id);
 
@@ -202,6 +203,15 @@ namespace FootballMatchPredictor.Application.Services
 
         public async Task<BaseResult<TeamViewModel>> UpdateTeam(TeamViewModel viewModel)
         {
+            if (viewModel.Rating > 2500 || viewModel.Rating < 1000)
+            {
+                return new BaseResult<TeamViewModel>()
+                {
+                    ErrorCode = (int)StatusCode.IncorrectRating,
+                    ErrorMessage = ErrorMessage.IncorrectRating
+                };
+            }
+
             var team = await _teamRepository.GetAll().FirstOrDefaultAsync(x => x.Id == viewModel.Id);
 
             if (team == null)
@@ -213,21 +223,37 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
-            var countryDictionary = await GetCountries();
-
-            if (countryDictionary.Count == 0)
+            if (viewModel.CountryName != null)
             {
-                return new BaseResult<TeamViewModel>()
+                var countryDictionary = await GetCountries();
+
+                if (countryDictionary.Count == 0)
                 {
-                    ErrorMessage = ErrorMessage.CountriesNotFound,
-                    ErrorCode = (int)StatusCode.CountriesNotFound
-                };
+                    return new BaseResult<TeamViewModel>()
+                    {
+                        ErrorMessage = ErrorMessage.CountriesNotFound,
+                        ErrorCode = (int)StatusCode.CountriesNotFound
+                    };
+                }
+
+                if (int.TryParse(viewModel.CountryName, out var countryId) && countryDictionary.TryGetValue(countryId, out var country))
+                {
+                    team.Country = country;
+                }
+                else
+                {
+                    return new BaseResult<TeamViewModel>()
+                    {
+                        ErrorMessage = ErrorMessage.CountriesNotFound,
+                        ErrorCode = (int)StatusCode.CountriesNotFound
+                    };
+                }
             }
 
             team.Name = viewModel.TeamName;
-            team.Country = countryDictionary[Convert.ToInt32(viewModel.CountryName)];
             team.MatchesPlayed = viewModel.MatchesPlayed;
             team.MatchesWon = viewModel.MatchesWon;
+            team.Rating = (float)viewModel.Rating;
 
             await _teamRepository.UpdateAsync(team);
 

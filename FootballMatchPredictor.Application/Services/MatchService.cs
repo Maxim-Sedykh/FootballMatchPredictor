@@ -26,15 +26,20 @@ namespace FootballMatchPredictor.Application.Services
         private readonly IBaseRepository<Match> _matchRepository;
         private readonly IBaseRepository<Team> _teamRepository;
         private readonly IBaseRepository<Coefficient> _coefficientRepository;
+        private readonly IBaseRepository<Bet> _betRepository;
+        private readonly IBaseRepository<User> _userRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public MatchService(IBaseRepository<Match> matchRepository, IBaseRepository<Team> teamRepository,
-            IBaseRepository<Coefficient> coefficientRepository, IUnitOfWork unitOfWork)
+            IBaseRepository<Coefficient> coefficientRepository, IUnitOfWork unitOfWork, IBaseRepository<Bet> betRepository,
+            IBaseRepository<User> userRepository)
         {
             _matchRepository = matchRepository;
             _teamRepository = teamRepository;
             _coefficientRepository = coefficientRepository;
             _unitOfWork = unitOfWork;
+            _betRepository = betRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<BaseResult> CreateMatch(CreateMatchViewModel viewModel)
@@ -295,6 +300,12 @@ namespace FootballMatchPredictor.Application.Services
             float WinTeamRatingChange = K * (1 - ExpectedWinValue);
             float LoseTeamRatingChange = K * (0 - (1 - ExpectedWinValue));
 
+            var bets = _betRepository.GetAll()
+                .Include(x => x.Coefficient)
+                .Where(x => x.MatchId == match.Id)
+                .ToList();
+
+
             if (newMatchState != MatchState.NotPlayedYet && newMatchState != MatchState.InProgress)
             {
                 match.IsEnded = true;
@@ -302,19 +313,57 @@ namespace FootballMatchPredictor.Application.Services
                 if (newMatchState == MatchState.FirstTeamWon)
                 {
                     (match.Team1.Rating, match.Team2.Rating) = (Team1Rating + WinTeamRatingChange, Team2Rating + LoseTeamRatingChange);
+                    await SetMatchBetsRightState(bets, BetType.FirstTeamWon);
                 }
                 else if (newMatchState == MatchState.SecondTeamWon)
                 {
                     (match.Team1.Rating, match.Team2.Rating) = (Team1Rating + LoseTeamRatingChange, Team2Rating + WinTeamRatingChange);
+
+                    await SetMatchBetsRightState(bets, BetType.SecondTeamWon);
+                }
+                else
+                {
+                    await SetMatchBetsRightState(bets, BetType.Draw);
                 }
             }
 
+            await _betRepository.UpdateRangeAsync(bets);
             await _matchRepository.UpdateAsync(match);
 
             return new BaseResult<MatchViewModel>()
             {
                 SuccessMessage = SuccessMessage.MatchUpdated
             };
+        }
+
+        private async Task<BaseResult> SetMatchBetsRightState(List<Bet> bets, BetType betType)
+        {
+            foreach (var bet in bets)
+            {
+                if (bet.Coefficient.BetType == betType)
+                {
+                    bet.BetState = BetState.Winning;
+
+                    var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Id == bet.UserId);
+                    if (user == null)
+                    {
+                        return new BaseResult()
+                        {
+                            ErrorCode = (int)StatusCode.UserNotFound,
+                            ErrorMessage = ErrorMessage.UserNotFound,
+                        };
+                    }
+                    user.WinningSum += bet.WinningAmount;
+
+                    await _userRepository.UpdateAsync(user);
+                }
+                else
+                {
+                    bet.BetState = BetState.Losing;
+                }
+            }
+
+            return new BaseResult();
         }
     }
 }

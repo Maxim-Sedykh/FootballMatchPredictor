@@ -106,6 +106,15 @@ namespace FootballMatchPredictor.Application.Resources.Error {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Некорректный рейтинг.
+        /// </summary>
+        internal static string IncorrectRating {
+            get {
+                return ResourceManager.GetString("IncorrectRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Недостаточно средств.
         /// </summary>
         internal static string InsufficientFunds {

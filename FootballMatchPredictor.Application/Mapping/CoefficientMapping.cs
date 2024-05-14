@@ -19,7 +19,7 @@ namespace FootballMatchPredictor.Application.Mapping
                 .Map(dest => dest.Id, src => src.Id)
                 .Map(dest => dest.Team1Name, src => src.Match.Team1.Name)
                 .Map(dest => dest.Team2Name, src => src.Match.Team2.Name)
-                .Map(dest => dest.CoefficientValue, src => src.CoefficientValue)
+                .Map(dest => dest.CoefficientValue, src => Math.Round(src.CoefficientValue, 2))
                 .Map(dest => dest.IsActive, src => src.IsActive)
                 .Map(dest => dest.MatchDate, src => src.Match.MatchDate)
                 .Map(dest => dest.CreatedAt, src => src.CreatedAt)
@@ -27,7 +27,7 @@ namespace FootballMatchPredictor.Application.Mapping
 
             config.NewConfig<Coefficient, UpdateCoefficientViewModel>()
                 .Map(dest => dest.Id, src => src.Id)
-                .Map(dest => dest.CoefficientValue, src => src.CoefficientValue)
+                .Map(dest => dest.CoefficientValue, src => Math.Round(src.CoefficientValue, 2))
                 .Map(dest => dest.BetType, src => src.BetType.GetDisplayName())
                 .Map(dest => dest.IsActive, src => src.IsActive);
 

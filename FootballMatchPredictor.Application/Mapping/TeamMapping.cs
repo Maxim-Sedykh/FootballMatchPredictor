@@ -18,7 +18,8 @@ namespace FootballMatchPredictor.Application.Mapping
                 .Map(dest => dest.TeamName, src => src.Name)
                 .Map(dest => dest.CountryName, src => src.Country)
                 .Map(dest => dest.MatchesPlayed, src => src.MatchesPlayed)
-                .Map(dest => dest.MatchesWon, src => src.MatchesWon);
+                .Map(dest => dest.MatchesWon, src => src.MatchesWon)
+                .Map(dest => dest.Rating, src => Math.Round(src.Rating, 2));
         }
     }
 }

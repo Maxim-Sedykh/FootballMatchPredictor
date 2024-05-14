@@ -18,9 +18,9 @@ namespace FootballMatchPredictor.Application.Mapping
                 .Map(dest => dest.Id, src => src.Id)
                 .Map(dest => dest.Team1Name, src => src.Coefficient.Match.Team1.Name)
                 .Map(dest => dest.Team2Name, src => src.Coefficient.Match.Team2.Name)
-                .Map(dest => dest.CoefficientValue, src => src.Coefficient.CoefficientValue)
+                .Map(dest => dest.CoefficientValue, src => Math.Round(src.Coefficient.CoefficientValue, 2))
                 .Map(dest => dest.BetAmountMoney, src => src.BetAmountMoney)
-                .Map(dest => dest.WinningAmount, src => src.WinningAmount)
+                .Map(dest => dest.WinningAmount, src => Math.Round(src.WinningAmount, 2))
                 .Map(dest => dest.BetType, src => src.Coefficient.BetType.GetDisplayName())
                 .Map(dest => dest.BetState, src => src.BetState.GetDisplayName())
                 .Map(dest => dest.CreatedAt, src => src.CreatedAt);
