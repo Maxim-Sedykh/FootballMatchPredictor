@@ -283,52 +283,64 @@ namespace FootballMatchPredictor.Application.Services
                 };
             }
 
-            var newMatchState = EnumExtension.GetEnumFromDisplay<MatchState>(viewModel.MatchState);
-
-            match.MatchState = newMatchState;
-            match.Team1Id = team1Id;
-            match.Team2Id = team2Id;
-            match.Team1GoalsCount = viewModel.Team1GoalsCount;
-            match.Team2GoalsCount = viewModel.Team2GoalsCount;
-            match.MatchDate = viewModel.MatchDate;
-
-            float K = 32; // Коэффициент для метода Эло
-            float Team1Rating = match.Team1.Rating;
-            float Team2Rating = match.Team2.Rating;
-
-            float ExpectedWinValue = (float)(1 / (1 + Math.Pow(10, (Team2Rating - Team1Rating) / 400)));
-            float WinTeamRatingChange = K * (1 - ExpectedWinValue);
-            float LoseTeamRatingChange = K * (0 - (1 - ExpectedWinValue));
-
-            var bets = _betRepository.GetAll()
-                .Include(x => x.Coefficient)
-                .Where(x => x.MatchId == match.Id)
-                .ToList();
-
-
-            if (newMatchState != MatchState.NotPlayedYet && newMatchState != MatchState.InProgress)
+            using(var transaction = await _unitOfWork.BeginTransactionAsync())
             {
-                match.IsEnded = true;
+                try
+                {
+                    var newMatchState = EnumExtension.GetEnumFromDisplay<MatchState>(viewModel.MatchState);
 
-                if (newMatchState == MatchState.FirstTeamWon)
-                {
-                    (match.Team1.Rating, match.Team2.Rating) = (Team1Rating + WinTeamRatingChange, Team2Rating + LoseTeamRatingChange);
-                    await SetMatchBetsRightState(bets, BetType.FirstTeamWon);
-                }
-                else if (newMatchState == MatchState.SecondTeamWon)
-                {
-                    (match.Team1.Rating, match.Team2.Rating) = (Team1Rating + LoseTeamRatingChange, Team2Rating + WinTeamRatingChange);
+                    match.MatchState = newMatchState;
+                    match.Team1Id = team1Id;
+                    match.Team2Id = team2Id;
+                    match.Team1GoalsCount = viewModel.Team1GoalsCount;
+                    match.Team2GoalsCount = viewModel.Team2GoalsCount;
+                    match.MatchDate = viewModel.MatchDate;
 
-                    await SetMatchBetsRightState(bets, BetType.SecondTeamWon);
+                    float K = 32; // Коэффициент для метода Эло
+                    float Team1Rating = match.Team1.Rating;
+                    float Team2Rating = match.Team2.Rating;
+
+                    float ExpectedWinValue = (float)(1 / (1 + Math.Pow(10, (Team2Rating - Team1Rating) / 400)));
+                    float WinTeamRatingChange = K * (1 - ExpectedWinValue);
+                    float LoseTeamRatingChange = K * (0 - (1 - ExpectedWinValue));
+
+                    var bets = _betRepository.GetAll()
+                        .Include(x => x.Coefficient)
+                        .Include(x => x.User)
+                        .Where(x => x.MatchId == match.Id)
+                        .ToList();
+
+
+                    if (newMatchState != MatchState.NotPlayedYet && newMatchState != MatchState.InProgress)
+                    {
+                        match.IsEnded = true;
+
+                        if (newMatchState == MatchState.FirstTeamWon)
+                        {
+                            (match.Team1.Rating, match.Team2.Rating) = (Team1Rating + WinTeamRatingChange, Team2Rating + LoseTeamRatingChange);
+                            SetMatchBetsRightState(bets, BetType.FirstTeamWon);
+                        }
+                        else if (newMatchState == MatchState.SecondTeamWon)
+                        {
+                            (match.Team1.Rating, match.Team2.Rating) = (Team1Rating + LoseTeamRatingChange, Team2Rating + WinTeamRatingChange);
+                            SetMatchBetsRightState(bets, BetType.SecondTeamWon);
+                        }
+                        else
+                        {
+                            SetMatchBetsRightState(bets, BetType.Draw);
+                        }
+                    }
+
+                    await _betRepository.UpdateRangeAsync(bets);
+                    await _matchRepository.UpdateAsync(match);
+
+                    await transaction.CommitAsync();
                 }
-                else
+                catch (Exception ex)
                 {
-                    await SetMatchBetsRightState(bets, BetType.Draw);
+                    await transaction.RollbackAsync();
                 }
             }
-
-            await _betRepository.UpdateRangeAsync(bets);
-            await _matchRepository.UpdateAsync(match);
 
             return new BaseResult<MatchViewModel>()
             {
@@ -336,34 +348,20 @@ namespace FootballMatchPredictor.Application.Services
             };
         }
 
-        private async Task<BaseResult> SetMatchBetsRightState(List<Bet> bets, BetType betType)
+        private void SetMatchBetsRightState(List<Bet> bets, BetType betType)
         {
             foreach (var bet in bets)
             {
                 if (bet.Coefficient.BetType == betType)
                 {
                     bet.BetState = BetState.Winning;
-
-                    var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Id == bet.UserId);
-                    if (user == null)
-                    {
-                        return new BaseResult()
-                        {
-                            ErrorCode = (int)StatusCode.UserNotFound,
-                            ErrorMessage = ErrorMessage.UserNotFound,
-                        };
-                    }
-                    user.WinningSum += bet.WinningAmount;
-
-                    await _userRepository.UpdateAsync(user);
+                    bet.User.WinningSum += bet.WinningAmount;
                 }
                 else
                 {
                     bet.BetState = BetState.Losing;
                 }
             }
-
-            return new BaseResult();
         }
     }
 }
