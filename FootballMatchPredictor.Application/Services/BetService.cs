@@ -143,6 +143,8 @@ namespace FootballMatchPredictor.Application.Services
                     };
 
                     await _betRepository.CreateAsync(bet);
+
+                    await transaction.CommitAsync();
                 }
                 catch (Exception ex)
                 {

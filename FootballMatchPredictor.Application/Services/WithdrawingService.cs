@@ -92,6 +92,8 @@ namespace FootballMatchPredictor.Application.Services
 
                     await _withdrawingRepository.CreateAsync(withDrawing);
                     await _userRepository.UpdateAsync(user);
+
+                    await transaction.CommitAsync();
                 }
                 catch (Exception ex)
                 {

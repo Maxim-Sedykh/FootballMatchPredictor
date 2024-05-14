@@ -274,7 +274,7 @@ namespace FootballMatchPredictor.Application.Services
             var team1Id = Convert.ToInt16(viewModel.Team1);
             var team2Id = Convert.ToInt16(viewModel.Team2);
 
-            if (match.Team1Id != team1Id || match.Team2Id == team2Id)
+            if (match.Team1Id != team1Id || match.Team2Id != team2Id)
             {
                 return new BaseResult<MatchViewModel>()
                 {
